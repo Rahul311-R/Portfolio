@@ -25,9 +25,9 @@ export const Footer: React.FC = () => {
               Exploring artificial intelligence, data systems, computer vision, and creative coding interfaces through practical engineering projects and interactive experiments.
             </p>
             <div className="flex items-center gap-2 pt-2">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
               <span className="font-mono text-[11px] text-[var(--text-muted)] uppercase tracking-wider">
-                SYSTEM ONLINE // COIMBATORE, TN
+                Coimbatore, Tamil Nadu, IN
               </span>
             </div>
           </div>

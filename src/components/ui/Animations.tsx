@@ -47,45 +47,10 @@ export const Magnetic: React.FC<MagneticProps> = ({
     <motion.div
       ref={ref}
       style={{ transform: `translate3d(${pos.x}px, ${pos.y}px, 0)` }}
-      transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 0.5 }}
+      transition={{ type: 'spring', stiffness: 550, damping: 26, mass: 0.5 }}
     >
       {children}
     </motion.div>
-  );
-};
-
-export const CursorGlow: React.FC = () => {
-  const [coords, setCoords] = useState({ x: -9999, y: -9999 });
-  const reducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (reducedMotion) return;
-    const handleMove = (e: MouseEvent) => setCoords({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
-  }, [reducedMotion]);
-
-  if (reducedMotion) return null;
-
-  return (
-    <div
-      aria-hidden="true"
-      style={{
-        position: 'fixed',
-        left: coords.x,
-        top: coords.y,
-        translate: '-50% -50%',
-        width: '400px',
-        height: '400px',
-        borderRadius: '50%',
-        pointerEvents: 'none',
-        zIndex: 9999,
-        background: 'radial-gradient(circle at center, var(--accent-glow) 0%, transparent 70%)',
-        opacity: 0.18,
-        mixBlendMode: 'screen',
-        transition: 'opacity 200ms ease',
-      }}
-    />
   );
 };
 
@@ -93,19 +58,30 @@ export const ParallaxLayer: React.FC<{
   children: React.ReactNode;
   speed?: number;
   className?: string;
-}> = ({ children, speed = 0.15, className = '' }) => {
+  /** Maximum pixel drift so framed artwork never exposes its edges. */
+  max?: number;
+}> = ({ children, speed = 0.15, className = '', max = 56 }) => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (reducedMotion) return;
+    let ticking = false;
     const handleScroll = () => {
-      const y = window.scrollY * speed;
-      setOffset((prev) => ({ ...prev, y }));
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        setOffset((prev) => {
+          const y = Math.min(window.scrollY * speed, max);
+          return prev.y === y ? prev : { ...prev, y };
+        });
+      });
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [reducedMotion, speed]);
+  }, [reducedMotion, speed, max]);
 
   return (
     <div
@@ -273,7 +249,7 @@ export const ScrollReveal: React.FC<{
         opacity: visible ? 1 : 0,
         transform: visible ? 'translate3d(0, 0, 0)' : 'translate3d(0, 28px, 0)',
         transitionProperty: 'opacity, transform',
-        transitionDuration: reducedMotion ? '0ms' : '680ms',
+        transitionDuration: reducedMotion ? '0ms' : '450ms',
         transitionTimingFunction: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
         transitionDelay: `${delay}ms`,
         willChange: visible ? 'auto' : 'opacity, transform',
@@ -284,4 +260,3 @@ export const ScrollReveal: React.FC<{
   );
 };
 
-export { Reveal } from './Reveal';

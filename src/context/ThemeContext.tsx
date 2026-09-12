@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { soundFx } from '../utils/audio';
 
 export type Theme = 'dark' | 'light';
 export type Accent = 'violet' | 'cyan' | 'lime' | 'orange';
@@ -24,14 +23,10 @@ interface ThemeContextType {
   toggleTheme: () => void;
   accent: Accent;
   setAccent: (accent: Accent) => void;
-  soundEnabled: boolean;
-  setSoundEnabled: (enabled: boolean) => void;
-  toggleSound: () => void;
-  scanlinesEnabled: boolean;
-  setScanlinesEnabled: (enabled: boolean) => void;
-  toggleScanlines: () => void;
   reducedMotion: boolean;
   setReducedMotion: (val: boolean) => void;
+  toggleReducedMotion: () => void;
+  motionSource: 'system' | 'manual';
   commandMenuOpen: boolean;
   setCommandMenuOpen: (open: boolean) => void;
   toggleCommandMenu: () => void;
@@ -53,38 +48,45 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       : 'violet';
   });
 
-  const [soundEnabled, setSoundEnabledState] = useState<boolean>(() => {
-    const savedSound = localStorage.getItem('rahul_portfolio_sound');
-    return savedSound !== null ? JSON.parse(savedSound) : true;
+  const [motionSource, setMotionSource] = useState<'system' | 'manual'>(() => {
+    return localStorage.getItem('rahul_portfolio_motion') !== null ? 'manual' : 'system';
   });
 
-  const [scanlinesEnabled, setScanlinesEnabledState] = useState<boolean>(() => {
-    const savedScanlines = localStorage.getItem('rahul_portfolio_scanlines');
-    return savedScanlines !== null ? JSON.parse(savedScanlines) : false;
-  });
-
-  const [reducedMotion, setReducedMotion] = useState<boolean>(() => {
+  const [reducedMotion, setReducedMotionState] = useState<boolean>(() => {
+    const saved = localStorage.getItem('rahul_portfolio_motion');
+    if (saved !== null) return saved === 'reduced';
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 
   const [commandMenuOpen, setCommandMenuOpen] = useState(false);
 
-  useEffect(() => {
-    soundFx.enabled = soundEnabled;
-    localStorage.setItem('rahul_portfolio_sound', JSON.stringify(soundEnabled));
-  }, [soundEnabled]);
-
-  useEffect(() => {
-    localStorage.setItem('rahul_portfolio_scanlines', JSON.stringify(scanlinesEnabled));
-  }, [scanlinesEnabled]);
-
-  // System reduced motion listener
+  // System reduced motion listener — only applies while the user
+  // hasn't chosen a manual preference.
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (localStorage.getItem('rahul_portfolio_motion') === null) {
+        setReducedMotionState(e.matches);
+      }
+    };
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
+
+  const setReducedMotion = (val: boolean) => {
+    setMotionSource('manual');
+    setReducedMotionState(val);
+    localStorage.setItem('rahul_portfolio_motion', val ? 'reduced' : 'full');
+  };
+
+  const toggleReducedMotion = () => {
+    setReducedMotionState((prev) => {
+      const next = !prev;
+      setMotionSource('manual');
+      localStorage.setItem('rahul_portfolio_motion', next ? 'reduced' : 'full');
+      return next;
+    });
+  };
 
   // Update theme class on HTML element
   useEffect(() => {
@@ -112,22 +114,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const setTheme = (newTheme: Theme) => setThemeState(newTheme);
   const toggleTheme = () => {
-    soundFx.playClick();
     setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
   const setAccent = (newAccent: Accent) => {
-    soundFx.playClick();
     setAccentState(newAccent);
   };
-  const toggleSound = () => {
-    setSoundEnabledState((prev) => !prev);
-  };
-  const toggleScanlines = () => {
-    soundFx.playClick();
-    setScanlinesEnabledState((prev) => !prev);
-  };
   const toggleCommandMenu = () => {
-    soundFx.playClick();
     setCommandMenuOpen((prev) => !prev);
   };
 
@@ -139,7 +131,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }
       if (e.key === '/') {
         e.preventDefault();
-        soundFx.playClick();
         setCommandMenuOpen((prev) => !prev);
       }
     };
@@ -155,14 +146,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         toggleTheme,
         accent,
         setAccent,
-        soundEnabled,
-        setSoundEnabled: setSoundEnabledState,
-        toggleSound,
-        scanlinesEnabled,
-        setScanlinesEnabled: setScanlinesEnabledState,
-        toggleScanlines,
         reducedMotion,
         setReducedMotion,
+        toggleReducedMotion,
+        motionSource,
         commandMenuOpen,
         setCommandMenuOpen,
         toggleCommandMenu

@@ -8,6 +8,8 @@ import {
   Briefcase,
   FlaskConical,
   FileText,
+  Pause,
+  Play,
   Mail,
   Sun,
   Moon,
@@ -20,7 +22,7 @@ import {
 import { useTheme } from '../../context/ThemeContext';
 
 export const CommandMenu: React.FC = () => {
-  const { commandMenuOpen, setCommandMenuOpen, theme, toggleTheme } = useTheme();
+  const { commandMenuOpen, setCommandMenuOpen, theme, toggleTheme, reducedMotion, toggleReducedMotion } = useTheme();
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -43,6 +45,12 @@ export const CommandMenu: React.FC = () => {
       label: `Toggle ${theme === 'dark' ? 'Light' : 'Dark'} Theme`,
       icon: theme === 'dark' ? Sun : Moon,
       action: () => toggleTheme()
+    },
+    {
+      id: 'motion',
+      label: reducedMotion ? 'Enable animations' : 'Reduce animations',
+      icon: reducedMotion ? Play : Pause,
+      action: () => toggleReducedMotion()
     }
   ];
 
@@ -160,7 +168,7 @@ export const CommandMenu: React.FC = () => {
             <span>•</span>
             <span>ESC Close</span>
           </div>
-          <div>RAHUL R COMMAND SYSTEM</div>
+          <div>COMMAND MENU</div>
         </div>
       </div>
     </div>

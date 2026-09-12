@@ -2,7 +2,8 @@ import React from 'react';
 import { Calendar, Clock, ExternalLink, Tag, Loader2 } from 'lucide-react';
 import { PageTransition } from '../components/ui/PageTransition';
 import { PageMasthead } from '../components/ui/PageMasthead';
-import { ScrollReveal, SplitText, Magnetic } from '../components/ui/Animations';
+import { SplitText, Magnetic } from '../components/ui/Animations';
+import { FlipIn } from '../components/three/Scroll3D';
 import { WRITING_DATA } from '../data/human';
 import heroField from '../assets/hero-field.svg';
 
@@ -22,18 +23,18 @@ export const Writing: React.FC = () => {
           artworkLabel="Words / code / clarity"
         />
 
-        <ScrollReveal as="section" delay={100} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <FlipIn as="section" delay={100} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--text-primary)]">{published.length}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Published</div></div>
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--text-primary)]">{drafts.length}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">In Draft</div></div>
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--text-primary)]">{WRITING_DATA.length}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Total</div></div>
-        </ScrollReveal>
+        </FlipIn>
 
         {published.length > 0 && (
-          <ScrollReveal as="section" delay={150}>
+          <FlipIn as="section" delay={150}>
             <div className="eyebrow-rule">Published</div>
             <div className="mt-6 space-y-4">
               {published.map((post, i) => (
-                <ScrollReveal key={post.slug} delay={200 + i * 80} className="studio-panel p-5 rounded-xl hover:border-[var(--accent-color)] transition-colors group">
+                <FlipIn key={post.slug} delay={200 + i * 80} className="studio-panel p-5 rounded-xl hover:border-[var(--accent-color)] transition-colors group">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <Magnetic>
@@ -55,18 +56,18 @@ export const Writing: React.FC = () => {
                       </a>
                     </Magnetic>
                   </div>
-                </ScrollReveal>
+                </FlipIn>
               ))}
             </div>
-          </ScrollReveal>
+          </FlipIn>
         )}
 
         {drafts.length > 0 && (
-          <ScrollReveal as="section" delay={300}>
+          <FlipIn as="section" delay={300}>
             <div className="eyebrow-rule">In Progress</div>
             <div className="mt-6 space-y-4">
               {drafts.map((post, i) => (
-                <ScrollReveal key={post.slug} delay={350 + i * 80} className="studio-panel p-5 rounded-xl border border-amber-400/30 bg-amber-400/5">
+                <FlipIn key={post.slug} delay={350 + i * 80} className="studio-panel p-5 rounded-xl border border-amber-400/30 bg-amber-400/5">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
@@ -82,15 +83,15 @@ export const Writing: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </ScrollReveal>
+                </FlipIn>
               ))}
             </div>
-          </ScrollReveal>
+          </FlipIn>
         )}
 
-        <ScrollReveal as="section" delay={500} className="border-t border-[var(--border-color)] pt-8">
+        <FlipIn as="section" delay={500} className="border-t border-[var(--border-color)] pt-8">
           <SplitText text="Writing is thinking in public. These notes exist because I couldn't find them elsewhere when I needed them." tag="p" className="text-center text-[var(--text-muted)] max-w-2xl mx-auto" stagger={0.02} />
-        </ScrollReveal>
+        </FlipIn>
       </div>
     </PageTransition>
   );

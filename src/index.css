@@ -163,7 +163,7 @@ html.light .bg-grid-pattern {
 }
 
 .float-slow { animation: float-slow 8s ease-in-out infinite; }
-.marquee-track { animation: marquee-slide 30s linear infinite; }
+.marquee-track { animation: marquee-slide 20s linear infinite; }
 .marquee-track:hover { animation-play-state: paused; }
 @keyframes marquee-slide {
   from { transform: translateX(0); }
@@ -172,27 +172,21 @@ html.light .bg-grid-pattern {
 
 .float-delayed { animation: float-slow 9s ease-in-out -4s infinite; }
 
+.loader-cube {
+  transform-style: preserve-3d;
+  animation: loader-spin 1.5s cubic-bezier(0.6, 0.05, 0.3, 0.95) infinite;
+}
+
+@keyframes loader-spin {
+  0% { transform: rotateX(-22deg) rotateY(0deg); }
+  100% { transform: rotateX(-22deg) rotateY(360deg); }
+}
+
 html.light .hero-particles { opacity: .32; }
 
 @keyframes float-slow {
   0%, 100% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(0, -10px, 0); }
-}
-
-.scanline-effect {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 999;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,0),
-    rgba(255,255,255,0) 50%,
-    rgba(0, 0, 0, 0.25) 50%,
-    rgba(0, 0, 0, 0.25)
-  );
-  background-size: 100% 4px;
-  opacity: 0.6;
 }
 
 .glow-accent {

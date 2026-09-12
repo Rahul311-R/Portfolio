@@ -3,7 +3,6 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { CommandMenu } from './CommandMenu';
 import { ScrollControls } from './ScrollControls';
-import { CursorGlow } from '../ui/Animations';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -14,7 +13,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       {/* Global Command Palette */}
       <CommandMenu />
       <ScrollControls />
-      <CursorGlow />
 
       {/* Main Content Area */}
       <main className="flex-1 pt-16">

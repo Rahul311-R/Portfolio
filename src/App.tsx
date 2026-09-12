@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { Layout } from './components/layout/Layout';
+import { RouteLoader } from './components/ui/RouteLoader';
 const Home = lazy(() => import('./pages/Home').then((module) => ({ default: module.Home })));
 const About = lazy(() => import('./pages/About').then((module) => ({ default: module.About })));
 const Projects = lazy(() => import('./pages/Projects').then((module) => ({ default: module.Projects })));
@@ -31,7 +32,7 @@ export const App: React.FC = () => {
       <BrowserRouter>
         <ScrollToTop />
         <Layout>
-          <Suspense fallback={<div className="min-h-[40vh] grid place-items-center font-mono text-xs text-[var(--text-muted)]">LOADING VIEW...</div>}>
+          <Suspense fallback={<RouteLoader />}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

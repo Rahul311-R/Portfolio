@@ -2,6 +2,10 @@ import React from 'react';
 import { motion, type MotionProps } from 'framer-motion';
 import { ArrowDown, ArrowRight, FileText, Cpu, Database, Eye } from 'lucide-react';
 import { ParticleVortexCanvas } from './ParticleVortexCanvas';
+import { ParallaxLayer, Magnetic } from '../ui/Animations';
+import { ScrubHero } from '../three/Scroll3D';
+import { TiltHeading } from '../three/TiltHeading';
+import { Typewriter } from '../ui/Typewriter';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import heroField from '../../assets/hero-field.svg';
@@ -14,7 +18,7 @@ export const InteractiveHero: React.FC = () => {
       : {
           initial: { opacity: 0, y: 18 },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.62, delay, ease: 'easeOut' },
+          transition: { duration: 0.45, delay, ease: 'easeOut' },
         };
 
   return (
@@ -24,25 +28,32 @@ export const InteractiveHero: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-7">
         <motion.div {...reveal()} className="flex items-center justify-between font-mono text-[10px] sm:text-xs tracking-[0.13em] uppercase text-[var(--text-muted)]">
-          <span className="inline-flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[var(--accent-color)]" /> System online</span>
+          <span className="inline-flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[var(--accent-color)]" /> Portfolio</span>
           <span className="hidden sm:block">Coimbatore, India / 2026</span>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pt-12 sm:pt-16 pb-12 lg:pb-16 min-h-[calc(100svh-8rem)]">
           <div className="lg:col-span-7 xl:col-span-7">
             <motion.div {...reveal(0.06)} className="eyebrow-rule">Independent portfolio / creative coding laboratory</motion.div>
-            <motion.h1 {...reveal(0.13)} className="mt-5 max-w-4xl font-display font-extrabold text-[clamp(4.1rem,11vw,10rem)] tracking-[-0.085em] leading-[0.78] text-[var(--text-primary)]">
-              RAHUL<br /><span className="text-[var(--accent-color)]">R.</span>
-            </motion.h1>
+            <TiltHeading max={5} className="mt-5 max-w-4xl">
+              <motion.h1 {...reveal(0.13)} className="font-display font-extrabold text-[clamp(4.1rem,11vw,10rem)] tracking-[-0.085em] leading-[0.78] text-[var(--text-primary)]">
+                RAHUL<br /><span className="text-[var(--accent-color)]">R.</span>
+              </motion.h1>
+            </TiltHeading>
             <motion.p {...reveal(0.2)} className="mt-8 font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
               AI <span className="text-[var(--accent-color)]">x</span> DATA <span className="text-[var(--accent-color)]">x</span> CODE
             </motion.p>
             <motion.p {...reveal(0.27)} className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-[var(--text-muted)]">
               Building useful things with code. Exploring artificial intelligence, data, computer vision and interactive software through practical projects and creative experiments.
             </motion.p>
+            <motion.div {...reveal(0.31)} className="mt-4 font-mono text-sm text-[var(--text-primary)] sm:text-base">
+              <Typewriter
+                phrases={['artificial intelligence', 'data analytics', 'computer vision', 'interactive software']}
+              />
+            </motion.div>
             <motion.div {...reveal(0.34)} className="mt-8 flex flex-wrap gap-3">
-              <Button as="a" href="/projects" size="lg" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>Explore projects</Button>
-              <Button as="a" href="/resume" size="lg" variant="outline" icon={<FileText className="w-4 h-4" />}>View resume</Button>
+              <Magnetic><Button as="a" href="/projects" size="lg" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>Explore projects</Button></Magnetic>
+              <Magnetic><Button as="a" href="/resume" size="lg" variant="outline" icon={<FileText className="w-4 h-4" />}>View resume</Button></Magnetic>
             </motion.div>
             <motion.div {...reveal(0.42)} className="mt-10 flex flex-wrap gap-x-5 gap-y-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-muted)]">
               <span className="inline-flex items-center gap-2"><Cpu className="h-3.5 w-3.5 text-[var(--accent-color)]" /> Artificial intelligence</span>
@@ -52,20 +63,24 @@ export const InteractiveHero: React.FC = () => {
           </div>
 
           <motion.div {...reveal(0.18)} className="lg:col-span-5 xl:col-span-5 relative lg:self-stretch min-h-[25rem] sm:min-h-[32rem]">
-            <div className="artifact-frame visual-stage absolute inset-0 rounded-2xl shadow-2xl">
-              <img src={heroField} alt="" className="absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#08090D]/76 via-transparent to-transparent" />
-              <div className="absolute top-5 left-5 font-mono text-[10px] tracking-[0.16em] uppercase text-white/70">Computational landscape / 01</div>
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 text-white">
-                <div><div className="font-mono text-[10px] tracking-[0.14em] uppercase text-white/55">Build / Experiment / Visualize</div><div className="mt-1 font-display text-2xl font-bold">An active field of ideas.</div></div>
-                <span className="hidden sm:grid h-12 w-12 place-items-center rounded-full border border-white/25 font-mono text-xs">01</span>
+            <ScrubHero maxTilt={6} drift={30} className="absolute inset-0">
+              <div className="artifact-frame visual-stage absolute inset-0 rounded-2xl shadow-2xl">
+                <ParallaxLayer speed={0.06} max={44} className="absolute inset-0">
+                  <img src={heroField} alt="" className="absolute inset-0 h-full w-full scale-110 object-cover" />
+                </ParallaxLayer>
+                <div className="absolute inset-0 bg-gradient-to-tr from-[#08090D]/76 via-transparent to-transparent" />
+                <div className="absolute top-5 left-5 font-mono text-[10px] tracking-[0.16em] uppercase text-white/70 [transform:translateZ(40px)]">Computational landscape / 01</div>
+                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 text-white [transform:translateZ(56px)]">
+                  <div><div className="font-mono text-[10px] tracking-[0.14em] uppercase text-white/55">Build / Experiment / Visualize</div><div className="mt-1 font-display text-2xl font-bold">An active field of ideas.</div></div>
+                  <span className="hidden sm:grid h-12 w-12 place-items-center rounded-full border border-white/25 font-mono text-xs">01</span>
+                </div>
               </div>
-            </div>
-            <motion.div animate={reducedMotion ? undefined : { y: [0, -9, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} className="absolute -left-3 sm:-left-8 top-12 studio-panel backdrop-blur-md px-4 py-3 rounded-lg max-w-[11rem]">
+            </ScrubHero>
+            <motion.div animate={reducedMotion ? undefined : { y: [0, -9, 0] }} transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }} className="absolute -left-3 sm:-left-8 top-12 studio-panel backdrop-blur-md px-4 py-3 rounded-lg max-w-[11rem]">
               <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--text-muted)]">Selected note</span>
               <p className="mt-1 font-display text-sm font-bold text-[var(--text-primary)]">Patent published</p>
             </motion.div>
-            <motion.div animate={reducedMotion ? undefined : { y: [0, 8, 0] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }} className="absolute -right-2 sm:-right-6 bottom-16 studio-panel backdrop-blur-md px-4 py-3 rounded-lg max-w-[12rem]">
+            <motion.div animate={reducedMotion ? undefined : { y: [0, 8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }} className="absolute -right-2 sm:-right-6 bottom-16 studio-panel backdrop-blur-md px-4 py-3 rounded-lg max-w-[12rem]">
               <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--text-muted)]">Education</span>
               <p className="mt-1 font-display text-sm font-bold text-[var(--text-primary)]">CGPA 8.3 / 10</p>
             </motion.div>

@@ -20,18 +20,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = fa
 
   return (
     <article
-      className={`group relative studio-panel overflow-hidden transition-all duration-500 hover:border-[var(--accent-color)] flex flex-col justify-between ${featured ? 'shadow-xl' : ''}`}
+      className={`group relative studio-panel overflow-hidden transition-all duration-500 hover:border-[var(--accent-color)] flex flex-col justify-between [transform-style:preserve-3d] ${featured ? 'shadow-xl' : ''}`}
     >
-      <div className="artifact-frame h-52 sm:h-60 border-x-0 border-t-0">
+      <div className="artifact-frame h-52 sm:h-60 border-x-0 border-t-0 [transform:translateZ(24px)] transition-transform duration-500 group-hover:[transform:translateZ(44px)]">
         {artwork && <img src={artwork} alt="" />}
         <div className="absolute inset-0 bg-gradient-to-t from-[#090A10]/80 via-transparent to-transparent" />
-        <div className="absolute top-4 left-4 flex items-center gap-2 font-mono text-[10px] tracking-[0.14em] text-white/80 uppercase">
+        <div className="absolute top-4 left-4 flex items-center gap-2 font-mono text-[10px] tracking-[0.14em] text-white/80 uppercase [transform:translateZ(30px)]">
           <span className="w-2 h-2 rounded-full bg-[var(--accent-secondary)] shadow-[0_0_16px_var(--accent-secondary)]" />
           Original generative artwork
         </div>
-        <div className="absolute bottom-4 left-4 font-mono text-[10px] text-white/60 uppercase tracking-[0.16em]">{project.year}</div>
+        <div className="absolute bottom-4 left-4 font-mono text-[10px] text-white/60 uppercase tracking-[0.16em] [transform:translateZ(30px)]">{project.year}</div>
         {project.badge && (
-          <span className="absolute bottom-4 right-4 inline-flex items-center gap-1 px-2.5 py-1 bg-black/35 border border-amber-300/30 text-amber-200 text-[10px] font-mono font-bold uppercase rounded-full backdrop-blur-sm">
+          <span className="absolute bottom-4 right-4 inline-flex items-center gap-1 px-2.5 py-1 bg-black/35 border border-amber-300/30 text-amber-200 text-[10px] font-mono font-bold uppercase rounded-full backdrop-blur-sm [transform:translateZ(56px)] transition-transform duration-500 group-hover:[transform:translateZ(80px)]">
             <Award className="w-3 h-3" /> {project.badge}
           </span>
         )}
@@ -52,7 +52,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = fa
         </div>
 
         {/* Title */}
-        <h3 className="text-2xl md:text-3xl font-bold font-display text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors">
+        <h3 className="text-2xl md:text-3xl font-bold font-display text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-all duration-500 [transform:translateZ(18px)] group-hover:[transform:translateZ(40px)]">
           <NavLink to={`/projects/${project.slug}`} className="focus:outline-none">
             {project.title}
           </NavLink>

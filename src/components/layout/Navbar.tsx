@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, Command, Sparkles, Tv } from 'lucide-react';
+import { Menu, X, Command } from 'lucide-react';
 import { ThemeToggle } from '../ui/ThemeToggle';
+import { MotionToggle } from '../ui/MotionToggle';
 import { AccentSelector } from '../ui/AccentSelector';
-import { AudioToggle } from '../ui/AudioToggle';
-import { ScanlineOverlay } from '../ui/ScanlineOverlay';
 import { useTheme } from '../../context/ThemeContext';
 import { MobileMenu } from './MobileMenu';
-import { soundFx } from '../../utils/audio';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { toggleCommandMenu, toggleScanlines, scanlinesEnabled } = useTheme();
+  const { toggleCommandMenu } = useTheme();
   const location = useLocation();
 
   const navLinks = [
     { name: 'About', path: '/about' },
     { name: 'Projects', path: '/projects' },
     { name: 'Experience', path: '/experience' },
-    { name: 'Lab', path: '/lab', badge: 'STUDIO' },
+    { name: 'Lab', path: '/lab' },
     { name: 'Resume', path: '/resume' },
     { name: 'Now', path: '/now' },
     { name: 'Uses', path: '/uses' },
@@ -29,14 +27,11 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <ScanlineOverlay />
-
       <header className="fixed top-0 left-0 right-0 z-40 bg-[var(--bg-primary)]/85 backdrop-blur-xl border-b border-[var(--border-color)] transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo / Brand */}
           <NavLink
             to="/"
-            onClick={() => soundFx.playClick()}
             className="flex items-center gap-2 group focus:outline-none"
           >
             <div className="w-8 h-8 rounded bg-[var(--bg-surface-secondary)] border border-[var(--accent-color)]/40 flex items-center justify-center font-mono text-xs font-bold text-[var(--accent-color)] group-hover:border-[var(--accent-color)] group-hover:shadow-[0_0_15px_var(--accent-glow)] transition-all">
@@ -60,7 +55,6 @@ export const Navbar: React.FC = () => {
                 <NavLink
                   key={link.path}
                   to={link.path}
-                  onClick={() => soundFx.playClick()}
                   className={`px-3 py-1.5 text-xs font-mono tracking-wider uppercase transition-all duration-200 relative ${
                     isActive
                       ? 'text-[var(--accent-color)] font-bold'
@@ -69,12 +63,6 @@ export const Navbar: React.FC = () => {
                 >
                   <span className="flex items-center gap-1.5">
                     {link.name}
-                    {link.badge && (
-                      <span className="inline-flex items-center px-1.5 py-0.5 text-[9px] font-bold bg-[var(--accent-glow)] text-[var(--accent-color)] border border-[var(--accent-color)]/40 rounded">
-                        <Sparkles className="w-2.5 h-2.5 mr-0.5 text-amber-400" />
-                        {link.badge}
-                      </span>
-                    )}
                   </span>
                   {isActive && (
                     <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[var(--accent-color)] shadow-[0_0_10px_var(--accent-color)]" />
@@ -98,29 +86,17 @@ export const Navbar: React.FC = () => {
               </span>
             </button>
 
-            <button
-              onClick={toggleScanlines}
-              type="button"
-              title={`CRT Scanlines: ${scanlinesEnabled ? 'ON' : 'OFF'}`}
-              className={`p-2 rounded-md border border-[var(--border-color)] bg-[var(--bg-surface-secondary)] transition-colors ${
-                scanlinesEnabled ? 'text-[var(--accent-color)] border-[var(--accent-color)]' : 'text-[var(--text-muted)]'
-              }`}
-            >
-              <Tv className="w-4 h-4" />
-            </button>
-
-            <AudioToggle />
             <AccentSelector />
+            <MotionToggle />
             <ThemeToggle />
           </div>
 
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center space-x-2">
-            <AudioToggle />
+            <MotionToggle />
             <ThemeToggle />
             <button
               onClick={() => {
-                soundFx.playClick();
                 setMobileMenuOpen(!mobileMenuOpen);
               }}
               type="button"

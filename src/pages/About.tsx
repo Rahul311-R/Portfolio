@@ -1,8 +1,10 @@
 import React from 'react';
 import { PageTransition } from '../components/ui/PageTransition';
 import { PageMasthead } from '../components/ui/PageMasthead';
-import { ScrollReveal, SplitText, Magnetic, Float } from '../components/ui/Animations';
+import { SplitText, Magnetic, Float } from '../components/ui/Animations';
+import { FlipIn } from '../components/three/Scroll3D';
 import { RESUME_DATA } from '../data/resume';
+import { DragCube3D } from '../components/three/DragCube3D';
 import { GraduationCap, Terminal, MapPin, Heart, Music, BookOpen, Coffee, Camera, Gamepad2, Mountain, Sun, Moon } from 'lucide-react';
 import weatherFlow from '../assets/weather-flow.svg';
 
@@ -53,7 +55,7 @@ export const About: React.FC = () => {
         />
 
         {/* Quick stat cards */}
-        <ScrollReveal as="section" delay={100} className="grid grid-cols-2 sm:grid-cols-4 gap-px overflow-hidden rounded-xl border border-[var(--border-color)] bg-[var(--border-color)]">
+        <FlipIn as="section" delay={100} className="grid grid-cols-2 sm:grid-cols-4 gap-px overflow-hidden rounded-xl border border-[var(--border-color)] bg-[var(--border-color)]">
           {[
             ['Base', 'Coimbatore, India'],
             ['Degree', 'B.Tech AI & Data Science'],
@@ -65,15 +67,15 @@ export const About: React.FC = () => {
               <div className="mt-1.5 font-display text-sm sm:text-base font-bold text-[var(--text-primary)]">{value}</div>
             </div>
           ))}
-        </ScrollReveal>
+        </FlipIn>
 
         {/* Journey Timeline */}
-        <ScrollReveal as="section" delay={150}>
+        <FlipIn as="section" delay={150}>
           <div className="eyebrow-rule">Journey</div>
           <div className="mt-8 relative">
             <div className="absolute left-8 top-0 bottom-0 w-px bg-[var(--border-color)]" />
             {JOURNEY.map((item, i) => (
-              <ScrollReveal key={item.year} delay={200 + i * 80} className="relative pl-20 pb-10 last:pb-0">
+              <FlipIn key={item.year} delay={200 + i * 80} className="relative pl-20 pb-10 last:pb-0">
                 <div className="absolute left-8 top-1 w-3 h-3 rounded-full border-2 border-[var(--accent-color)] bg-[var(--bg-primary)]" />
                 <div className="studio-panel p-5 rounded-xl">
                   <div className="flex items-center gap-3 mb-2">
@@ -89,17 +91,17 @@ export const About: React.FC = () => {
                   </div>
                   <p className="text-sm text-[var(--text-muted)] leading-relaxed">{item.detail}</p>
                 </div>
-              </ScrollReveal>
+              </FlipIn>
             ))}
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
         {/* Philosophy / Values */}
-        <ScrollReveal as="section" delay={400}>
+        <FlipIn as="section" delay={400}>
           <div className="eyebrow-rule">Operating Principles</div>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v, i) => (
-              <ScrollReveal key={v.label} delay={450 + i * 60} className="studio-panel p-6 rounded-xl space-y-3 group">
+              <FlipIn key={v.label} delay={450 + i * 60} className="studio-panel p-6 rounded-xl space-y-3 group">
                 <Magnetic>
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-[var(--accent-glow)] rounded-lg"><v.icon className="h-5 w-5 text-[var(--accent-color)]" /></div>
@@ -107,44 +109,44 @@ export const About: React.FC = () => {
                   </div>
                 </Magnetic>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">{v.description}</p>
-              </ScrollReveal>
+              </FlipIn>
             ))}
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
         {/* Personal Quotes */}
-        <ScrollReveal as="section" delay={600}>
+        <FlipIn as="section" delay={600}>
           <div className="eyebrow-rule">Notes to Self</div>
           <div className="mt-8 space-y-4">
             {QUOTES.map((quote, i) => (
-              <ScrollReveal key={i} delay={650 + i * 60} className="studio-panel p-5 rounded-xl relative border-l-4 border-[var(--accent-color)]/50 group">
+              <FlipIn key={i} delay={650 + i * 60} className="studio-panel p-5 rounded-xl relative border-l-4 border-[var(--accent-color)]/50 group">
                 <div className="absolute top-3 left-3 text-[var(--accent-color)]/30 text-4xl font-display">"</div>
                 <Magnetic>
                   <p className="relative z-10 text-base font-medium text-[var(--text-primary)] leading-relaxed italic pr-8">{quote}</p>
                 </Magnetic>
-              </ScrollReveal>
+              </FlipIn>
             ))}
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
         {/* Non-work Interests */}
-        <ScrollReveal as="section" delay={800}>
+        <FlipIn as="section" delay={800}>
           <div className="eyebrow-rule">When Not Building</div>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {INTERESTS.map((interest, i) => (
-              <ScrollReveal key={interest.label} delay={850 + i * 60} className="studio-panel p-6 rounded-xl space-y-2">
+              <FlipIn key={interest.label} delay={850 + i * 60} className="studio-panel p-6 rounded-xl space-y-2">
                 <div className="flex items-center gap-2">
                   <div className="p-2 bg-[var(--bg-surface-secondary)] rounded-lg"><interest.icon className="h-5 w-5 text-[var(--accent-color)]" /></div>
                   <h3 className="font-display text-base font-bold text-[var(--text-primary)]">{interest.label}</h3>
                 </div>
                 <p className="text-sm text-[var(--text-muted)]">{interest.detail}</p>
-              </ScrollReveal>
+              </FlipIn>
             ))}
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
         {/* Daily Rhythm */}
-        <ScrollReveal as="section" delay={1000}>
+        <FlipIn as="section" delay={1000}>
           <div className="eyebrow-rule">A Typical Day</div>
           <div className="mt-8 studio-panel p-6 rounded-xl space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
@@ -158,20 +160,28 @@ export const About: React.FC = () => {
                 { icon: Music, time: '20:00', label: 'Wind Down', detail: 'Ambient, no screens' },
                 { icon: Moon, time: '22:00', label: 'Sleep', detail: '7h target' },
               ].map((item, i) => (
-                <ScrollReveal key={item.time} delay={1050 + i * 40} className="p-4 bg-[var(--bg-surface-secondary)] rounded-lg space-y-2">
+                <FlipIn key={item.time} delay={1050 + i * 40} className="p-4 bg-[var(--bg-surface-secondary)] rounded-lg space-y-2">
                   <div className="flex items-center justify-center gap-2"><item.icon className="h-4 w-4 text-[var(--accent-color)]" /><span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--accent-color)]">{item.time}</span></div>
                   <div className="font-display text-sm font-bold text-[var(--text-primary)]">{item.label}</div>
                   <div className="text-[11px] text-[var(--text-muted)]">{item.detail}</div>
-                </ScrollReveal>
+                </FlipIn>
               ))}
             </div>
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
         {/* Skills matrix - compact */}
-        <ScrollReveal as="section" delay={1200}>
+        <FlipIn as="section" delay={1200}>
           <div className="eyebrow-rule">Technical Stack (Resume)</div>
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="lg:col-span-4 visual-stage relative grid place-items-center overflow-hidden rounded-xl border border-[var(--border-color)] p-8">
+              <div className="bg-grid-pattern pointer-events-none absolute inset-0 opacity-40" />
+              <DragCube3D size={220} />
+              <div className="absolute bottom-4 font-mono text-[10px] uppercase tracking-[0.14em] text-white/55">
+                Drag to spin the stack
+              </div>
+            </div>
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div className="studio-panel p-6 rounded-xl space-y-4">
               <div className="flex items-center gap-2"><Terminal className="h-5 w-5 text-[var(--accent-color)]" /><span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">Languages</span></div>
               <div className="flex flex-wrap gap-2">
@@ -196,11 +206,12 @@ export const About: React.FC = () => {
                 ))}
               </div>
             </div>
+            </div>
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
         {/* Education detail */}
-        <ScrollReveal as="section" delay={1300}>
+        <FlipIn as="section" delay={1300}>
           <div className="eyebrow-rule">Education</div>
           <div className="mt-8 studio-panel p-6 rounded-xl space-y-4">
             <div className="flex items-center gap-3 text-[var(--accent-color)] font-mono text-xs font-bold">
@@ -219,14 +230,14 @@ export const About: React.FC = () => {
               <p className="text-sm text-[var(--text-muted)]">Relevant coursework: Machine Learning, Computer Vision, Data Mining, Database Systems, Software Engineering, Signal Processing, Linear Algebra, Probability & Statistics.</p>
             </div>
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
         {/* Closing thought */}
-        <ScrollReveal as="section" delay={1400} className="border-t border-[var(--border-color)] pt-12 text-center">
+        <FlipIn as="section" delay={1400} className="border-t border-[var(--border-color)] pt-12 text-center">
           <Float amplitude={6} duration={8}>
             <SplitText text="Building useful things with code. One commit at a time." tag="p" className="text-[var(--text-muted)] max-w-xl mx-auto font-display text-lg" stagger={0.03} />
           </Float>
-        </ScrollReveal>
+        </FlipIn>
       </div>
     </PageTransition>
   );

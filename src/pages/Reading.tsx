@@ -2,7 +2,8 @@ import React from 'react';
 import { FileText, ExternalLink, Star, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { PageTransition } from '../components/ui/PageTransition';
 import { PageMasthead } from '../components/ui/PageMasthead';
-import { ScrollReveal, Magnetic, SplitText } from '../components/ui/Animations';
+import { Magnetic, SplitText } from '../components/ui/Animations';
+import { FlipIn } from '../components/three/Scroll3D';
 import { READING_DATA } from '../data/human';
 import heroField from '../assets/hero-field.svg';
 
@@ -33,20 +34,20 @@ export const Reading: React.FC = () => {
           artworkLabel="Input / synthesis / reference"
         />
 
-        <ScrollReveal as="section" delay={100} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <FlipIn as="section" delay={100} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--text-primary)]">{totalBooks}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Books tracked</div></div>
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-emerald-400">{finishedBooks}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Finished</div></div>
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--accent-color)]">{readingBooks}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">In progress</div></div>
-        </ScrollReveal>
+        </FlipIn>
 
-        <ScrollReveal as="section" delay={150}>
+        <FlipIn as="section" delay={150}>
           <div className="eyebrow-rule">Books</div>
           <div className="mt-6 space-y-4">
             {READING_DATA.books.map((book, i) => {
               const s = statusLabel[book.status as keyof typeof statusLabel] || statusLabel.queue;
               const progress = Math.round((book.progress || 0) * 100);
               return (
-                <ScrollReveal key={book.title} delay={200 + i * 60} className="studio-panel p-5 rounded-xl space-y-3 group">
+                <FlipIn key={book.title} delay={200 + i * 60} className="studio-panel p-5 rounded-xl space-y-3 group">
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <Magnetic>
@@ -76,17 +77,17 @@ export const Reading: React.FC = () => {
                       <div className="shrink-0" />
                     )}
                   </div>
-                </ScrollReveal>
+                </FlipIn>
               );
             })}
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
-        <ScrollReveal as="section" delay={300}>
+        <FlipIn as="section" delay={300}>
           <div className="eyebrow-rule">Papers</div>
           <div className="mt-6 space-y-3">
             {READING_DATA.papers.map((paper, i) => (
-              <ScrollReveal key={paper.title} delay={350 + i * 50} className="studio-panel p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <FlipIn key={paper.title} delay={350 + i * 50} className="studio-panel p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <Magnetic>
                     <h4 className="font-display text-base font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors">{paper.title}</h4>
@@ -99,16 +100,16 @@ export const Reading: React.FC = () => {
                     <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 </Magnetic>
-              </ScrollReveal>
+              </FlipIn>
             ))}
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
-        <ScrollReveal as="section" delay={450}>
+        <FlipIn as="section" delay={450}>
           <div className="eyebrow-rule">Resources & Communities</div>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {READING_DATA.resources.map((res, i) => (
-              <ScrollReveal key={res.name} delay={500 + i * 60} className="studio-panel p-5 rounded-xl space-y-2">
+              <FlipIn key={res.name} delay={500 + i * 60} className="studio-panel p-5 rounded-xl space-y-2">
                 <div className="flex items-center gap-2"><FileText className="h-5 w-5 text-[var(--accent-color)]" /><span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-muted)]">{res.type}</span></div>
                 <Magnetic>
                   <h4 className="font-display text-base font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors">{res.name}</h4>
@@ -119,14 +120,14 @@ export const Reading: React.FC = () => {
                     <ArrowRight className="h-3.5 w-3.5" />
                   </a>
                 </Magnetic>
-              </ScrollReveal>
+              </FlipIn>
             ))}
           </div>
-        </ScrollReveal>
+        </FlipIn>
 
-        <ScrollReveal as="section" delay={600} className="border-t border-[var(--border-color)] pt-8 text-center">
+        <FlipIn as="section" delay={600} className="border-t border-[var(--border-color)] pt-8 text-center">
           <SplitText text="The best debugging tool is a good book. The best feature is a well-read mind." tag="p" className="text-[var(--text-muted)] max-w-xl mx-auto" stagger={0.02} />
-        </ScrollReveal>
+        </FlipIn>
       </div>
     </PageTransition>
   );

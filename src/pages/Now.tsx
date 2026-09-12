@@ -2,7 +2,8 @@ import React from 'react';
 import { Zap, Music, BookOpen, Heart } from 'lucide-react';
 import { PageTransition } from '../components/ui/PageTransition';
 import { PageMasthead } from '../components/ui/PageMasthead';
-import { Reveal, ScrollReveal, SplitText } from '../components/ui/Animations';
+import { SplitText } from '../components/ui/Animations';
+import { FlipIn } from '../components/three/Scroll3D';
 import { NOW_DATA } from '../data/human';
 import heroField from '../assets/hero-field.svg';
 
@@ -22,7 +23,7 @@ export const Now: React.FC = () => {
           artworkLabel="Current snapshot / field notes"
         />
 
-        <Reveal as="section" delay={100}>
+        <FlipIn as="section" delay={100}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="eyebrow-rule">Last updated</div>
             <div className="eyebrow-rule">Location</div>
@@ -33,67 +34,67 @@ export const Now: React.FC = () => {
             <div className="studio-panel p-4 rounded-xl"><span className="font-mono text-sm text-[var(--text-muted)]">{NOW_DATA.location}</span></div>
             <div className="studio-panel p-4 rounded-xl"><span className="font-mono text-sm text-[var(--text-muted)]">IST (UTC+5:30)</span></div>
           </div>
-        </Reveal>
+        </FlipIn>
 
-        <ScrollReveal delay={150}>
+        <FlipIn delay={150}>
           <div className="eyebrow-rule">Primary focus</div>
-        </ScrollReveal>
-        <ScrollReveal delay={200}>
+        </FlipIn>
+        <FlipIn delay={200}>
           <p className="mt-3 text-lg leading-relaxed text-[var(--text-primary)] max-w-3xl">{NOW_DATA.focus}</p>
-        </ScrollReveal>
+        </FlipIn>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          <ScrollReveal as="section" delay={250} className="studio-panel p-6 rounded-xl space-y-4">
+          <FlipIn as="section" delay={250} className="studio-panel p-6 rounded-xl space-y-4">
             <div className="flex items-center gap-2"><Zap className="h-5 w-5 text-[var(--accent-color)]" /><SplitText text="LEARNING" tag="h3" className="font-display text-lg font-bold" /></div>
             <ul className="space-y-2.5 text-[var(--text-muted)]">
               {NOW_DATA.learning.map((item, i) => (
-                <ScrollReveal key={item} delay={300 + i * 60} className="flex items-start gap-2">
+                <FlipIn key={item} delay={300 + i * 60} className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--accent-color)] shrink-0" />
                   <li>{item}</li>
-                </ScrollReveal>
+                </FlipIn>
               ))}
             </ul>
-          </ScrollReveal>
+          </FlipIn>
 
-          <ScrollReveal as="section" delay={350} className="studio-panel p-6 rounded-xl space-y-4">
+          <FlipIn as="section" delay={350} className="studio-panel p-6 rounded-xl space-y-4">
             <div className="flex items-center gap-2"><Zap className="h-5 w-5 text-[var(--accent-color)]" /><SplitText text="BUILDING" tag="h3" className="font-display text-lg font-bold" /></div>
             <ul className="space-y-2.5 text-[var(--text-muted)]">
               {NOW_DATA.building.map((item, i) => (
-                <ScrollReveal key={item} delay={400 + i * 60} className="flex items-start gap-2">
+                <FlipIn key={item} delay={400 + i * 60} className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--accent-color)] shrink-0" />
                   <li>{item}</li>
-                </ScrollReveal>
+                </FlipIn>
               ))}
             </ul>
-          </ScrollReveal>
+          </FlipIn>
 
-          <ScrollReveal as="section" delay={450} className="studio-panel p-6 rounded-xl space-y-4">
+          <FlipIn as="section" delay={450} className="studio-panel p-6 rounded-xl space-y-4">
             <div className="flex items-center gap-2"><Music className="h-5 w-5 text-[var(--accent-color)]" /><SplitText text="LISTENING" tag="h3" className="font-display text-lg font-bold" /></div>
             <ul className="space-y-2.5 text-[var(--text-muted)]">
               {NOW_DATA.listening.map((item, i) => (
-                <ScrollReveal key={item} delay={500 + i * 60} className="flex items-start gap-2">
+                <FlipIn key={item} delay={500 + i * 60} className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--accent-color)] shrink-0" />
                   <li>{item}</li>
-                </ScrollReveal>
+                </FlipIn>
               ))}
             </ul>
-          </ScrollReveal>
+          </FlipIn>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ScrollReveal as="section" delay={550} className="studio-panel p-6 rounded-xl space-y-4">
+          <FlipIn as="section" delay={550} className="studio-panel p-6 rounded-xl space-y-4">
             <div className="flex items-center gap-2"><BookOpen className="h-5 w-5 text-[var(--accent-color)]" /><SplitText text="READING" tag="h3" className="font-display text-lg font-bold" /></div>
             <ul className="space-y-2.5 text-[var(--text-muted)]">
               {NOW_DATA.reading.map((item, i) => (
-                <ScrollReveal key={item} delay={600 + i * 60} className="flex items-start gap-2">
+                <FlipIn key={item} delay={600 + i * 60} className="flex items-start gap-2">
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--accent-color)] shrink-0" />
                   <li>{item}</li>
-                </ScrollReveal>
+                </FlipIn>
               ))}
             </ul>
-          </ScrollReveal>
+          </FlipIn>
 
-          <ScrollReveal as="section" delay={650} className="studio-panel p-6 rounded-xl space-y-4">
+          <FlipIn as="section" delay={650} className="studio-panel p-6 rounded-xl space-y-4">
             <div className="flex items-center gap-2"><Heart className="h-5 w-5 text-rose-400" /><SplitText text="HEALTH & RHYTHM" tag="h3" className="font-display text-lg font-bold" /></div>
             <p className="text-[var(--text-muted)]">{NOW_DATA.health}</p>
             <div className="flex flex-wrap gap-2 pt-2">
@@ -101,12 +102,12 @@ export const Now: React.FC = () => {
               <span className="px-3 py-1 bg-[var(--bg-surface-secondary)] border border-[var(--border-color)] text-[var(--text-muted)] font-mono text-xs">7h sleep target</span>
               <span className="px-3 py-1 bg-[var(--bg-surface-secondary)] border border-[var(--border-color)] text-[var(--text-muted)] font-mono text-xs">Phone greyscale post-21:00</span>
             </div>
-          </ScrollReveal>
+          </FlipIn>
         </div>
 
-        <ScrollReveal as="section" delay={750} className="border-t border-[var(--border-color)] pt-8 text-center">
+        <FlipIn as="section" delay={750} className="border-t border-[var(--border-color)] pt-8 text-center">
           <p className="font-mono text-xs text-[var(--text-muted)]">This page is a manual snapshot. It drifts. That's the point.</p>
-        </ScrollReveal>
+        </FlipIn>
       </div>
     </PageTransition>
   );

@@ -5,6 +5,7 @@ import type { CategoryFilter } from '../components/projects/ProjectFilters';
 import { ProjectGrid } from '../components/projects/ProjectGrid';
 import { PROJECTS } from '../data/projects';
 import { PageMasthead } from '../components/ui/PageMasthead';
+import { Coverflow3D } from '../components/three/Coverflow3D';
 import roadTopology from '../assets/road-topology.svg';
 
 export const Projects: React.FC = () => {
@@ -48,6 +49,11 @@ export const Projects: React.FC = () => {
     <PageTransition>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-14 sm:space-y-20">
         <PageMasthead number="01" eyebrow="Selected work" title="PROJECT GALLERY" description="A focused collection of practical work across artificial intelligence, computer vision, data and interface development." artwork={roadTopology} artworkLabel="Systems / signals / surfaces" />
+
+        <section aria-label="Featured coverflow">
+          <div className="eyebrow-rule mb-5">Drag through the work</div>
+          <Coverflow3D projects={PROJECTS} />
+        </section>
 
         <section aria-label="Project collection">
           <div className="eyebrow-rule mb-5">Filter the collection</div>

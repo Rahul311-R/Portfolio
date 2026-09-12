@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { useTheme } from '../../context/ThemeContext';
-import { soundFx } from '../../utils/audio';
 
 export const ParticleVortexCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -67,7 +66,6 @@ export const ParticleVortexCanvas: React.FC = () => {
     };
 
     const handleClick = (e: MouseEvent) => {
-      soundFx.playClick();
       const rect = canvas.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickY = e.clientY - rect.top;

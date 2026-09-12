@@ -8,7 +8,7 @@ import { VirtualBoardDemo } from '../components/projects/VirtualBoardDemo';
 import { WeatherApiDemo } from '../components/projects/WeatherApiDemo';
 import { PROJECTS } from '../data/projects';
 import { GithubIcon } from '../components/ui/SocialIcons';
-import { TiltCard } from '../components/ui/TiltCard';
+import { ScrubHero, StickyStack, FlipIn } from '../components/three/Scroll3D';
 import roadTopology from '../assets/road-topology.svg';
 import gestureOrbit from '../assets/gesture-orbit.svg';
 import weatherFlow from '../assets/weather-flow.svg';
@@ -89,14 +89,16 @@ export const ProjectDetail: React.FC = () => {
           </div>
         </div>
 
-        <section className="artifact-frame visual-stage min-h-[18rem] md:min-h-[28rem] rounded-xl">
-          {artwork && <img src={artwork} alt="" className="absolute inset-0 h-full w-full object-cover opacity-90" />}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#090A10]/78 via-[#090A10]/12 to-transparent" />
-          <div className="absolute left-6 bottom-6 md:left-10 md:bottom-10 max-w-md z-10">
-            <div className="eyebrow-rule text-white/75">Visual system study</div>
-            <p className="mt-3 font-mono text-xs md:text-sm leading-relaxed text-white/75">Original abstract artwork created for this portfolio. It represents the project theme, not a project screenshot.</p>
-          </div>
-        </section>
+        <ScrubHero maxTilt={8} drift={44}>
+          <section className="artifact-frame visual-stage min-h-[18rem] md:min-h-[28rem] rounded-xl">
+            {artwork && <img src={artwork} alt="" className="absolute inset-0 h-full w-full object-cover opacity-90" />}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#090A10]/78 via-[#090A10]/12 to-transparent" />
+            <div className="absolute left-6 bottom-6 md:left-10 md:bottom-10 max-w-md z-10 [transform:translateZ(60px)]">
+              <div className="eyebrow-rule text-white/75">Visual system study</div>
+              <p className="mt-3 font-mono text-xs md:text-sm leading-relaxed text-white/75">Original abstract artwork created for this portfolio. It represents the project theme, not a project screenshot.</p>
+            </div>
+          </section>
+        </ScrubHero>
 
         {/* Interactive Demos depending on project */}
         {project.id === 'road-condition-analyzer' && (
@@ -128,45 +130,30 @@ export const ProjectDetail: React.FC = () => {
 
         {/* Architectural Flow Diagram if present */}
         {project.architecture && (
-          <TiltCard maxTilt={4}>
-            <section className="p-8 bg-[var(--bg-surface)] border border-[var(--border-color)] rounded-lg space-y-6">
-              <div className="flex items-center gap-2 font-mono text-xs text-[var(--accent-color)] font-bold uppercase tracking-wider">
-                <Layers className="w-4 h-4" />
-                <span>System Architecture (Conceptual Diagram)</span>
-              </div>
+          <section className="p-6 sm:p-8 bg-[var(--bg-surface)] border border-[var(--border-color)] rounded-lg space-y-6">
+            <div className="flex items-center gap-2 font-mono text-xs text-[var(--accent-color)] font-bold uppercase tracking-wider">
+              <Layers className="w-4 h-4" />
+              <span>System Architecture (Conceptual Diagram)</span>
+            </div>
 
-               <div className="visual-stage relative flex flex-wrap items-center justify-center gap-3 py-6 border border-[var(--border-color)] rounded">
-                {project.architecture.nodes.map((node, index) => (
-                  <React.Fragment key={node}>
-                    <div className="px-4 py-3 bg-[var(--bg-surface-secondary)] border border-[var(--accent-color)]/40 font-mono text-xs text-[var(--text-primary)] text-center rounded">
-                      {node}
-                    </div>
-                    {index < project.architecture!.nodes.length - 1 && (
-                      <span className="font-mono text-xs text-[var(--accent-color)] font-bold">→</span>
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
-
-              <p className="text-xs text-[var(--text-muted)] font-mono italic">
-                * Note: {project.architecture.description}
-              </p>
-            </section>
-          </TiltCard>
+            <StickyStack nodes={project.architecture.nodes} note={project.architecture.description} />
+          </section>
         )}
 
         {/* 9 Standard Case Study Sections */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           <div className="md:col-span-2 space-y-12">
-            {project.sections.map((section) => (
-              <section key={section.title} className="space-y-3 border-b border-[var(--border-color)]/50 pb-8">
-                <h3 className="font-mono text-xs text-[var(--accent-color)] font-bold tracking-widest uppercase">
-                  {section.title}
-                </h3>
-                <p className="text-base text-[var(--text-primary)] leading-relaxed font-normal">
-                  {section.content}
-                </p>
-              </section>
+            {project.sections.map((section, i) => (
+              <FlipIn key={section.title} delay={Math.min(i * 40, 200)}>
+                <section className="space-y-3 border-b border-[var(--border-color)]/50 pb-8">
+                  <h3 className="font-mono text-xs text-[var(--accent-color)] font-bold tracking-widest uppercase">
+                    {section.title}
+                  </h3>
+                  <p className="text-base text-[var(--text-primary)] leading-relaxed font-normal">
+                    {section.content}
+                  </p>
+                </section>
+              </FlipIn>
             ))}
           </div>
 
