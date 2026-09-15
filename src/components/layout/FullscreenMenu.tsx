@@ -100,8 +100,13 @@ export const FullscreenMenu: React.FC<{
             </button>
           </div>
 
-          {/* Link index — the oversized editorial list */}
-          <nav className="flex-1 overflow-y-auto px-5 sm:px-8 py-6 sm:py-8">
+          {/* Link index — the oversized editorial list.
+              data-lenis-prevent lets Lenis ignore wheel events here so the
+              list itself scrolls when it overflows on short viewports. */}
+          <nav
+            data-lenis-prevent
+            className="flex-1 overflow-y-auto overscroll-contain px-5 sm:px-8 py-6 sm:py-8"
+          >
             {links.map((link, i) => (
               <motion.div
                 key={link.path}

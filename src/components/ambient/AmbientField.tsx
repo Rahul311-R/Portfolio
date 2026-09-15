@@ -50,7 +50,7 @@ export const AmbientField: React.FC = () => {
     resize();
     window.addEventListener('resize', resize);
 
-    const motes: Mote[] = Array.from({ length: 70 }, () => ({
+    const motes: Mote[] = Array.from({ length: 46 }, () => ({
       x: Math.random(),
       y: Math.random(),
       z: 0.25 + Math.random() * 0.75,
@@ -58,7 +58,7 @@ export const AmbientField: React.FC = () => {
       vy: 0.008 + Math.random() * 0.02,
       phase: Math.random() * Math.PI * 2,
     }));
-    const packets: Packet[] = Array.from({ length: 5 }, () => ({
+    const packets: Packet[] = Array.from({ length: 3 }, () => ({
       x: Math.random(),
       y: 0.1 + Math.random() * 0.8,
       speed: 0.0012 + Math.random() * 0.0022,
@@ -110,7 +110,7 @@ export const AmbientField: React.FC = () => {
         const sy = ((m.y * height + scrollOffset * m.z * 0.35) % (height + 40)) - 20;
         const dxp = sx - cursorX;
         const dyp = sy - cursorY;
-        const dp = Math.sqrt(dxp * dxp + dyp * dyp);
+        const dp = pointerActive ? Math.sqrt(dxp * dxp + dyp * dyp) : 9999;
         const glow = pointerActive && dp < 160 ? (1 - dp / 160) * 0.5 : 0;
         const alpha = (0.12 + m.z * 0.3 + glow) * (0.7 + Math.abs(Math.sin(t * 0.8 + m.phase)) * 0.3);
         ctx.fillStyle = `hsla(${m.z > 0.6 ? accentHue : 190}, 80%, 72%, ${alpha.toFixed(3)})`;

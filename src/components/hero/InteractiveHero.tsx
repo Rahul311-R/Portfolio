@@ -1,88 +1,82 @@
 import React from 'react';
 import { motion, type MotionProps } from 'framer-motion';
-import { ArrowDown, ArrowRight, FileText, Cpu, Database, Eye } from 'lucide-react';
-import { Reactor3D } from '../three/Reactor3D';
+import { ArrowDown, ArrowRight, FileText } from 'lucide-react';
 import { Magnetic } from '../ui/Animations';
-import { TiltHeading } from '../three/TiltHeading';
 import { Typewriter } from '../ui/Typewriter';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
+/**
+ * Chapter 0 — the intro. Full-viewport, transparent; the cinematic world
+ * IS the visual. Type, tagline, CTAs and a scroll cue — nothing else.
+ */
 export const InteractiveHero: React.FC = () => {
   const reducedMotion = useReducedMotion();
   const reveal = (delay = 0): MotionProps =>
     reducedMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 18 },
+          initial: { opacity: 0, y: 22 },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.45, delay, ease: 'easeOut' },
+          transition: { duration: 0.55, delay, ease: 'easeOut' },
         };
 
   return (
-    <section className="relative isolate overflow-hidden border-b border-[var(--border-color)]">
-      <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(circle_at_84%_22%,var(--accent-glow),transparent_24rem)]" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-7">
-        <motion.div {...reveal()} className="flex items-center justify-between font-mono text-[10px] sm:text-xs tracking-[0.13em] uppercase text-[var(--text-muted)]">
-          <span className="inline-flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[var(--accent-color)]" /> Portfolio</span>
-          <span className="hidden sm:block">Coimbatore, India / 2026</span>
+    <section className="relative flex min-h-[100svh] flex-col justify-center px-5 sm:px-8">
+      <div className="mx-auto w-full max-w-[100rem]">
+        <motion.div {...reveal(0.05)} className="flex items-center justify-between font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[var(--text-muted)]">
+          <span className="inline-flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-[var(--accent-color)]" />
+            Portfolio — 2026
+          </span>
+          <span className="hidden sm:block">Coimbatore, India</span>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pt-12 sm:pt-16 pb-12 lg:pb-16 min-h-[calc(100svh-8rem)]">
-          <div className="lg:col-span-7 xl:col-span-7">
-            <motion.div {...reveal(0.06)} className="eyebrow-rule">Independent portfolio / creative coding laboratory</motion.div>
-            <TiltHeading max={5} className="mt-5 max-w-4xl">
-              <motion.h1 {...reveal(0.13)} className="font-display font-extrabold text-[clamp(4.1rem,11vw,10rem)] tracking-[-0.085em] leading-[0.78] text-[var(--text-primary)]">
-                RAHUL<br /><span className="font-serif-accent text-gold-gradient font-medium tracking-[-0.03em]">R.</span>
-              </motion.h1>
-            </TiltHeading>
-            <motion.p {...reveal(0.2)} className="mt-8 font-serif-accent text-3xl sm:text-4xl md:text-5xl tracking-tight text-[var(--text-primary)]">
-              AI <span className="text-[var(--accent-color)] not-italic font-display font-bold text-2xl align-middle">×</span> DATA <span className="text-[var(--accent-color)] not-italic font-display font-bold text-2xl align-middle">×</span> CODE
-            </motion.p>
-            <motion.p {...reveal(0.27)} className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-[var(--text-muted)]">
-              I like taking messy problems, turning them into systems, and seeing whether they work —
-              across artificial intelligence, data, computer vision and interactive software.
-            </motion.p>
-            <motion.div {...reveal(0.31)} className="mt-4 font-mono text-sm text-[var(--text-primary)] sm:text-base">
-              <Typewriter
-                phrases={['artificial intelligence', 'data analytics', 'computer vision', 'interactive software']}
-              />
-            </motion.div>
-            <motion.div {...reveal(0.34)} className="mt-8 flex flex-wrap gap-3">
-              <Magnetic><Button to="/projects" size="lg" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>View my work</Button></Magnetic>
-              <Magnetic><Button to="/contact" size="lg" variant="outline" icon={<FileText className="w-4 h-4" />}>Let's connect</Button></Magnetic>
-            </motion.div>
-            <motion.div {...reveal(0.42)} className="mt-10 flex flex-wrap gap-x-5 gap-y-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-muted)]">
-              <span className="inline-flex items-center gap-2"><Cpu className="h-3.5 w-3.5 text-[var(--accent-color)]" /> Artificial intelligence</span>
-              <span className="inline-flex items-center gap-2"><Eye className="h-3.5 w-3.5 text-[var(--accent-color)]" /> Computer vision</span>
-              <span className="inline-flex items-center gap-2"><Database className="h-3.5 w-3.5 text-[var(--accent-color)]" /> Data visualisation</span>
-            </motion.div>
-          </div>
+        <motion.h1
+          {...reveal(0.12)}
+          className="mt-10 font-display font-extrabold text-[clamp(3.8rem,12vw,11rem)] tracking-[-0.08em] leading-[0.8] text-[var(--text-primary)]"
+        >
+          RAHUL
+          <br />
+          <span className="font-serif-accent text-gold-gradient font-medium tracking-[-0.03em]">R.</span>
+        </motion.h1>
 
-          <motion.div {...reveal(0.18)} className="lg:col-span-5 xl:col-span-5 relative lg:self-stretch min-h-[25rem] sm:min-h-[32rem] flex items-center justify-center">
-            <Reactor3D className="w-full shadow-2xl" />
-            <motion.div animate={reducedMotion ? undefined : { y: [0, -9, 0] }} transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }} className="absolute -left-3 sm:-left-8 top-12 studio-panel backdrop-blur-md px-4 py-3 rounded-lg max-w-[11rem]">
-              <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--text-muted)]">Selected note</span>
-              <p className="mt-1 font-display text-sm font-bold text-[var(--text-primary)]">Patent published</p>
-            </motion.div>
-            <motion.div animate={reducedMotion ? undefined : { y: [0, 8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }} className="absolute -right-2 sm:-right-6 bottom-16 studio-panel backdrop-blur-md px-4 py-3 rounded-lg max-w-[12rem]">
-              <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--text-muted)]">Education</span>
-              <p className="mt-1 font-display text-sm font-bold text-[var(--text-primary)]">CGPA 8.3 / 10</p>
-            </motion.div>
-          </motion.div>
-        </div>
+        <motion.p {...reveal(0.2)} className="mt-8 font-serif-accent text-2xl sm:text-4xl md:text-5xl tracking-tight text-[var(--text-primary)]">
+          AI <span className="text-[var(--accent-color)] not-italic font-display font-bold text-xl align-middle">×</span> DATA{' '}
+          <span className="text-[var(--accent-color)] not-italic font-display font-bold text-xl align-middle">×</span> CODE
+        </motion.p>
 
-        <motion.div {...reveal(0.5)} className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl overflow-hidden">
-          {[
-            ['Focus', 'AI & data'],
-            ['Project note', 'Patent published'],
-            ['Practice', 'Code & interfaces'],
-            ['Approach', 'Learn by building']
-          ].map(([label, value]) => <div key={label} className="bg-[var(--bg-surface)] px-4 py-4 sm:px-5 sm:py-5"><div className="font-mono text-[9px] sm:text-[10px] text-[var(--text-muted)] uppercase tracking-[0.14em]">{label}</div><div className="mt-1.5 font-display text-sm sm:text-base font-bold text-[var(--text-primary)]">{value}</div></div>)}
+        <motion.p {...reveal(0.27)} className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-[var(--text-muted)]">
+          I like taking messy problems, turning them into systems, and seeing whether they work —
+          across artificial intelligence, data, computer vision and interactive software.
+        </motion.p>
+
+        <motion.div {...reveal(0.33)} className="mt-5 font-mono text-sm text-[var(--text-primary)] sm:text-base">
+          <Typewriter phrases={['artificial intelligence', 'data analytics', 'computer vision', 'interactive software']} />
+        </motion.div>
+
+        <motion.div {...reveal(0.38)} className="mt-10 flex flex-wrap gap-3">
+          <Magnetic>
+            <Button to="/projects" size="lg" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>
+              View my work
+            </Button>
+          </Magnetic>
+          <Magnetic>
+            <Button to="/contact" size="lg" variant="outline" icon={<FileText className="w-4 h-4" />}>
+              Let's connect
+            </Button>
+          </Magnetic>
         </motion.div>
       </div>
-      <a href="#selected-projects" className="absolute z-10 bottom-5 right-5 hidden lg:inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--text-muted)] hover:text-[var(--accent-color)]"><ArrowDown className="h-4 w-4" /> Scroll for projects</a>
+
+      <motion.a
+        {...reveal(0.5)}
+        href="#chapter-idea"
+        className="absolute bottom-7 left-1/2 -translate-x-1/2 inline-flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--text-muted)] hover:text-[var(--accent-color)] transition-colors"
+      >
+        Scroll
+        <ArrowDown className="h-4 w-4 animate-bounce" />
+      </motion.a>
     </section>
   );
 };

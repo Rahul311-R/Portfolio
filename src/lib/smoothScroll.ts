@@ -13,11 +13,12 @@ export function initSmoothScroll(): () => void {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return () => {};
 
   lenis = new Lenis({
-    duration: 1.15,
-    // Premium easing: long glide out, no bounce.
+    duration: 0.9,
+    // Premium easing: quick response, long glide out, no bounce.
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    touchMultiplier: 1.4,
+    wheelMultiplier: 1.05,
+    touchMultiplier: 1.6,
   });
 
   const raf = (time: number) => {

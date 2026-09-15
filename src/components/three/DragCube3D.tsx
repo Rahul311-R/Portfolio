@@ -51,8 +51,21 @@ export const DragCube3D: React.FC<{ size?: number }> = ({ size = 260 }) => {
     let velX = 0;
     let velY = 0.32; // idle auto-rotation (deg / frame)
     let raf = 0;
+    let inView = true;
+
+    // Park the spin loop while the cube is scrolled out of view.
+    const io = new IntersectionObserver(([entry]) => {
+      const was = inView;
+      inView = entry.isIntersecting;
+      if (inView && !was) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(render);
+      }
+    });
+    io.observe(cube);
 
     const render = () => {
+      if (!inView) return; // parked offscreen
       if (!drag.current.active) {
         rot.x += velX;
         rot.y += velY;
@@ -91,6 +104,7 @@ export const DragCube3D: React.FC<{ size?: number }> = ({ size = 260 }) => {
     window.addEventListener('pointercancel', onUp);
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       cube.removeEventListener('pointerdown', onDown);
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('pointerup', onUp);

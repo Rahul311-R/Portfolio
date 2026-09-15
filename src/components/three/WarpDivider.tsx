@@ -44,6 +44,18 @@ export const WarpDivider: React.FC<{ className?: string; stars?: number }> = ({
     let warp = 0;
     let lastY = window.scrollY;
     let raf = 0;
+    let inView = true;
+
+    // Park the loop entirely while offscreen — no draw cost when scrolled away.
+    const io = new IntersectionObserver(([entry]) => {
+      const was = inView;
+      inView = entry.isIntersecting;
+      if (inView && !was && !reducedMotion) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(render);
+      }
+    });
+    io.observe(canvas);
 
     const draw = () => {
       ctx.fillStyle = 'rgba(11, 12, 19, 0.4)';
@@ -84,6 +96,7 @@ export const WarpDivider: React.FC<{ className?: string; stars?: number }> = ({
     };
 
     const render = () => {
+      if (!inView) return; // parked
       const y = window.scrollY;
       const vel = Math.abs(y - lastY);
       lastY = y;
@@ -99,6 +112,7 @@ export const WarpDivider: React.FC<{ className?: string; stars?: number }> = ({
     }
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       window.removeEventListener('resize', onResize);
     };
   }, [stars, reducedMotion]);
