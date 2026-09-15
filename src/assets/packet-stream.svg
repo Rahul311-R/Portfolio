@@ -1,0 +1,50 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0A0B11"/>
+  <g opacity=".14" stroke="#C9A45C" stroke-width="1">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M200 0V1000M400 0V1000M600 0V1000M800 0V1000M1000 0V1000M1200 0V1000M1400 0V1000"/>
+  </g>
+  <g stroke="#F5F7FA" stroke-opacity=".12"><path d="M0 230H1600M0 430H1600M0 630H1600M0 830H1600"/></g>
+  <g fill="url(#psA)">
+    <rect x="120" y="204" width="150" height="26" rx="9"/>
+    <rect x="330" y="204" width="70" height="26" rx="9"/>
+    <rect x="470" y="204" width="240" height="26" rx="9"/>
+    <rect x="860" y="204" width="110" height="26" rx="9"/>
+    <rect x="1080" y="204" width="300" height="26" rx="9"/>
+  </g>
+  <g fill="url(#psB)">
+    <rect x="180" y="417" width="300" height="26" rx="9"/>
+    <rect x="560" y="417" width="90" height="26" rx="9"/>
+    <rect x="930" y="417" width="200" height="26" rx="9"/>
+    <rect x="1250" y="417" width="140" height="26" rx="9"/>
+  </g>
+  <g fill="url(#psA)">
+    <rect x="90" y="617" width="90" height="26" rx="9"/>
+    <rect x="260" y="617" width="200" height="26" rx="9"/>
+    <rect x="700" y="617" width="130" height="26" rx="9"/>
+    <rect x="1010" y="617" width="330" height="26" rx="9"/>
+  </g>
+  <g fill="url(#psC)">
+    <rect x="220" y="817" width="200" height="26" rx="9"/>
+    <rect x="520" y="817" width="80" height="26" rx="9"/>
+    <rect x="760" y="817" width="260" height="26" rx="9"/>
+    <rect x="1180" y="817" width="160" height="26" rx="9"/>
+  </g>
+  <g stroke="#EFE3C2" stroke-opacity=".7" stroke-width="3" fill="none">
+    <path d="M1500 218h44m0 0-14-12m14 12-14 12"/>
+    <path d="M56 630h-44m0 0 14-12m-14 12 14 12"/>
+  </g>
+  <g stroke="#C9A45C" stroke-opacity=".7" stroke-width="3" fill="none">
+    <path d="M1500 418h44m0 0-14-12m14 12-14 12"/>
+    <path d="M1500 818h44m0 0-14-12m14 12-14 12"/>
+  </g>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".4">
+    <text x="60" y="160">TX-01</text><text x="60" y="392">RX-02</text><text x="60" y="592">TX-03</text><text x="60" y="792">TX-04</text>
+    <text x="1290" y="950">SIG 07 · WORK IN FLIGHT</text>
+  </g>
+  <defs>
+    <linearGradient id="psA" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#C9A45C"/><stop offset="1" stop-color="#EFE3C2"/></linearGradient>
+    <linearGradient id="psB" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#EFE3C2"/><stop offset="1" stop-color="#C9A45C"/></linearGradient>
+    <linearGradient id="psC" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#F5F7FA" stop-opacity=".85"/><stop offset="1" stop-color="#EFE3C2"/></linearGradient>
+  </defs>
+</svg>

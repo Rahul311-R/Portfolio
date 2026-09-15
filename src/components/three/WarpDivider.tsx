@@ -38,7 +38,7 @@ export const WarpDivider: React.FC<{ className?: string; stars?: number }> = ({
       x: Math.random() * 2 - 1,
       y: Math.random() * 2 - 1,
       z: Math.random() * 0.9 + 0.1,
-      hue: Math.random() < 0.6 ? 258 : Math.random() < 0.5 ? 190 : 0,
+      hue: Math.random() < 0.6 ? 42 : Math.random() < 0.5 ? 48 : 0,
     }));
 
     let warp = 0;
@@ -68,7 +68,7 @@ export const WarpDivider: React.FC<{ className?: string; stars?: number }> = ({
         ctx.strokeStyle =
           s.hue === 0
             ? `rgba(245, 247, 250, ${alpha.toFixed(2)})`
-            : `hsla(${s.hue}, 85%, 68%, ${alpha.toFixed(2)})`;
+            : `hsla(${s.hue}, 62%, 70%, ${alpha.toFixed(2)})`;
         ctx.lineWidth = Math.max(1, (1 - s.z) * 2);
         ctx.beginPath();
         ctx.moveTo(px, py);

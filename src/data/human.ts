@@ -119,15 +119,15 @@ export const READING_DATA = {
     { title: 'Staff Engineer', author: 'Will Larson', status: 'queue', progress: 0.0, rating: null, note: 'For the path ahead.' },
   ],
   papers: [
-    { title: 'Attention Is All You Need', authors: 'Vaswani et al.', year: 2017, status: 'studied', link: '[ADD LINK]' },
-    { title: 'BERT: Pre-training of Deep Bidirectional Transformers', authors: 'Devlin et al.', year: 2018, status: 'read', link: '[ADD LINK]' },
-    { title: 'Scaling Laws for Neural Language Models', authors: 'Kaplan et al.', year: 2020, status: 'skimmed', link: '[ADD LINK]' },
-    { title: 'LoRA: Low-Rank Adaptation of Large Language Models', authors: 'Hu et al.', year: 2021, status: 'read', link: '[ADD LINK]' },
+    { title: 'Attention Is All You Need', authors: 'Vaswani et al.', year: 2017, status: 'studied', link: 'https://arxiv.org/abs/1706.03762' },
+    { title: 'BERT: Pre-training of Deep Bidirectional Transformers', authors: 'Devlin et al.', year: 2018, status: 'read', link: 'https://arxiv.org/abs/1810.04805' },
+    { title: 'Scaling Laws for Neural Language Models', authors: 'Kaplan et al.', year: 2020, status: 'skimmed', link: 'https://arxiv.org/abs/2001.08361' },
+    { title: 'LoRA: Low-Rank Adaptation of Large Language Models', authors: 'Hu et al.', year: 2021, status: 'read', link: 'https://arxiv.org/abs/2106.09685' },
   ],
   resources: [
-    { name: 'The Illustrated Transformer', type: 'Visual guide', link: '[ADD LINK]' },
-    { name: 'Stanford CS231n (2023)', type: 'Course', link: '[ADD LINK]' },
-    { name: 'MLOps Community', type: 'Community', link: '[ADD LINK]' },
-    { name: 'Papers with Code', type: 'Paper + code index', link: '[ADD LINK]' },
+    { name: 'The Illustrated Transformer', type: 'Visual guide', link: 'https://jalammar.github.io/illustrated-transformer/' },
+    { name: 'Stanford CS231n (2023)', type: 'Course', link: 'https://cs231n.stanford.edu/' },
+    { name: 'MLOps Community', type: 'Community', link: 'https://mlops.community/' },
+    { name: 'Papers with Code', type: 'Paper + code index', link: 'https://paperswithcode.com/' },
   ],
 };

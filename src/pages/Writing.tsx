@@ -5,7 +5,8 @@ import { PageMasthead } from '../components/ui/PageMasthead';
 import { SplitText, Magnetic } from '../components/ui/Animations';
 import { FlipIn } from '../components/three/Scroll3D';
 import { WRITING_DATA } from '../data/human';
-import heroField from '../assets/hero-field.svg';
+import { PAGE_ARTWORK } from '../data/artwork';
+import { SignalHelix3D } from '../components/three/SignalHelix3D';
 
 export const Writing: React.FC = () => {
   const published = WRITING_DATA.filter((w) => w.status === 'published');
@@ -19,7 +20,7 @@ export const Writing: React.FC = () => {
           eyebrow="Notes & Articles"
           title="WRITING"
           description="Technical notes I've polished into articles, plus drafts I'm still shaping. No content calendar — just topics I needed to understand better."
-          artwork={heroField}
+          artwork={PAGE_ARTWORK.writing}
           artworkLabel="Words / code / clarity"
         />
 
@@ -27,6 +28,26 @@ export const Writing: React.FC = () => {
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--text-primary)]">{published.length}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Published</div></div>
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--text-primary)]">{drafts.length}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">In Draft</div></div>
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--text-primary)]">{WRITING_DATA.length}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Total</div></div>
+        </FlipIn>
+
+        {/* The drafting helix — ideas winding into words */}
+        <FlipIn as="section" delay={120}>
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+            <div className="order-2 lg:order-1">
+              <SignalHelix3D />
+            </div>
+            <div className="order-1 lg:order-2">
+              <div className="eyebrow-rule">The helix · live</div>
+              <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-3xl">
+                Ideas wind into words.
+              </h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+                Drafting is a double helix: one strand of research, one strand of
+                rewriting, twisted together until it stands up on its own.
+                Drag the helix — it keeps your momentum.
+              </p>
+            </div>
+          </div>
         </FlipIn>
 
         {published.length > 0 && (

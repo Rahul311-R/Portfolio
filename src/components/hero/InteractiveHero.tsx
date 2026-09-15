@@ -1,14 +1,12 @@
 import React from 'react';
 import { motion, type MotionProps } from 'framer-motion';
 import { ArrowDown, ArrowRight, FileText, Cpu, Database, Eye } from 'lucide-react';
-import { ParticleVortexCanvas } from './ParticleVortexCanvas';
-import { ParallaxLayer, Magnetic } from '../ui/Animations';
-import { ScrubHero } from '../three/Scroll3D';
+import { Reactor3D } from '../three/Reactor3D';
+import { Magnetic } from '../ui/Animations';
 import { TiltHeading } from '../three/TiltHeading';
 import { Typewriter } from '../ui/Typewriter';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import heroField from '../../assets/hero-field.svg';
 
 export const InteractiveHero: React.FC = () => {
   const reducedMotion = useReducedMotion();
@@ -23,7 +21,6 @@ export const InteractiveHero: React.FC = () => {
 
   return (
     <section className="relative isolate overflow-hidden border-b border-[var(--border-color)]">
-      <ParticleVortexCanvas />
       <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(circle_at_84%_22%,var(--accent-glow),transparent_24rem)]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-7">
@@ -37,14 +34,15 @@ export const InteractiveHero: React.FC = () => {
             <motion.div {...reveal(0.06)} className="eyebrow-rule">Independent portfolio / creative coding laboratory</motion.div>
             <TiltHeading max={5} className="mt-5 max-w-4xl">
               <motion.h1 {...reveal(0.13)} className="font-display font-extrabold text-[clamp(4.1rem,11vw,10rem)] tracking-[-0.085em] leading-[0.78] text-[var(--text-primary)]">
-                RAHUL<br /><span className="text-[var(--accent-color)]">R.</span>
+                RAHUL<br /><span className="font-serif-accent text-gold-gradient font-medium tracking-[-0.03em]">R.</span>
               </motion.h1>
             </TiltHeading>
-            <motion.p {...reveal(0.2)} className="mt-8 font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--text-primary)]">
-              AI <span className="text-[var(--accent-color)]">x</span> DATA <span className="text-[var(--accent-color)]">x</span> CODE
+            <motion.p {...reveal(0.2)} className="mt-8 font-serif-accent text-3xl sm:text-4xl md:text-5xl tracking-tight text-[var(--text-primary)]">
+              AI <span className="text-[var(--accent-color)] not-italic font-display font-bold text-2xl align-middle">×</span> DATA <span className="text-[var(--accent-color)] not-italic font-display font-bold text-2xl align-middle">×</span> CODE
             </motion.p>
             <motion.p {...reveal(0.27)} className="mt-5 max-w-xl text-base sm:text-lg leading-relaxed text-[var(--text-muted)]">
-              Building useful things with code. Exploring artificial intelligence, data, computer vision and interactive software through practical projects and creative experiments.
+              I like taking messy problems, turning them into systems, and seeing whether they work —
+              across artificial intelligence, data, computer vision and interactive software.
             </motion.p>
             <motion.div {...reveal(0.31)} className="mt-4 font-mono text-sm text-[var(--text-primary)] sm:text-base">
               <Typewriter
@@ -52,8 +50,8 @@ export const InteractiveHero: React.FC = () => {
               />
             </motion.div>
             <motion.div {...reveal(0.34)} className="mt-8 flex flex-wrap gap-3">
-              <Magnetic><Button as="a" href="/projects" size="lg" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>Explore projects</Button></Magnetic>
-              <Magnetic><Button as="a" href="/resume" size="lg" variant="outline" icon={<FileText className="w-4 h-4" />}>View resume</Button></Magnetic>
+              <Magnetic><Button to="/projects" size="lg" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>View my work</Button></Magnetic>
+              <Magnetic><Button to="/contact" size="lg" variant="outline" icon={<FileText className="w-4 h-4" />}>Let's connect</Button></Magnetic>
             </motion.div>
             <motion.div {...reveal(0.42)} className="mt-10 flex flex-wrap gap-x-5 gap-y-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-muted)]">
               <span className="inline-flex items-center gap-2"><Cpu className="h-3.5 w-3.5 text-[var(--accent-color)]" /> Artificial intelligence</span>
@@ -62,20 +60,8 @@ export const InteractiveHero: React.FC = () => {
             </motion.div>
           </div>
 
-          <motion.div {...reveal(0.18)} className="lg:col-span-5 xl:col-span-5 relative lg:self-stretch min-h-[25rem] sm:min-h-[32rem]">
-            <ScrubHero maxTilt={6} drift={30} className="absolute inset-0">
-              <div className="artifact-frame visual-stage absolute inset-0 rounded-2xl shadow-2xl">
-                <ParallaxLayer speed={0.06} max={44} className="absolute inset-0">
-                  <img src={heroField} alt="" className="absolute inset-0 h-full w-full scale-110 object-cover" />
-                </ParallaxLayer>
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#08090D]/76 via-transparent to-transparent" />
-                <div className="absolute top-5 left-5 font-mono text-[10px] tracking-[0.16em] uppercase text-white/70 [transform:translateZ(40px)]">Computational landscape / 01</div>
-                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4 text-white [transform:translateZ(56px)]">
-                  <div><div className="font-mono text-[10px] tracking-[0.14em] uppercase text-white/55">Build / Experiment / Visualize</div><div className="mt-1 font-display text-2xl font-bold">An active field of ideas.</div></div>
-                  <span className="hidden sm:grid h-12 w-12 place-items-center rounded-full border border-white/25 font-mono text-xs">01</span>
-                </div>
-              </div>
-            </ScrubHero>
+          <motion.div {...reveal(0.18)} className="lg:col-span-5 xl:col-span-5 relative lg:self-stretch min-h-[25rem] sm:min-h-[32rem] flex items-center justify-center">
+            <Reactor3D className="w-full shadow-2xl" />
             <motion.div animate={reducedMotion ? undefined : { y: [0, -9, 0] }} transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }} className="absolute -left-3 sm:-left-8 top-12 studio-panel backdrop-blur-md px-4 py-3 rounded-lg max-w-[11rem]">
               <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-[var(--text-muted)]">Selected note</span>
               <p className="mt-1 font-display text-sm font-bold text-[var(--text-primary)]">Patent published</p>

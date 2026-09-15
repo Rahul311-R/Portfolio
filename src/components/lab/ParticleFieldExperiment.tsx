@@ -26,7 +26,7 @@ export const ParticleFieldExperiment: React.FC = () => {
       size: number;
     }[] = [];
 
-    const colors = ['#8B5CF6', '#22D3EE', '#34D399', '#FBBF24'];
+    const colors = ['#C9A45C', '#EFE3C2', '#9A7A35', '#F5E7C1'];
 
     for (let i = 0; i < 70; i++) {
       particles.push({

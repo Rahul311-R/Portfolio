@@ -1,0 +1,46 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0A0B11"/>
+  <g opacity=".12" stroke="#C9A45C" stroke-width="1">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M133 0V1000M266 0V1000M400 0V1000M533 0V1000M666 0V1000M800 0V1000M933 0V1000M1066 0V1000M1200 0V1000M1333 0V1000M1466 0V1000"/>
+  </g>
+  <g fill="#10131D" stroke="#C9A45C" stroke-opacity=".8" stroke-width="2.5">
+    <rect x="130" y="240" width="260" height="150" rx="12"/>
+    <rect x="130" y="560" width="260" height="150" rx="12"/>
+  </g>
+  <g fill="#10131D" stroke="#EFE3C2" stroke-opacity=".8" stroke-width="2.5">
+    <rect x="460" y="240" width="260" height="150" rx="12"/>
+    <rect x="460" y="560" width="260" height="150" rx="12"/>
+  </g>
+  <g fill="#10131D" stroke="#F5F7FA" stroke-opacity=".55" stroke-width="2.5">
+    <rect x="790" y="240" width="260" height="150" rx="12"/>
+    <rect x="790" y="560" width="260" height="150" rx="12"/>
+  </g>
+  <g font-family="monospace" font-size="18" fill="#F5F7FA" fill-opacity=".6">
+    <text x="155" y="325">TATA · VIZ</text>
+    <text x="155" y="645">VOC · WEB</text>
+    <text x="485" y="325">ACCENTURE</text>
+    <text x="485" y="645">PATENT FILE</text>
+    <text x="815" y="325">ORACLE CLOUD</text>
+    <text x="815" y="645">IBM UI/UX</text>
+  </g>
+  <g stroke-width="3" fill="none">
+    <path d="M390 315h44m0 0-12-10m12 10-12 10" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <path d="M390 635h44m0 0-12-10m12 10-12 10" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <path d="M720 315h44m0 0-12-10m12 10-12 10" stroke="#C9A45C" stroke-opacity=".8"/>
+    <path d="M720 635h44m0 0-12-10m12 10-12 10" stroke="#C9A45C" stroke-opacity=".8"/>
+    <path d="M1050 315h44m0 0-12-10m12 10-12 10" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <path d="M1050 635h44m0 0-12-10m12 10-12 10" stroke="#EFE3C2" stroke-opacity=".8"/>
+  </g>
+  <path d="M1120 315C1260 315 1300 460 1430 460" stroke="#C9A45C" stroke-opacity=".7" stroke-width="3.5" fill="none"/>
+  <path d="M1120 635C1260 635 1300 500 1430 500" stroke="#EFE3C2" stroke-opacity=".7" stroke-width="3.5" fill="none"/>
+  <path d="M1120 315C1260 315 1300 460 1430 460" stroke="#F5F7FA" stroke-opacity=".14" stroke-width="12" stroke-linecap="round"/>
+  <path d="M1120 635C1260 635 1300 500 1430 500" stroke="#F5F7FA" stroke-opacity=".14" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="1470" cy="480" r="44" fill="#0A0B11" stroke="#34D399" stroke-width="3"/>
+  <circle cx="1470" cy="480" r="18" fill="#34D399" fill-opacity=".85"/>
+  <path d="M1430 480h-30m0 0 12-10m-12 10 12 10" stroke="#34D399" stroke-opacity=".85" stroke-width="3" fill="none"/>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".4">
+    <text x="60" y="950">SIG 14 · LEARNING RELAYS</text>
+    <text x="1380" y="620">GROWTH</text>
+  </g>
+</svg>

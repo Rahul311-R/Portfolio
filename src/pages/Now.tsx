@@ -5,7 +5,8 @@ import { PageMasthead } from '../components/ui/PageMasthead';
 import { SplitText } from '../components/ui/Animations';
 import { FlipIn } from '../components/three/Scroll3D';
 import { NOW_DATA } from '../data/human';
-import heroField from '../assets/hero-field.svg';
+import { PAGE_ARTWORK } from '../data/artwork';
+import { SignalBus } from '../components/transmission/SignalBus';
 
 export const Now: React.FC = () => {
   const now = new Date();
@@ -19,7 +20,7 @@ export const Now: React.FC = () => {
           eyebrow={`Updated ${month}`}
           title="NOW"
           description="What I'm focused on, learning, building, and consuming right now. Updated manually when things shift."
-          artwork={heroField}
+          artwork={PAGE_ARTWORK.now}
           artworkLabel="Current snapshot / field notes"
         />
 
@@ -104,6 +105,12 @@ export const Now: React.FC = () => {
             </div>
           </FlipIn>
         </div>
+
+        {/* Live status strip */}
+        <FlipIn as="section" delay={700} className="studio-panel rounded-xl p-4 sm:p-6">
+          <div className="eyebrow-rule mb-3">Live relays · all channels nominal</div>
+          <SignalBus height={120} lanes={3} />
+        </FlipIn>
 
         <FlipIn as="section" delay={750} className="border-t border-[var(--border-color)] pt-8 text-center">
           <p className="font-mono text-xs text-[var(--text-muted)]">This page is a manual snapshot. It drifts. That's the point.</p>

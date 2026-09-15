@@ -6,7 +6,9 @@ import { FlipIn } from '../components/three/Scroll3D';
 import { RESUME_DATA } from '../data/resume';
 import { DragCube3D } from '../components/three/DragCube3D';
 import { GraduationCap, Terminal, MapPin, Heart, Music, BookOpen, Coffee, Camera, Gamepad2, Mountain, Sun, Moon } from 'lucide-react';
-import weatherFlow from '../assets/weather-flow.svg';
+import { PAGE_ARTWORK, SECTION_ARTWORK } from '../data/artwork';
+import { ArtifactPlate } from '../components/transmission/ArtifactPlate';
+import { WarpDivider } from '../components/three/WarpDivider';
 
 const JOURNEY = [
   { year: '2022', title: 'Started B.Tech', detail: 'Joined V.S.B College of Engineering, Coimbatore. First time living away from home. Discovered computer vision in second semester.', tone: 'origin' },
@@ -50,9 +52,11 @@ export const About: React.FC = () => {
           eyebrow="Profile"
           title="ABOUT ME"
           description="A practical interest in combining data, AI, software and visual interfaces — grounded in the supplied resume, shaped by daily practice."
-          artwork={weatherFlow}
+          artwork={PAGE_ARTWORK.about}
           artworkLabel="Interests / context / craft"
         />
+
+        <WarpDivider stars={90} />
 
         {/* Quick stat cards */}
         <FlipIn as="section" delay={100} className="grid grid-cols-2 sm:grid-cols-4 gap-px overflow-hidden rounded-xl border border-[var(--border-color)] bg-[var(--border-color)]">
@@ -97,6 +101,7 @@ export const About: React.FC = () => {
         </FlipIn>
 
         {/* Philosophy / Values */}
+        <ArtifactPlate src={SECTION_ARTWORK.values} caption="SIG 12 · OPERATING PRINCIPLES" label="Four blocks on one bus — context, usefulness, learning, craft" />
         <FlipIn as="section" delay={400}>
           <div className="eyebrow-rule">Operating Principles</div>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -128,6 +133,9 @@ export const About: React.FC = () => {
             ))}
           </div>
         </FlipIn>
+
+        {/* Daily rhythm plate */}
+        <ArtifactPlate src={SECTION_ARTWORK.rhythm} caption="SIG 13 · DAILY RHYTHM" label="One day, four deep-work blocks, IST timebase" />
 
         {/* Non-work Interests */}
         <FlipIn as="section" delay={800}>

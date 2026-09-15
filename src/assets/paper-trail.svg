@@ -1,0 +1,50 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0A0B11"/>
+  <g opacity=".12" stroke="#C9A45C" stroke-width="1">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M133 0V1000M266 0V1000M400 0V1000M533 0V1000M666 0V1000M800 0V1000M933 0V1000M1066 0V1000M1200 0V1000M1333 0V1000M1466 0V1000"/>
+  </g>
+  <g fill="none" stroke-width="2.5">
+    <rect x="140" y="200" width="380" height="460" rx="14" stroke="#C9A45C" stroke-opacity=".8"/>
+    <rect x="620" y="200" width="380" height="460" rx="14" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <rect x="1100" y="200" width="360" height="460" rx="14" stroke="#F5F7FA" stroke-opacity=".5"/>
+  </g>
+  <g fill="#F5F7FA" fill-opacity=".2">
+    <rect x="180" y="250" width="220" height="18" rx="9"/>
+    <rect x="180" y="290" width="300" height="18" rx="9"/>
+    <rect x="180" y="330" width="260" height="18" rx="9"/>
+    <rect x="660" y="250" width="260" height="18" rx="9"/>
+    <rect x="660" y="290" width="180" height="18" rx="9"/>
+    <rect x="660" y="330" width="300" height="18" rx="9"/>
+    <rect x="1140" y="250" width="200" height="18" rx="9"/>
+    <rect x="1140" y="290" width="280" height="18" rx="9"/>
+  </g>
+  <g stroke-width="3" fill="none">
+    <path d="M180 430h300" stroke="#C9A45C" stroke-opacity=".6"/>
+    <path d="M180 470h240" stroke="#C9A45C" stroke-opacity=".45"/>
+    <path d="M660 430h300" stroke="#EFE3C2" stroke-opacity=".6"/>
+    <path d="M660 470h240" stroke="#EFE3C2" stroke-opacity=".45"/>
+    <path d="M1140 430h280" stroke="#F5F7FA" stroke-opacity=".45"/>
+  </g>
+  <g font-family="monospace" font-size="19" fill="#F5F7FA" fill-opacity=".55">
+    <text x="180" y="590">ATTRENTION IS ALL</text>
+    <text x="660" y="590">SCALING LAWS · 2020</text>
+    <text x="1140" y="590">LORA · 2021</text>
+  </g>
+  <g font-family="monospace" font-size="16" fill="#F5F7FA" fill-opacity=".4">
+    <text x="180" y="625">VASWANI ET AL · 2017</text>
+    <text x="660" y="625">KAPLAN ET AL</text>
+    <text x="1140" y="625">HU ET AL</text>
+  </g>
+  <g stroke="#EFE3C2" stroke-opacity=".85" stroke-width="3">
+    <path d="M520 430H620"/>
+  </g>
+  <g stroke="#C9A45C" stroke-opacity=".85" stroke-width="3">
+    <path d="M1000 430H1100"/>
+  </g>
+  <g fill="#EFE3C2"><circle cx="520" cy="430" r="6"/><circle cx="1000" cy="430" r="6"/></g>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".4">
+    <text x="60" y="950">SIG 17 · PAPER TRAIL</text>
+    <text x="1250" y="140">CITATION FLOW →</text>
+  </g>
+</svg>

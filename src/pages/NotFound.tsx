@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { ArrowLeft, Compass } from 'lucide-react';
 import { PageTransition } from '../components/ui/PageTransition';
 import { Button } from '../components/ui/Button';
-import heroField from '../assets/hero-field.svg';
+import { PAGE_ARTWORK } from '../data/artwork';
+import { SignalBus } from '../components/transmission/SignalBus';
 
 export const NotFound: React.FC = () => {
   return (
@@ -19,10 +20,10 @@ export const NotFound: React.FC = () => {
               This route does not exist in the portfolio. The work, timeline, lab and contact pages are all one step away.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button as="a" href="/" size="md" variant="primary" icon={<ArrowLeft className="h-4 w-4" />}>
+              <Button to="/" size="md" variant="primary" icon={<ArrowLeft className="h-4 w-4" />}>
                 Back home
               </Button>
-              <Button as="a" href="/projects" size="md" variant="outline" icon={<Compass className="h-4 w-4" />}>
+              <Button to="/projects" size="md" variant="outline" icon={<Compass className="h-4 w-4" />}>
                 Browse projects
               </Button>
             </div>
@@ -41,11 +42,19 @@ export const NotFound: React.FC = () => {
             </nav>
           </div>
           <div className="artifact-frame visual-stage min-h-[22rem] rounded-2xl">
-            <img src={heroField} alt="" className="absolute inset-0 h-full w-full object-cover" />
+            <img src={PAGE_ARTWORK.notFound} alt="" className="absolute inset-0 h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#08090D]/85 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 font-mono text-[11px] uppercase tracking-[0.14em] text-white/65">
-              Original generative artwork / not a screenshot
+            <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
+              <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/65">
+                Signal rerouted — not a screenshot
+              </span>
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/25 font-mono text-[10px] text-white/80">
+                404
+              </span>
             </div>
+          </div>
+          <div className="lg:col-span-2">
+            <SignalBus height={140} lanes={3} />
           </div>
         </div>
       </div>

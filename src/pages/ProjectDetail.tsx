@@ -9,9 +9,8 @@ import { WeatherApiDemo } from '../components/projects/WeatherApiDemo';
 import { PROJECTS } from '../data/projects';
 import { GithubIcon } from '../components/ui/SocialIcons';
 import { ScrubHero, StickyStack, FlipIn } from '../components/three/Scroll3D';
-import roadTopology from '../assets/road-topology.svg';
-import gestureOrbit from '../assets/gesture-orbit.svg';
-import weatherFlow from '../assets/weather-flow.svg';
+import { PROJECT_ARTWORK } from '../data/artwork';
+import { TerminalPending } from '../components/ui/TerminalPending';
 
 export const ProjectDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -21,11 +20,7 @@ export const ProjectDetail: React.FC = () => {
     return <Navigate to="/projects" replace />;
   }
 
-  const artwork = {
-    'road-condition-analyzer': roadTopology,
-    'virtual-drawing-board': gestureOrbit,
-    'weather-prediction-gui': weatherFlow
-  }[project.id];
+  const artwork = PROJECT_ARTWORK[project.id];
   const projectIndex = PROJECTS.findIndex((item) => item.slug === slug);
   const previousProject = projectIndex > 0 ? PROJECTS[projectIndex - 1] : undefined;
   const nextProject = projectIndex < PROJECTS.length - 1 ? PROJECTS[projectIndex + 1] : undefined;
@@ -84,8 +79,8 @@ export const ProjectDetail: React.FC = () => {
           )}
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
-            {project.githubUrl ? <Button as="a" href={project.githubUrl} target="_blank" rel="noopener noreferrer" variant="outline" size="md" icon={<GithubIcon className="w-4 h-4" />}>VIEW REPOSITORY</Button> : <span className="inline-flex items-center gap-2 px-4 py-2.5 border border-[var(--border-color)] font-mono text-xs text-[var(--text-muted)]"><Link2Off className="w-4 h-4" /> REPOSITORY [ADD LINK]</span>}
-            {project.liveUrl ? <Button as="a" href={project.liveUrl} target="_blank" rel="noopener noreferrer" variant="secondary" size="md" icon={<ExternalLink className="w-4 h-4" />}>VIEW LIVE DEMO</Button> : <span className="inline-flex items-center gap-2 px-4 py-2.5 border border-[var(--border-color)] font-mono text-xs text-[var(--text-muted)]"><Link2Off className="w-4 h-4" /> LIVE DEMO [ADD LINK]</span>}
+            {project.githubUrl ? <Button as="a" href={project.githubUrl} target="_blank" rel="noopener noreferrer" variant="outline" size="md" icon={<GithubIcon className="w-4 h-4" />}>VIEW REPOSITORY</Button> : <span className="inline-flex items-center gap-2"><Link2Off className="w-4 h-4 text-[var(--text-muted)]" /><TerminalPending label="Repository" /></span>}
+            {project.liveUrl ? <Button as="a" href={project.liveUrl} target="_blank" rel="noopener noreferrer" variant="secondary" size="md" icon={<ExternalLink className="w-4 h-4" />}>VIEW LIVE DEMO</Button> : <span className="inline-flex items-center gap-2"><Link2Off className="w-4 h-4 text-[var(--text-muted)]" /><TerminalPending label="Live demo" /></span>}
           </div>
         </div>
 
@@ -190,6 +185,7 @@ export const ProjectDetail: React.FC = () => {
           {previousProject ? (
             <NavLink
               to={`/projects/${previousProject.slug}`}
+              viewTransition
               className="group studio-panel rounded-xl p-5 transition-colors hover:border-[var(--accent-color)]"
             >
               <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
@@ -205,6 +201,7 @@ export const ProjectDetail: React.FC = () => {
           {nextProject && (
             <NavLink
               to={`/projects/${nextProject.slug}`}
+              viewTransition
               className="group studio-panel rounded-xl p-5 text-right transition-colors hover:border-[var(--accent-color)]"
             >
               <span className="inline-flex items-center justify-end gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">

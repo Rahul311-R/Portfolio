@@ -4,13 +4,18 @@ import { PageTransition } from '../components/ui/PageTransition';
 import { ContactForm } from '../components/forms/ContactForm';
 import { GithubIcon, LinkedinIcon } from '../components/ui/SocialIcons';
 import { PageMasthead } from '../components/ui/PageMasthead';
-import weatherFlow from '../assets/weather-flow.svg';
+import { SOCIAL } from '../data/social';
+import { PAGE_ARTWORK, SECTION_ARTWORK } from '../data/artwork';
+import { ArtifactPlate } from '../components/transmission/ArtifactPlate';
+import { PacketOrbit3D } from '../components/three/PacketOrbit3D';
 
 export const Contact: React.FC = () => {
   return (
     <PageTransition>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-16 sm:space-y-24">
-        <PageMasthead number="01" eyebrow="Contact" title="LET'S BUILD SOMETHING INTERESTING." description="Use the form to share an enquiry or idea. A form backend can be connected when contact delivery is configured." artwork={weatherFlow} artworkLabel="Signal / response / connection" />
+        <PageMasthead number="01" eyebrow="Contact" title="LET'S BUILD SOMETHING INTERESTING." description="Use the form to share an enquiry or idea. A form backend can be connected when contact delivery is configured." artwork={PAGE_ARTWORK.contact} artworkLabel="Signal / response / connection" />
+
+        <ArtifactPlate src={SECTION_ARTWORK.handshake} caption="SIG 16 · HANDSHAKE PROTOCOL" label="SYN, ACK — every good conversation starts with a clean handshake" />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           {/* Contact Details Column */}
@@ -32,10 +37,13 @@ export const Contact: React.FC = () => {
 
                 <div>
                   <span className="text-[var(--text-muted)] block uppercase mb-1">Direct Email:</span>
-                  <span className="flex items-center gap-2 text-sm text-[var(--text-primary)] font-bold">
+                  <a
+                    href={`mailto:${SOCIAL.email}`}
+                    className="flex items-center gap-2 text-sm text-[var(--text-primary)] font-bold hover:text-[var(--accent-color)] transition-colors"
+                  >
                     <Mail className="w-4 h-4 text-[var(--accent-color)]" />
-                    <span>[ADD LINK]</span>
-                  </span>
+                    <span className="underline decoration-[var(--border-strong)] underline-offset-4">{SOCIAL.email}</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -46,22 +54,41 @@ export const Contact: React.FC = () => {
               </div>
 
               <div className="space-y-3 pt-1">
-                <span className="flex items-center gap-2 text-xs text-[var(--text-primary)]">
-                  <GithubIcon className="w-4 h-4 text-[var(--text-muted)]" />
-                  <span>GitHub Profile [ADD LINK]</span>
-                </span>
+                <a
+                  href={SOCIAL.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors group"
+                >
+                  <GithubIcon className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent-color)] transition-colors" />
+                  <span className="underline decoration-[var(--border-strong)] underline-offset-4">{SOCIAL.github.replace('https://', '')}</span>
+                </a>
 
-                <span className="flex items-center gap-2 text-xs text-[var(--text-primary)]">
-                  <LinkedinIcon className="w-4 h-4 text-[var(--text-muted)]" />
-                  <span>LinkedIn Profile [ADD LINK]</span>
-                </span>
+                <a
+                  href={SOCIAL.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors group"
+                >
+                  <LinkedinIcon className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent-color)] transition-colors" />
+                  <span className="underline decoration-[var(--border-strong)] underline-offset-4">{SOCIAL.linkedin.replace('https://www.', '').replace(/\/$/, '')}</span>
+                </a>
               </div>
             </div>
           </div>
 
           {/* Contact Form Column */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-6">
+            <div className="grid grid-cols-1 items-center gap-6 sm:grid-cols-[1fr_auto]">
+              <p className="font-mono text-xs leading-relaxed text-[var(--text-muted)]">
+                // Or catch a signal in the wild — the orbit below shows the channels live.
+              </p>
+              <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" /> Channel open
+              </span>
+            </div>
             <ContactForm />
+            <PacketOrbit3D perRing={6} />
           </div>
         </div>
       </div>

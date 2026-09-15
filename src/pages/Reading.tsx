@@ -5,7 +5,11 @@ import { PageMasthead } from '../components/ui/PageMasthead';
 import { Magnetic, SplitText } from '../components/ui/Animations';
 import { FlipIn } from '../components/three/Scroll3D';
 import { READING_DATA } from '../data/human';
-import heroField from '../assets/hero-field.svg';
+import { TerminalPending } from '../components/ui/TerminalPending';
+import { ArtifactPlate } from '../components/transmission/ArtifactPlate';
+import { SECTION_ARTWORK } from '../data/artwork';
+import { SignalBus } from '../components/transmission/SignalBus';
+import { PAGE_ARTWORK } from '../data/artwork';
 
 const statusLabel = {
   reading: { label: 'Reading', color: 'text-[var(--accent-color)]', bg: 'bg-[var(--accent-glow)] border-[var(--accent-color)]/30' },
@@ -30,7 +34,7 @@ export const Reading: React.FC = () => {
           eyebrow="Library"
           title="READING"
           description="Books, papers, and resources that shaped how I think about systems, learning, and craft. Ratings are personal, not objective."
-          artwork={heroField}
+          artwork={PAGE_ARTWORK.reading}
           artworkLabel="Input / synthesis / reference"
         />
 
@@ -83,6 +87,8 @@ export const Reading: React.FC = () => {
           </div>
         </FlipIn>
 
+        <ArtifactPlate src={SECTION_ARTWORK.papers} caption="SIG 17 · PAPER TRAIL" label="Papers on the shelf, linked by citation flow" />
+
         <FlipIn as="section" delay={300}>
           <div className="eyebrow-rule">Papers</div>
           <div className="mt-6 space-y-3">
@@ -95,10 +101,14 @@ export const Reading: React.FC = () => {
                   <p className="mt-1 text-sm text-[var(--text-muted)]">{paper.authors} · {paper.year} · {statusLabel[paper.status as keyof typeof statusLabel]?.label || paper.status}</p>
                 </div>
                 <Magnetic>
-                  <a href={paper.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[var(--accent-color)] font-mono text-xs uppercase tracking-[0.12em] hover:gap-2 transition-all">
-                    <span>Open</span>
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
+                  {paper.link.startsWith('[') ? (
+                    <TerminalPending label="Paper link" />
+                  ) : (
+                    <a href={paper.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[var(--accent-color)] font-mono text-xs uppercase tracking-[0.12em] hover:gap-2 transition-all">
+                      <span>Open</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  )}
                 </Magnetic>
               </FlipIn>
             ))}
@@ -115,14 +125,24 @@ export const Reading: React.FC = () => {
                   <h4 className="font-display text-base font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors">{res.name}</h4>
                 </Magnetic>
                 <Magnetic>
-                  <a href={res.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[var(--accent-color)] font-mono text-xs uppercase tracking-[0.12em] hover:gap-2 transition-all">
-                    <span>Visit</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
+                  {res.link.startsWith('[') ? (
+                    <TerminalPending label="Resource link" />
+                  ) : (
+                    <a href={res.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[var(--accent-color)] font-mono text-xs uppercase tracking-[0.12em] hover:gap-2 transition-all">
+                      <span>Visit</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </a>
+                  )}
                 </Magnetic>
               </FlipIn>
             ))}
           </div>
+        </FlipIn>
+
+        {/* Knowledge bus — inputs flowing through the library */}
+        <FlipIn as="section" delay={550} className="studio-panel rounded-xl p-4 sm:p-6">
+          <div className="eyebrow-rule mb-3">Knowledge bus · inputs in flight</div>
+          <SignalBus height={110} lanes={3} />
         </FlipIn>
 
         <FlipIn as="section" delay={600} className="border-t border-[var(--border-color)] pt-8 text-center">

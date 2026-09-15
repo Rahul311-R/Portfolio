@@ -1,28 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export type Theme = 'dark' | 'light';
-export type Accent = 'violet' | 'cyan' | 'lime' | 'orange';
-
-export interface AccentOption {
-  id: Accent;
-  name: string;
-  darkHex: string;
-  lightHex: string;
-}
-
-export const ACCENT_OPTIONS: AccentOption[] = [
-  { id: 'violet', name: 'Violet', darkHex: '#8B5CF6', lightHex: '#6D28D9' },
-  { id: 'cyan', name: 'Cyan', darkHex: '#22D3EE', lightHex: '#087F9C' },
-  { id: 'lime', name: 'Lime', darkHex: '#84CC16', lightHex: '#4D7C0F' },
-  { id: 'orange', name: 'Orange', darkHex: '#F97316', lightHex: '#C2410C' }
-];
 
 interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
-  accent: Accent;
-  setAccent: (accent: Accent) => void;
   reducedMotion: boolean;
   setReducedMotion: (val: boolean) => void;
   toggleReducedMotion: () => void;
@@ -39,13 +22,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const savedTheme = localStorage.getItem('rahul_portfolio_theme') as Theme;
     if (savedTheme && ['dark', 'light'].includes(savedTheme)) return savedTheme;
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-  });
-
-  const [accent, setAccentState] = useState<Accent>(() => {
-    const savedAccent = localStorage.getItem('rahul_portfolio_accent') as Accent;
-    return savedAccent && ['violet', 'cyan', 'lime', 'orange'].includes(savedAccent)
-      ? savedAccent
-      : 'violet';
   });
 
   const [motionSource, setMotionSource] = useState<'system' | 'manual'>(() => {
@@ -101,23 +77,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem('rahul_portfolio_theme', theme);
   }, [theme]);
 
-  // Update CSS variables for chosen accent
-  useEffect(() => {
-    const root = document.documentElement;
-    const accentConfig = ACCENT_OPTIONS.find((a) => a.id === accent) || ACCENT_OPTIONS[0];
-    const accentHex = theme === 'dark' ? accentConfig.darkHex : accentConfig.lightHex;
-    
-    root.style.setProperty('--accent-color', accentHex);
-    root.style.setProperty('--accent-glow', `${accentHex}44`);
-    localStorage.setItem('rahul_portfolio_accent', accent);
-  }, [accent, theme]);
+  // Brand accent is a fixed design token (see index.css) — no runtime swapping.
 
   const setTheme = (newTheme: Theme) => setThemeState(newTheme);
   const toggleTheme = () => {
     setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
-  const setAccent = (newAccent: Accent) => {
-    setAccentState(newAccent);
   };
   const toggleCommandMenu = () => {
     setCommandMenuOpen((prev) => !prev);
@@ -144,8 +108,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         theme,
         setTheme,
         toggleTheme,
-        accent,
-        setAccent,
         reducedMotion,
         setReducedMotion,
         toggleReducedMotion,

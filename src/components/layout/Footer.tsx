@@ -1,131 +1,108 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Mail, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../ui/SocialIcons';
+import { SOCIAL } from '../../data/social';
+import { SplitText } from '../premium/SplitText';
 
+const CHANNELS = [
+  { label: 'GitHub', href: SOCIAL.github, text: SOCIAL.githubLabel, icon: <GithubIcon className="w-4 h-4" /> },
+  { label: 'LinkedIn', href: SOCIAL.linkedin, text: SOCIAL.linkedinLabel, icon: <LinkedinIcon className="w-4 h-4" /> },
+  { label: 'Email', href: `mailto:${SOCIAL.email}`, text: SOCIAL.email, icon: <Mail className="w-4 h-4" /> },
+];
+
+/**
+ * Editorial footer — the reel's closing move. A hairline, a wordmark,
+ * an oversized serif "Let's talk" CTA that leans toward the pointer's
+ * side of the page, then channels and the fine print.
+ */
 export const Footer: React.FC = () => {
+  const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
+
   return (
-    <footer className="bg-[var(--bg-surface)] border-t border-[var(--border-color)] mt-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12 mb-12">
-          {/* Brand Col */}
-          <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded bg-[var(--bg-surface-secondary)] border border-[var(--border-color)] flex items-center justify-center font-mono text-xs font-bold text-[var(--accent-color)]">
-                R
-              </div>
-              <span className="font-display font-bold text-lg tracking-wider text-[var(--text-primary)]">
-                RAHUL R
-              </span>
-            </div>
-            <p className="font-mono text-xs text-[var(--accent-color)] uppercase tracking-widest">
-              AI × DATA × CODE
+    <footer className="relative overflow-hidden border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
+      <div className="max-w-[100rem] mx-auto px-5 sm:px-8 pt-16 sm:pt-24 pb-10">
+        {/* Wordmark row */}
+        <div className="flex flex-wrap items-end justify-between gap-6 pb-10 sm:pb-16">
+          <div>
+            <span className="font-display font-extrabold text-2xl tracking-[0.06em] text-[var(--text-primary)]">
+              RAHUL R
+            </span>
+            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--accent-color)]">
+              AI × Data × Code
             </p>
-            <p className="text-sm text-[var(--text-muted)] max-w-md leading-relaxed font-normal">
-              Exploring artificial intelligence, data systems, computer vision, and creative coding interfaces through practical engineering projects and interactive experiments.
-            </p>
-            <div className="flex items-center gap-2 pt-2">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="font-mono text-[11px] text-[var(--text-muted)] uppercase tracking-wider">
-                Coimbatore, Tamil Nadu, IN
-              </span>
-            </div>
           </div>
-
-          {/* Navigation Links */}
-          <div className="space-y-3">
-            <h4 className="font-mono text-xs text-[var(--text-muted)] uppercase tracking-widest border-b border-[var(--border-color)] pb-2">
-              NAVIGATION
-            </h4>
-            <ul className="space-y-2 text-xs font-mono">
-              <li>
-                <NavLink to="/about" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  01 / ABOUT ME
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/projects" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  02 / PROJECTS
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/experience" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  03 / EXPERIENCE
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/lab" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors inline-flex items-center gap-1">
-                  04 / THE LAB <Sparkles className="w-3 h-3 text-[var(--accent-color)]" />
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/resume" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  05 / RESUME
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/now" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  06 / NOW
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/uses" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  07 / USES
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/writing" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  08 / WRITING
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/reading" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  09 / READING
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/contact" className="text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors">
-                  10 / CONTACT
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social / Connect */}
-          <div className="space-y-3">
-            <h4 className="font-mono text-xs text-[var(--text-muted)] uppercase tracking-widest border-b border-[var(--border-color)] pb-2">
-              CONNECT
-            </h4>
-            <div className="space-y-2.5">
-              <span className="flex items-center gap-2 text-xs font-mono text-[var(--text-primary)]">
-                <GithubIcon className="w-4 h-4 text-[var(--text-muted)]" />
-                <span>GitHub Profile [ADD LINK]</span>
-              </span>
-              <span className="flex items-center gap-2 text-xs font-mono text-[var(--text-primary)]">
-                <LinkedinIcon className="w-4 h-4 text-[var(--text-muted)]" />
-                <span>LinkedIn Profile [ADD LINK]</span>
-              </span>
-              <NavLink
-                to="/contact"
-                className="flex items-center gap-2 text-xs font-mono text-[var(--text-primary)] hover:text-[var(--accent-color)] transition-colors"
-              >
-                <Mail className="w-4 h-4 text-[var(--text-muted)]" />
-                <span>Direct Contact Form</span>
-              </NavLink>
-            </div>
-          </div>
+          <p className="max-w-sm text-sm leading-relaxed text-[var(--text-muted)]">
+            Building useful things with code — artificial intelligence, data systems, computer vision and interfaces with intent.
+          </p>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-[var(--border-color)] flex flex-col md:flex-row items-center justify-between text-xs font-mono text-[var(--text-muted)] gap-4">
-          <div>
-            RAHUL R © {new Date().getFullYear()} — B.Tech Artificial Intelligence & Data Science
+        {/* The giant CTA — pointer-reactive serif */}
+        <NavLink
+          to="/contact"
+          viewTransition
+          className="group relative block border-t border-b border-[var(--border-color)] py-12 sm:py-20 focus:outline-none"
+          onMouseMove={(e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            setTilt({
+              x: ((e.clientX - r.left) / r.width - 0.5) * 2,
+              y: ((e.clientY - r.top) / r.height - 0.5) * 2,
+            });
+          }}
+          onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+        >
+          <div
+            className="flex items-center justify-between gap-6 transition-transform duration-300 ease-out will-change-transform"
+            style={{ transform: `translate(${tilt.x * 10}px, ${tilt.y * 6}px)` }}
+          >
+            <h2 className="font-serif-accent text-[clamp(3rem,9vw,8.5rem)] leading-[0.95] tracking-[-0.02em] text-[var(--text-primary)]">
+              <SplitText text="Let's talk" stagger={0.09} />
+              <span className="text-gold-gradient">.</span>
+            </h2>
+            <span className="grid h-16 w-16 sm:h-24 sm:w-24 shrink-0 place-items-center rounded-full border border-[var(--border-strong)] transition-all duration-500 group-hover:border-[var(--accent-color)] group-hover:shadow-[0_0_40px_var(--accent-glow)] group-hover:rotate-45">
+              <ArrowUpRight className="h-6 w-6 sm:h-9 sm:w-9 text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent-color)]" />
+            </span>
           </div>
-          <div className="flex items-center gap-4 text-[10px]">
-            <span>DESIGN SYSTEM v2.4</span>
-            <span>•</span>
-            <span>BUILT WITH REACT + VITE</span>
+        </NavLink>
+
+        {/* Channels */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-10 sm:py-14">
+          {CHANNELS.map((c) => (
+            <a
+              key={c.label}
+              href={c.href}
+              target={c.href.startsWith('http') ? '_blank' : undefined}
+              rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="group flex items-center justify-between gap-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] px-5 py-4 transition-all duration-300 hover:border-[var(--accent-color)]/60 hover:bg-[var(--bg-surface-secondary)]"
+            >
+              <span className="flex items-center gap-3">
+                <span className="text-[var(--text-muted)] transition-colors group-hover:text-[var(--accent-color)]">{c.icon}</span>
+                <span className="font-mono text-xs text-[var(--text-primary)]">{c.text}</span>
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors group-hover:text-[var(--accent-color)]">
+                {c.label}
+              </span>
+            </a>
+          ))}
+        </div>
+
+        {/* Fine print */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 border-t border-[var(--border-color)] pt-8 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+          <span>© {new Date().getFullYear()} Rahul R — B.Tech AI &amp; Data Science</span>
+          <div className="flex flex-wrap justify-center gap-4">
+            {[
+              { label: 'About', path: '/about' },
+              { label: 'Projects', path: '/projects' },
+              { label: 'Resume', path: '/resume' },
+              { label: 'Now', path: '/now' },
+              { label: 'Contact', path: '/contact' },
+            ].map((l) => (
+              <NavLink key={l.path} to={l.path} viewTransition className="hover:text-[var(--accent-color)] transition-colors">
+                {l.label}
+              </NavLink>
+            ))}
           </div>
+          <span className="tabular-nums">Coimbatore, IN</span>
         </div>
       </div>
     </footer>

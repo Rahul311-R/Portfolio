@@ -1,6 +1,6 @@
 <svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1600" height="1000" fill="#0A0B11"/>
-  <g opacity=".18" stroke="#8B5CF6" stroke-width="1">
+  <g opacity=".18" stroke="#C9A45C" stroke-width="1">
     <path d="M0 120H1600M0 240H1600M0 360H1600M0 480H1600M0 600H1600M0 720H1600M0 840H1600"/>
     <path d="M160 0V1000M320 0V1000M480 0V1000M640 0V1000M800 0V1000M960 0V1000M1120 0V1000M1280 0V1000M1440 0V1000"/>
   </g>
@@ -9,21 +9,21 @@
     <path d="M-70 830C184 614 250 899 465 711C703 503 807 778 1027 570C1250 363 1394 592 1690 274" stroke="url(#lineB)" stroke-width="1.5" opacity=".75"/>
     <path d="M-20 576C160 390 286 536 478 368C688 183 803 437 1015 272C1207 122 1388 217 1630 38" stroke="url(#lineC)" stroke-width="1.5" opacity=".7"/>
   </g>
-  <g fill="#22D3EE">
+  <g fill="#EFE3C2">
     <circle cx="406" cy="645" r="8"/><circle cx="954" cy="532" r="8"/><circle cx="1308" cy="538" r="8"/>
   </g>
-  <g fill="#8B5CF6">
+  <g fill="#C9A45C">
     <circle cx="478" cy="368" r="5"/><circle cx="1015" cy="272" r="5"/><circle cx="1388" cy="217" r="5"/>
   </g>
   <circle cx="1080" cy="420" r="250" fill="url(#halo)" opacity=".5"/>
-  <circle cx="1080" cy="420" r="170" stroke="#8B5CF6" stroke-opacity=".45"/>
-  <circle cx="1080" cy="420" r="114" stroke="#22D3EE" stroke-opacity=".35"/>
+  <circle cx="1080" cy="420" r="170" stroke="#C9A45C" stroke-opacity=".45"/>
+  <circle cx="1080" cy="420" r="114" stroke="#EFE3C2" stroke-opacity=".35"/>
   <path d="M1080 124V716M784 420H1376" stroke="#F5F7FA" stroke-opacity=".16"/>
   <path d="M835 666L1058 447L1190 515L1360 258" stroke="#F5F7FA" stroke-opacity=".5" stroke-width="2"/>
   <defs>
-    <linearGradient id="lineA" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6" stop-opacity="0"/><stop offset=".5" stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></linearGradient>
-    <linearGradient id="lineB" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#22D3EE" stop-opacity="0"/><stop offset=".48" stop-color="#8B5CF6"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></linearGradient>
-    <linearGradient id="lineC" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6" stop-opacity="0"/><stop offset=".5" stop-color="#F5F7FA"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></linearGradient>
-    <radialGradient id="halo" cx="0" cy="0" r="1" gradientTransform="translate(1080 420) rotate(90) scale(250)" gradientUnits="userSpaceOnUse"><stop stop-color="#8B5CF6" stop-opacity=".68"/><stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+    <linearGradient id="lineA" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A45C" stop-opacity="0"/><stop offset=".5" stop-color="#EFE3C2"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></linearGradient>
+    <linearGradient id="lineB" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#EFE3C2" stop-opacity="0"/><stop offset=".48" stop-color="#C9A45C"/><stop offset="1" stop-color="#EFE3C2" stop-opacity="0"/></linearGradient>
+    <linearGradient id="lineC" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A45C" stop-opacity="0"/><stop offset=".5" stop-color="#F5F7FA"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientTransform="translate(1080 420) rotate(90) scale(250)" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A45C" stop-opacity=".68"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></radialGradient>
   </defs>
 </svg>

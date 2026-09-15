@@ -57,7 +57,7 @@ export const ParticleSphere3D: React.FC<{
         x: Math.cos(theta) * radius,
         y,
         z: Math.sin(theta) * radius,
-        hue: Math.random() < 0.55 ? 258 : 190,
+        hue: Math.random() < 0.55 ? 42 : 48,
         size: Math.random() * 1.6 + 1,
       });
     }
@@ -109,7 +109,7 @@ export const ParticleSphere3D: React.FC<{
         const alpha = 0.25 + p.depth * 0.75;
         ctx.beginPath();
         ctx.arc(p.sx, p.sy, d.size * (0.6 + p.depth * 1.4), 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${d.hue}, 85%, 68%, ${alpha})`;
+        ctx.fillStyle = `hsla(${d.hue}, 62%, 70%, ${alpha})`;
         ctx.fill();
       }
     };

@@ -7,7 +7,8 @@ import { DynamicColorGenerator } from '../components/lab/DynamicColorGenerator';
 import { ParticleSphere3D } from '../components/three/ParticleSphere3D';
 import { TiltCard } from '../components/ui/TiltCard';
 import { LazyMount } from '../components/ui/LazyMount';
-import heroField from '../assets/hero-field.svg';
+import { PAGE_ARTWORK } from '../data/artwork';
+import { WaveTunnel3D } from '../components/three/WaveTunnel3D';
 
 const InteractiveCanvas = lazy(() => import('../components/lab/InteractiveCanvas').then((m) => ({ default: m.InteractiveCanvas })));
 const DataVisExperiment = lazy(() => import('../components/lab/DataVisExperiment').then((m) => ({ default: m.DataVisExperiment })));
@@ -27,7 +28,8 @@ const experiments = [
   ['color-generator', '04', 'Colour generator'],
   ['data-visualisation', '05', 'Generative data sketch'],
   ['particle-sphere', '06', '3D particle sphere'],
-  ['terrain-drift', '07', 'Wireframe terrain']
+  ['terrain-drift', '07', 'Wireframe terrain'],
+  ['wave-tunnel', '08', 'Wave tunnel (3D)']
 ] as const;
 
 export const Lab: React.FC = () => {
@@ -35,7 +37,7 @@ export const Lab: React.FC = () => {
     <PageTransition>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-16 sm:space-y-24">
         <section className="relative artifact-frame visual-stage min-h-[31rem] sm:min-h-[35rem] rounded-2xl">
-          <img src={heroField} alt="" className="absolute inset-0 h-full w-full object-cover opacity-90" />
+          <img src={PAGE_ARTWORK.lab} alt="" className="absolute inset-0 h-full w-full object-cover opacity-90" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#08090D]/92 via-[#08090D]/55 to-[#08090D]/15" />
           <div className="absolute inset-y-0 right-0 hidden w-1/2 md:block" aria-hidden="true">
             <ParticleSphere3D fluid transparent points={110} />
@@ -68,6 +70,7 @@ export const Lab: React.FC = () => {
           <section id="data-visualisation" className="scroll-mt-24"><TiltCard maxTilt={4}><LazyMount minHeight={420} fallbackLabel="Loading data visualisation…"><Suspense fallback={<ExperimentFallback label="Loading data visualisation…" />}><DataVisExperiment /></Suspense></LazyMount></TiltCard></section>
           <section id="particle-sphere" className="scroll-mt-24"><TiltCard maxTilt={4}><LazyMount minHeight={520} fallbackLabel="Loading 3D particle sphere…"><Suspense fallback={<ExperimentFallback label="Loading 3D particle sphere…" />}><SphereExperiment /></Suspense></LazyMount></TiltCard></section>
           <section id="terrain-drift" className="scroll-mt-24"><TiltCard maxTilt={4}><LazyMount minHeight={520} fallbackLabel="Loading wireframe terrain…"><Suspense fallback={<ExperimentFallback label="Loading wireframe terrain…" />}><TerrainExperiment /></Suspense></LazyMount></TiltCard></section>
+          <section id="wave-tunnel" className="scroll-mt-24"><TiltCard maxTilt={4}><WaveTunnel3D /></TiltCard></section>
         </div>
       </div>
     </PageTransition>

@@ -37,7 +37,8 @@ export const FlipIn: React.FC<{
   // perspective() function) lives on the same element that carries layout
   // classes, so FlipIn never breaks grid/flex placement of its children.
   // Settles to `none` so descendant 3D layers (preserve-3d) keep working.
-  const Tag = as as unknown as React.ElementType;
+  type FlipTag = React.FC<React.HTMLAttributes<HTMLElement> & { ref?: React.Ref<HTMLElement | null> }>;
+  const Tag = as as unknown as FlipTag;
 
   return (
     <Tag

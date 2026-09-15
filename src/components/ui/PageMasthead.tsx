@@ -3,18 +3,23 @@ import { motion, type MotionProps } from 'framer-motion';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { ParallaxLayer } from './Animations';
 import { ScrubHero } from '../three/Scroll3D';
+import { CarrierWave } from '../transmission/CarrierWave';
+import { SplitText } from '../premium/SplitText';
+import { PAGE_ARTWORK } from '../../data/artwork';
 
 interface PageMastheadProps {
   number: string;
   eyebrow: string;
   title: string;
   description: string;
-  artwork: string;
+  /** Defaults to the page's assigned Transmission-series artwork. */
+  artwork?: string;
   artworkLabel: string;
   children?: React.ReactNode;
 }
 
 export const PageMasthead: React.FC<PageMastheadProps> = ({ number, eyebrow, title, description, artwork, artworkLabel, children }) => {
+  const resolvedArtwork = artwork ?? PAGE_ARTWORK.home;
   const reducedMotion = useReducedMotion();
   const motionProps: MotionProps = reducedMotion
     ? {}
@@ -35,7 +40,9 @@ export const PageMasthead: React.FC<PageMastheadProps> = ({ number, eyebrow, tit
     <section className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-10 items-center">
       <motion.div {...motionProps} className="lg:col-span-7 xl:col-span-7 py-4">
         <div className="eyebrow-rule">{number} / {eyebrow}</div>
-        <h1 className="mt-5 max-w-3xl font-display text-[clamp(3.25rem,7vw,6.7rem)] font-extrabold leading-[0.86] tracking-[-0.07em] text-[var(--text-primary)]">{title}</h1>
+        <h1 className="mt-5 max-w-3xl font-display text-[clamp(3.25rem,7vw,6.7rem)] font-extrabold leading-[0.86] tracking-[-0.07em] text-[var(--text-primary)]">
+          <SplitText text={title} stagger={0.07} />
+        </h1>
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[var(--text-muted)]">{description}</p>
         {children && <div className="mt-7">{children}</div>}
       </motion.div>
@@ -43,8 +50,9 @@ export const PageMasthead: React.FC<PageMastheadProps> = ({ number, eyebrow, tit
         <ScrubHero maxTilt={5} drift={28}>
           <div className="artifact-frame visual-stage aspect-[5/4] rounded-2xl shadow-xl">
             <ParallaxLayer speed={0.05} max={36} className="absolute inset-0">
-              <img src={artwork} alt="" className="h-full w-full scale-110 object-cover" />
+              <img src={resolvedArtwork} alt="" className="h-full w-full scale-110 object-cover" />
             </ParallaxLayer>
+            <CarrierWave />
             <div className="absolute inset-0 bg-gradient-to-t from-[#08090D]/80 via-transparent to-transparent" />
             <div className="absolute left-5 right-5 bottom-5 flex items-end justify-between text-white [transform:translateZ(48px)]"><span className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/65">{artworkLabel}</span><span className="grid h-9 w-9 place-items-center rounded-full border border-white/25 font-mono text-[10px]">{number}</span></div>
           </div>

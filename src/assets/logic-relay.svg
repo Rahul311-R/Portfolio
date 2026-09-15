@@ -1,0 +1,50 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0A0B11"/>
+  <g opacity=".14" stroke="#C9A45C" stroke-width="1">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M133 0V1000M266 0V1000M400 0V1000M533 0V1000M666 0V1000M800 0V1000M933 0V1000M1066 0V1000M1200 0V1000M1333 0V1000M1466 0V1000"/>
+  </g>
+  <path d="M800 60V940" stroke="#F5F7FA" stroke-opacity=".4" stroke-width="4"/>
+  <path d="M800 60V940" stroke="#C9A45C" stroke-opacity=".5" stroke-width="10" stroke-opacity=".18"/>
+  <g fill="none" stroke="#C9A45C" stroke-opacity=".65" stroke-width="2">
+    <path d="M210 210H420V330H790"/>
+    <path d="M210 430H520V470H790"/>
+    <path d="M210 650H380V610H790"/>
+    <path d="M210 860H560V740H790"/>
+  </g>
+  <g fill="none" stroke="#EFE3C2" stroke-opacity=".6" stroke-width="2">
+    <path d="M1390 260H1180V360H810"/>
+    <path d="M1390 520H1240V500H810"/>
+    <path d="M1390 780H1120V700H810"/>
+  </g>
+  <g>
+    <rect x="210" y="184" width="120" height="52" rx="10" stroke="#C9A45C" stroke-opacity=".8" fill="#10131D"/>
+    <circle cx="240" cy="210" r="8" fill="#34D399"/>
+    <rect x="210" y="404" width="120" height="52" rx="10" stroke="#C9A45C" stroke-opacity=".8" fill="#10131D"/>
+    <circle cx="240" cy="430" r="8" fill="#F5F7FA" fill-opacity=".25"/>
+    <rect x="210" y="624" width="120" height="52" rx="10" stroke="#C9A45C" stroke-opacity=".8" fill="#10131D"/>
+    <circle cx="240" cy="650" r="8" fill="#34D399"/>
+    <rect x="210" y="834" width="120" height="52" rx="10" stroke="#C9A45C" stroke-opacity=".8" fill="#10131D"/>
+    <circle cx="240" cy="860" r="8" fill="#F5F7FA" fill-opacity=".25"/>
+  </g>
+  <g>
+    <rect x="1390" y="234" width="120" height="52" rx="10" stroke="#EFE3C2" stroke-opacity=".8" fill="#10131D"/>
+    <circle cx="1420" cy="260" r="8" fill="#34D399"/>
+    <rect x="1390" y="494" width="120" height="52" rx="10" stroke="#EFE3C2" stroke-opacity=".8" fill="#10131D"/>
+    <circle cx="1420" cy="520" r="8" fill="#34D399"/>
+    <rect x="1390" y="754" width="120" height="52" rx="10" stroke="#EFE3C2" stroke-opacity=".8" fill="#10131D"/>
+    <circle cx="1420" cy="780" r="8" fill="#F5F7FA" fill-opacity=".25"/>
+  </g>
+  <circle cx="800" cy="500" r="60" fill="url(#lrHalo)"/>
+  <circle cx="800" cy="500" r="26" fill="#C9A45C"/>
+  <circle cx="800" cy="500" r="44" stroke="#F5F7FA" stroke-opacity=".4"/>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".4">
+    <text x="210" y="150">INPUT BANK</text>
+    <text x="1300" y="150">OUTPUT</text>
+    <text x="830" y="80">BUS</text>
+    <text x="60" y="950">SIG 05 · SKILL RELAYS</text>
+  </g>
+  <defs>
+    <radialGradient id="lrHalo" cx="0" cy="0" r="1" gradientTransform="translate(800 500) rotate(90) scale(60)" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A45C" stop-opacity=".8"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></radialGradient>
+  </defs>
+</svg>

@@ -1,0 +1,28 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0A0B11"/>
+  <g opacity=".14" stroke="#C9A45C" stroke-width="1">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M133 0V1000M266 0V1000M400 0V1000M533 0V1000M666 0V1000M800 0V1000M933 0V1000M1066 0V1000M1200 0V1000M1333 0V1000M1466 0V1000"/>
+  </g>
+  <circle cx="430" cy="500" r="300" fill="url(#sgHalo)" opacity=".55"/>
+  <circle cx="430" cy="500" r="300" stroke="#C9A45C" stroke-opacity=".4"/>
+  <circle cx="430" cy="500" r="208" stroke="#C9A45C" stroke-opacity=".24"/>
+  <circle cx="430" cy="500" r="118" stroke="#EFE3C2" stroke-opacity=".38"/>
+  <path d="M110 500H750M430 180V820" stroke="#F5F7FA" stroke-opacity=".14"/>
+  <path d="M430 500L648 322" stroke="#EFE3C2" stroke-opacity=".75" stroke-width="2"/>
+  <path d="M430 200A300 300 0 0 1 690 348" stroke="url(#sgSweep)" stroke-width="3"/>
+  <path d="M-40 780C230 650 330 840 570 705C810 572 910 745 1170 612C1330 532 1490 562 1660 470" stroke="url(#sgLine)" stroke-width="3"/>
+  <g fill="#EFE3C2"><circle cx="570" cy="705" r="7"/><circle cx="1170" cy="612" r="7"/></g>
+  <g fill="#C9A45C"><circle cx="430" cy="500" r="9"/></g>
+  <circle cx="430" cy="500" r="24" stroke="#F5F7FA" stroke-opacity=".35"/>
+  <g stroke="#F5F7FA" stroke-opacity=".28"><path d="M430 172v-18M430 828v18M104 500H86M774 500h18"/></g>
+  <g font-family="monospace" font-size="22" fill="#F5F7FA" fill-opacity=".4">
+    <text x="60" y="950">SIG 04 · IDENTITY FIELD</text>
+    <text x="1350" y="80">51.0333° N</text>
+  </g>
+  <defs>
+    <radialGradient id="sgHalo" cx="0" cy="0" r="1" gradientTransform="translate(430 500) rotate(90) scale(300)" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A45C" stop-opacity=".6"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></radialGradient>
+    <linearGradient id="sgSweep" x1="430" y1="200" x2="690" y2="348" gradientUnits="userSpaceOnUse"><stop stop-color="#EFE3C2" stop-opacity="0"/><stop offset="1" stop-color="#EFE3C2"/></linearGradient>
+    <linearGradient id="sgLine" x1="0" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A45C" stop-opacity="0"/><stop offset=".5" stop-color="#EFE3C2"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></linearGradient>
+  </defs>
+</svg>

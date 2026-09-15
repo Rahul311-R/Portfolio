@@ -6,7 +6,8 @@ import { ProjectGrid } from '../components/projects/ProjectGrid';
 import { PROJECTS } from '../data/projects';
 import { PageMasthead } from '../components/ui/PageMasthead';
 import { Coverflow3D } from '../components/three/Coverflow3D';
-import roadTopology from '../assets/road-topology.svg';
+import { PAGE_ARTWORK } from '../data/artwork';
+import { PacketOrbit3D } from '../components/three/PacketOrbit3D';
 
 export const Projects: React.FC = () => {
   const [currentFilter, setCurrentFilter] = useState<CategoryFilter>('ALL');
@@ -48,11 +49,27 @@ export const Projects: React.FC = () => {
   return (
     <PageTransition>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-14 sm:space-y-20">
-        <PageMasthead number="01" eyebrow="Selected work" title="PROJECT GALLERY" description="A focused collection of practical work across artificial intelligence, computer vision, data and interface development." artwork={roadTopology} artworkLabel="Systems / signals / surfaces" />
+        <PageMasthead number="01" eyebrow="Selected work" title="PROJECT GALLERY" description="A focused collection of practical work across artificial intelligence, computer vision, data and interface development." artwork={PAGE_ARTWORK.projects} artworkLabel="Systems / signals / surfaces" />
 
         <section aria-label="Featured coverflow">
           <div className="eyebrow-rule mb-5">Drag through the work</div>
           <Coverflow3D projects={PROJECTS} />
+        </section>
+
+        <section aria-label="Work in orbit" className="studio-panel rounded-xl p-6 sm:p-8">
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+            <div>
+              <div className="eyebrow-rule">Signal hub / live</div>
+              <h2 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-3xl">
+                Work in orbit.
+              </h2>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-[var(--text-muted)]">
+                Every project is a satellite in the same system — capture, process, transmit.
+                The orbit below is live; drag it to spin the fleet.
+              </p>
+            </div>
+            <PacketOrbit3D />
+          </div>
         </section>
 
         <section aria-label="Project collection">

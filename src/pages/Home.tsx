@@ -1,298 +1,316 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ArrowRight, Code2, Database, Cpu, Sparkles, Rotate3d, Move, Zap } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { PageTransition } from '../components/ui/PageTransition';
 import { InteractiveHero } from '../components/hero/InteractiveHero';
-import { SectionHeading } from '../components/ui/SectionHeading';
-import { ProjectCard } from '../components/projects/ProjectCard';
-import { Button } from '../components/ui/Button';
+import { ProjectPreview } from '../components/home/ProjectPreview';
+import { SectionMarker } from '../components/ui/SectionMarker';
+import { SplitText } from '../components/premium/SplitText';
 import { PROJECTS } from '../data/projects';
 import { EXPERIENCES } from '../data/experience';
+import { PROJECT_ARTWORK } from '../data/artwork';
 import { RESUME_DATA } from '../data/resume';
-import { TiltCard } from '../components/ui/TiltCard';
-import { CodePanel } from '../components/ui/CodePanel';
-import { DragCube3D } from '../components/three/DragCube3D';
-import { FlipIn, ScrubHero } from '../components/three/Scroll3D';
 import { CountUp } from '../components/ui/CountUp';
-import { Magnetic } from '../components/ui/Animations';
+import { WhoamiTerminal } from '../components/home/WhoamiTerminal';
 import { WarpDivider } from '../components/three/WarpDivider';
-import { Marquee } from '../components/ui/Marquee';
-import heroField from '../assets/hero-field.svg';
+import { PacketOrbit3D } from '../components/three/PacketOrbit3D';
+import { SignalHelix3D } from '../components/three/SignalHelix3D';
 
+/**
+ * Home — rebuilt in the reference reel's editorial genre:
+ * numbered sections, a statement manifesto, the work list with
+ * cursor-following previews, row lists instead of card grids,
+ * and quiet unboxed stats.
+ */
 export const Home: React.FC = () => {
   const featuredProjects = PROJECTS.filter((p) => p.featured);
+  const [preview, setPreview] = useState<{ src: string; label: string } | null>(null);
 
   return (
     <PageTransition>
-      {/* 01 / Hero Section with Particle Vortex & Code Panel */}
       <InteractiveHero />
       <WarpDivider />
-      <Marquee
-        label="Focus areas"
-        items={[
-          'Artificial intelligence',
-          'Data visualisation',
-          'Computer vision',
-          'Python interfaces',
-          'API integration',
-          'Creative coding',
-          'Build in public',
-        ]}
-      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28 sm:space-y-36 py-20 sm:py-28">
-        {/* Selected work */}
-        <FlipIn as="section" className="scroll-mt-24" >
-          <div id="selected-projects" className="scroll-mt-24" />
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
-            <SectionHeading
-              number="01"
-              title="SELECTED PROJECTS"
-              subtitle="Practical work across AI, computer vision, data and interactive software."
-            />
-            <NavLink
-              to="/projects"
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-[var(--accent-color)] uppercase tracking-wider hover:translate-x-1 transition-transform mb-12 md:mb-0"
-            >
-              <span>VIEW ALL PROJECTS</span>
-              <ArrowRight className="w-4 h-4" />
-            </NavLink>
-          </div>
+      {/* ————— 01 / STATEMENT ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 py-24 sm:py-40">
+        <SectionMarker n="01" label="The idea" />
+        <p className="mt-10 max-w-5xl font-display text-[clamp(1.7rem,4vw,3.4rem)] font-medium leading-[1.18] tracking-[-0.02em] text-[var(--text-primary)]">
+          <SplitText
+            text="I build useful things with code —"
+            stagger={0.045}
+          />{' '}
+          <span className="font-serif-accent text-gold-gradient">
+            <SplitText text="intelligence, data and interfaces" stagger={0.045} delay={0.35} />
+          </span>{' '}
+          <SplitText text="shaped with intent." stagger={0.045} delay={0.75} />
+        </p>
+        <div className="mt-12 flex flex-wrap gap-x-10 gap-y-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
+          <span>Artificial intelligence</span>
+          <span>Computer vision</span>
+          <span>Data analytics</span>
+          <span>Interfaces</span>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {featuredProjects.map((project) => (
-              <TiltCard key={project.id}>
-                <ProjectCard project={project} featured={project.featured} />
-              </TiltCard>
-            ))}
-          </div>
-        </FlipIn>
-
-        <FlipIn as="section" className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-          <ScrubHero maxTilt={5} drift={26} className="lg:col-span-5">
-            <div className="artifact-frame visual-stage min-h-[26rem] rounded-xl">
-              <img src={heroField} alt="" className="absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#090A10]/90 via-[#090A10]/20 to-transparent" />
-              <div className="absolute bottom-7 left-7 right-7 z-10 [transform:translateZ(48px)]">
-                <div className="eyebrow-rule text-white/75">The workbench</div>
-                <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-white">Ideas become interfaces.</h2>
-                <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/65">Real code from this codebase, running the draggable 3D object below — no simulated terminals.</p>
-              </div>
+      {/* ————— 02 / THE STORY — the narrative arc ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 py-20 sm:py-28">
+        <SectionMarker n="02" label="The story" />
+        <h2 className="mt-8 font-display text-[clamp(2.4rem,6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[var(--text-primary)]">
+          How I got <span className="font-serif-accent text-gold-gradient">here</span>
+        </h2>
+        <div className="mt-14 border-l border-[var(--border-color)] pl-6 sm:pl-10">
+          {[
+            ['Curious about technology', 'Took things apart to see how they worked — software was the only thing that never ran out of screws.'],
+            ['Started with programming', 'Python first: small scripts, small wins, and the realisation that ideas could actually run.'],
+            ['Moved into AI & data', 'B.Tech in Artificial Intelligence & Data Science — transformers, computer vision and the mathematics underneath them.'],
+            ['Built real projects', 'A patent-published road analyzer, gesture drawing, live-data dashboards — things that meet reality.'],
+            ['Now looking for problems worth solving', 'Open to opportunities where useful beats impressive — and ideally both.'],
+          ].map(([title, body], i, arr) => (
+            <div key={title} className="relative pb-10 last:pb-0">
+              <span className="absolute -left-[1.75rem] top-1.5 h-2 w-2 rounded-full bg-[var(--accent-color)] sm:-left-[2.75rem]" aria-hidden="true" />
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--text-muted)]">
+                Chapter {String(i + 1).padStart(2, '0')} {i === arr.length - 1 ? '— now' : ''}
+              </span>
+              <h3 className="mt-2 font-display text-xl sm:text-2xl font-bold tracking-tight text-[var(--text-primary)]">
+                {title}
+              </h3>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--text-muted)]">{body}</p>
             </div>
-          </ScrubHero>
-          <div className="lg:col-span-7 flex items-center studio-panel p-4 sm:p-7 rounded-xl">
-            <TiltCard maxTilt={6} className="w-full">
-              <CodePanel />
-            </TiltCard>
-          </div>
-        </FlipIn>
+          ))}
+        </div>
+      </section>
 
-        {/* Playable 3D object — drag to spin the resume stack */}
-        <FlipIn as="section" className="studio-panel relative overflow-hidden rounded-xl p-6 sm:p-10 md:p-12">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
-            <div>
-              <div className="eyebrow-rule">Playable object / 3D</div>
-              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-4xl">
-                Spin the stack.
-              </h2>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-[var(--text-muted)] sm:text-base">
-                Six tools from the resume, folded into one object. It turns on its own —
-                grab it to spin it your way, let go and it keeps your momentum before
-                settling back into its idle rotation.
-              </p>
-              <div className="mt-6 flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
-                <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-surface-secondary)] px-3 py-1.5">
-                  <Rotate3d className="h-3.5 w-3.5 text-[var(--accent-color)]" /> auto-rotates
-                </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-surface-secondary)] px-3 py-1.5">
-                  <Move className="h-3.5 w-3.5 text-[var(--accent-color)]" /> drag to spin
-                </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-surface-secondary)] px-3 py-1.5">
-                  <Zap className="h-3.5 w-3.5 text-[var(--accent-color)]" /> release for momentum
-                </span>
-              </div>
-            </div>
-            <div className="visual-stage relative grid min-h-[22rem] place-items-center overflow-hidden rounded-xl border border-[var(--border-color)] py-10">
-              <div className="bg-grid-pattern pointer-events-none absolute inset-0 opacity-40" />
-              <DragCube3D />
-              <div className="absolute bottom-4 left-1/2 h-4 w-48 -translate-x-1/2 rounded-full bg-black/50 blur-xl" aria-hidden="true" />
-            </div>
-          </div>
-        </FlipIn>
-
-        {/* Technical skills */}
-        <FlipIn as="section" className="studio-panel p-6 sm:p-8 md:p-12 rounded-xl relative overflow-hidden">
-          <SectionHeading
-            number="02"
-            title="TECHNICAL SKILLS"
-            subtitle="Languages, data tools and development practices from the supplied resume."
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="p-6 bg-[var(--bg-surface-secondary)] border border-[var(--border-color)] space-y-3 rounded">
-              <div className="flex items-center gap-2 text-[var(--accent-color)] font-mono text-xs font-bold uppercase">
-                <Code2 className="w-4 h-4" />
-                <span>Programming Languages</span>
-              </div>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {RESUME_DATA.skills.programming.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1 font-mono text-xs text-[var(--text-primary)] bg-[var(--bg-primary)] border border-[var(--border-color)] rounded"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-6 bg-[var(--bg-surface-secondary)] border border-[var(--border-color)] space-y-3 rounded">
-              <div className="flex items-center gap-2 text-[var(--accent-color)] font-mono text-xs font-bold uppercase">
-                <Cpu className="w-4 h-4" />
-                <span>Data & Computer Vision</span>
-              </div>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {RESUME_DATA.skills.dataAndAi.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1 font-mono text-xs text-[var(--text-primary)] bg-[var(--bg-primary)] border border-[var(--border-color)] rounded"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-6 bg-[var(--bg-surface-secondary)] border border-[var(--border-color)] space-y-3 sm:col-span-2 lg:col-span-1 rounded">
-              <div className="flex items-center gap-2 text-[var(--accent-color)] font-mono text-xs font-bold uppercase">
-                <Database className="w-4 h-4" />
-                <span>Tools & Architecture</span>
-              </div>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {RESUME_DATA.skills.toolsAndDev.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1 font-mono text-xs text-[var(--text-primary)] bg-[var(--bg-primary)] border border-[var(--border-color)] rounded"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </FlipIn>
-
-        {/* Experience snapshot */}
-        <FlipIn as="section">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
-            <SectionHeading
-              number="03"
-              title="EXPERIENCE SNAPSHOT"
-              subtitle="Internships and structured training in data analytics, web development and visualisation."
-            />
-            <NavLink
-              to="/experience"
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-[var(--accent-color)] uppercase tracking-wider hover:translate-x-1 transition-transform mb-12 md:mb-0"
-            >
-              <span>VIEW TIMELINE</span>
-              <ArrowRight className="w-4 h-4" />
-            </NavLink>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {EXPERIENCES.map((exp) => (
-              <TiltCard key={exp.id}>
-                <div className="p-6 bg-[var(--bg-surface)] border border-[var(--border-color)] rounded-lg space-y-3 hover:border-[var(--accent-color)] transition-colors h-full flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="font-mono text-xs text-[var(--accent-color)] font-bold">
-                      {exp.period}
-                    </div>
-                    <h3 className="text-xl font-bold font-display text-[var(--text-primary)]">
-                      {exp.company}
-                    </h3>
-                    <div className="text-xs font-mono text-[var(--text-muted)] uppercase">
-                      {exp.role}
-                    </div>
-                    <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                      {exp.summary}
-                    </p>
-                  </div>
-                  {exp.badge && (
-                    <span className="self-start px-2 py-0.5 text-[10px] font-mono bg-[var(--accent-glow)] text-[var(--accent-color)] border border-[var(--accent-color)]/30 rounded uppercase mt-4">
-                      {exp.badge}
-                    </span>
-                  )}
-                </div>
-              </TiltCard>
-            ))}
-          </div>
-        </FlipIn>
-
-        {/* Lab teaser */}
-        <FlipIn as="section" className="relative overflow-hidden visual-stage border border-[var(--accent-color)]/35 p-8 md:p-12 rounded-xl flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_0_30px_var(--accent-glow)]">
-          <img src={heroField} alt="" className="absolute inset-0 h-full w-full object-cover opacity-35" />
-          <div className="absolute inset-0 bg-[#0B0C13]/60" />
-          <div className="relative z-10 space-y-4 max-w-xl">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--accent-glow)] border border-[var(--accent-color)]/40 text-[var(--accent-color)] font-mono text-xs uppercase tracking-wider rounded">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>THE LAB // PERSONAL EXPERIMENTS</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold font-display text-white">
-              CREATIVE CODING & DATA LAB
-            </h2>
-            <p className="text-sm text-white/65 leading-relaxed font-mono">
-              A collection of small creative-coding studies in motion, drawing, colour and data visualisation.
-            </p>
-          </div>
-
-          <Magnetic>
-            <Button
-              as="a"
-              href="/lab"
-              size="lg"
-              variant="primary"
-              icon={<Sparkles className="w-4 h-4" />}
-              className="relative z-10"
-            >
-              ENTER THE LAB
-            </Button>
-          </Magnetic>
-        </FlipIn>
-
-        {/* 07 / Final CTA */}
-        <FlipIn as="section" className="text-center space-y-6 py-16 border-t border-[var(--border-color)]">
-          <h2 className="text-4xl md:text-7xl font-extrabold font-display text-[var(--text-primary)] text-glow">
-            LET'S BUILD SOMETHING INTERESTING.
+      {/* ————— 03 / SELECTED WORK — list rows with cursor preview ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 py-20 sm:py-28">
+        <SectionMarker n="03" label="Selected work" />
+        <div className="mt-8 flex items-end justify-between gap-6">
+          <h2 className="font-display text-[clamp(2.4rem,6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[var(--text-primary)]">
+            Work
           </h2>
-          <p className="text-base text-[var(--text-muted)] max-w-lg mx-auto font-mono">
-            Interested in AI, data, computer vision, software and thoughtful interfaces.
-          </p>
-          <div className="mx-auto grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-[var(--border-color)] bg-[var(--border-color)] sm:grid-cols-4">
-            {[
-              { end: 3, label: 'Projects', decimals: 0, suffix: '' },
-              { end: 6, label: 'Lab experiments', decimals: 0, suffix: '' },
-              { end: 4, label: 'Certifications', decimals: 0, suffix: '' },
-              { end: 8.3, label: 'CGPA / 10', decimals: 1, suffix: '' },
-            ].map((stat) => (
-              <div key={stat.label} className="bg-[var(--bg-surface)] px-4 py-5">
-                <div className="font-display text-3xl font-extrabold text-[var(--accent-color)] sm:text-4xl">
-                  <CountUp end={stat.end} decimals={stat.decimals} suffix={stat.suffix} />
-                </div>
-                <div className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
-                  {stat.label}
-                </div>
+          <NavLink
+            to="/projects"
+            className="group mb-2 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent-color)]"
+          >
+            All projects
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </NavLink>
+        </div>
+
+        <ProjectPreview preview={preview} />
+
+        <ul
+          className="mt-10 border-t border-[var(--border-color)]"
+          onMouseLeave={() => setPreview(null)}
+        >
+          {featuredProjects.map((project, i) => (
+            <li key={project.id} className="border-b border-[var(--border-color)]">
+              <NavLink
+                to={`/projects/${project.slug}`}
+                className="group relative flex items-baseline gap-5 sm:gap-10 py-7 sm:py-9"
+                onMouseEnter={() =>
+                  setPreview({
+                    src: PROJECT_ARTWORK[project.slug],
+                    label: project.categories[0] ?? 'Project',
+                  })
+                }
+              >
+                <span className="w-8 shrink-0 font-mono text-[11px] tabular-nums text-[var(--accent-color)]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="flex-1 font-display text-[clamp(1.5rem,4.2vw,3.2rem)] font-bold leading-[1.04] tracking-[-0.03em] text-[var(--text-primary)] transition-colors duration-300 group-hover:text-[var(--accent-color)]">
+                  {project.title}
+                </span>
+                <span className="hidden md:block font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                  {project.categories.slice(0, 2).join(' · ')}
+                </span>
+                <span className="hidden sm:block font-mono text-[11px] text-[var(--text-muted)] tabular-nums">
+                  {project.year}
+                </span>
+                <ArrowUpRight className="h-5 w-5 shrink-0 self-center text-[var(--text-muted)] transition-all duration-300 group-hover:rotate-45 group-hover:text-[var(--accent-color)]" />
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ————— 04 / CAPABILITIES — unboxed editorial rows ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 py-20 sm:py-28">
+        <SectionMarker n="04" label="Capabilities" />
+        <h2 className="mt-8 font-display text-[clamp(2.4rem,6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[var(--text-primary)]">
+          What I <span className="font-serif-accent text-gold-gradient">work with</span>
+        </h2>
+
+        <div className="mt-12 divide-y divide-[var(--border-color)] border-y border-[var(--border-color)]">
+          {[
+            { k: 'Languages', v: RESUME_DATA.skills.programming },
+            { k: 'Data & vision', v: RESUME_DATA.skills.dataAndAi },
+            { k: 'Tools', v: RESUME_DATA.skills.toolsAndDev },
+          ].map((row) => (
+            <div
+              key={row.k}
+              className="group grid grid-cols-1 gap-3 py-7 sm:grid-cols-[16rem_1fr] sm:gap-8"
+            >
+              <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-[var(--text-muted)] transition-colors group-hover:text-[var(--accent-color)]">
+                {row.k}
+              </span>
+              <p className="font-display text-xl sm:text-2xl font-medium text-[var(--text-primary)]">
+                {row.v.join('  ·  ')}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ————— 05 / EXPERIENCE — editorial rows ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 py-20 sm:py-28">
+        <SectionMarker n="05" label="Experience" />
+        <h2 className="mt-8 font-display text-[clamp(2.4rem,6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[var(--text-primary)]">
+          Where I've <span className="font-serif-accent text-gold-gradient">worked</span>
+        </h2>
+
+        <div className="mt-12 border-t border-[var(--border-color)]">
+          {EXPERIENCES.map((exp) => (
+            <div
+              key={exp.id}
+              className="group grid grid-cols-1 gap-4 border-b border-[var(--border-color)] py-8 sm:grid-cols-[11rem_1fr_auto] sm:gap-10"
+            >
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                {exp.period}
+              </span>
+              <div>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent-color)]">
+                  {exp.company}
+                </h3>
+                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--text-muted)]">
+                  {exp.role}
+                </p>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--text-muted)]">
+                  {exp.summary}
+                </p>
               </div>
-            ))}
+              <span className="self-start rounded-full border border-[var(--border-color)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent-color)]">
+                {exp.badge}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ————— 06 / BEYOND THE CODE — the human layer ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 py-20 sm:py-28">
+        <SectionMarker n="06" label="Beyond the code" />
+        <div className="mt-12 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <h2 className="font-display text-[clamp(2.4rem,6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[var(--text-primary)]">
+              The person behind the <span className="font-serif-accent text-gold-gradient">terminal</span>
+            </h2>
+            <p className="mt-8 max-w-xl text-base leading-relaxed text-[var(--text-muted)]">
+              Outside of code — I enjoy exploring new technologies, breaking things apart to
+              understand how they work, and turning random ideas into small experiments that
+              sometimes turn into real projects. Long walks untangle whatever the debugger can't.
+            </p>
+            <div className="mt-10 grid grid-cols-2 gap-8">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--accent-color)]">Currently learning</p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--text-primary)]">Attention from first principles · Rust · GLSL shaders</p>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--accent-color)]">On the walk</p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--text-primary)]">Nils Frahm · Jon Hopkins · Hiroshi Yoshimura</p>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--accent-color)]">On the desk</p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--text-primary)]">DDIA · Hamming · the Transformer paper (again)</p>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[var(--accent-color)]">Philosophy</p>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--text-primary)]">Build useful things. Keep learning. Solve real problems.</p>
+              </div>
+            </div>
           </div>
-          <div className="flex justify-center gap-4 pt-4">
-            <Magnetic>
-              <Button as="a" href="/contact" size="lg" variant="primary">
-                GET IN TOUCH
-              </Button>
-            </Magnetic>
+          <WhoamiTerminal />
+        </div>
+      </section>
+
+      {/* ————— 07 / SIGNALS + LAB — the two live 3D studies ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 py-20 sm:py-28">
+        <SectionMarker n="07" label="Signals & lab" />
+        <div className="mt-8 flex items-end justify-between gap-6">
+          <h2 className="font-display text-[clamp(2.4rem,6vw,5.5rem)] font-extrabold leading-[0.95] tracking-[-0.05em] text-[var(--text-primary)]">
+            Live <span className="font-serif-accent text-gold-gradient">signals</span>
+          </h2>
+          <NavLink
+            to="/lab"
+            className="group mb-2 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent-color)]"
+          >
+            Enter the lab
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </NavLink>
+        </div>
+        <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <div className="visual-stage artifact-frame relative overflow-hidden rounded-xl">
+            <PacketOrbit3D />
+            <span className="absolute left-4 top-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#EFE3C2]/70">
+              SIG A · Orbit
+            </span>
           </div>
-        </FlipIn>
-      </div>
+          <div className="visual-stage artifact-frame relative overflow-hidden rounded-xl">
+            <SignalHelix3D />
+            <span className="absolute left-4 top-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#EFE3C2]/70">
+              SIG B · Helix
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ————— 08 / PROOF — credentials + numbers ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 py-20 sm:py-28">
+        <SectionMarker n="08" label="Proof of work" />
+        <div className="mt-12 grid grid-cols-2 gap-y-12 sm:grid-cols-4">
+          {[
+            { end: 3, label: 'Projects' },
+            { end: 6, label: 'Lab experiments' },
+            { end: 4, label: 'Certifications' },
+            { end: 8.3, label: 'CGPA / 10', decimals: 1 },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="font-display text-[clamp(3rem,6vw,5rem)] font-extrabold leading-none tracking-[-0.04em] text-[var(--text-primary)]">
+                <CountUp end={stat.end} decimals={stat.decimals ?? 0} />
+              </div>
+              <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Certification wall — named, not counted */}
+        <div className="mt-16 flex flex-wrap gap-x-10 gap-y-5 border-t border-[var(--border-color)] pt-10">
+          {RESUME_DATA.certifications.map((c) => (
+            <span key={c.title} className="group inline-flex items-baseline gap-3">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-color)] transition-transform group-hover:scale-150" aria-hidden="true" />
+              <span className="font-display text-base sm:text-lg font-bold text-[var(--text-primary)]">{c.title}</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)]">{c.issuer}</span>
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* ————— 09 / CONTACT — the closing invitation ————— */}
+      <section className="max-w-[100rem] mx-auto px-5 sm:px-8 pt-10 pb-24 sm:pb-36 text-center">
+        <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--text-muted)]">
+          09 / Have an interesting problem?
+        </p>
+        <NavLink
+          to="/contact"
+          className="group mt-6 inline-block focus:outline-none"
+        >
+          <span className="font-serif-accent text-[clamp(3rem,10vw,9rem)] leading-[1.02] tracking-[-0.02em] text-[var(--text-primary)] transition-colors duration-500 group-hover:text-[var(--accent-color)]">
+            Let's build{' '}
+            <span className="text-gold-gradient">together</span>.
+          </span>
+        </NavLink>
+      </section>
     </PageTransition>
   );
 };

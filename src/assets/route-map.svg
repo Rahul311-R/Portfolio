@@ -1,0 +1,36 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0A0B11"/>
+  <g opacity=".12" stroke="#C9A45C" stroke-width="1">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M133 0V1000M266 0V1000M400 0V1000M533 0V1000M666 0V1000M800 0V1000M933 0V1000M1066 0V1000M1200 0V1000M1333 0V1000M1466 0V1000"/>
+  </g>
+  <path d="M80 560C320 560 360 380 560 380C760 380 800 620 1000 620C1160 620 1200 440 1400 440L1540 440" stroke="url(#rmLine)" stroke-width="4"/>
+  <path d="M80 560C320 560 360 380 560 380C760 380 800 620 1000 620C1160 620 1200 440 1400 440L1540 440" stroke="#F5F7FA" stroke-opacity=".12" stroke-width="14" stroke-linecap="round"/>
+  <g>
+    <circle cx="180" cy="546" r="14" fill="#0A0B11" stroke="#C9A45C" stroke-width="3"/>
+    <circle cx="560" cy="380" r="14" fill="#0A0B11" stroke="#EFE3C2" stroke-width="3"/>
+    <circle cx="1000" cy="620" r="14" fill="#0A0B11" stroke="#C9A45C" stroke-width="3"/>
+    <circle cx="1400" cy="440" r="16" fill="#0A0B11" stroke="#34D399" stroke-width="3"/>
+    <circle cx="1400" cy="440" r="30" stroke="#34D399" stroke-opacity=".4"/>
+  </g>
+  <g fill="#EFE3C2"><circle cx="560" cy="380" r="5"/><circle cx="180" cy="546" r="5"/></g>
+  <circle cx="1000" cy="620" r="5" fill="#C9A45C"/>
+  <circle cx="1400" cy="440" r="6" fill="#34D399"/>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".5">
+    <text x="140" y="620">2022 · START</text>
+    <text x="510" y="330">2023 · FIRST SIGNAL</text>
+    <text x="950" y="690">2024 · RELAYS</text>
+    <text x="1300" y="380">2026 · LIVE</text>
+  </g>
+  <path d="M1540 440h44m0 0-14-12m14 12-14 12" stroke="#34D399" stroke-opacity=".8" stroke-width="3"/>
+  <g stroke="#F5F7FA" stroke-opacity=".14" stroke-dasharray="4 10">
+    <path d="M180 560V820M560 380V180M1000 620V820M1400 440V180"/>
+  </g>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".4">
+    <text x="60" y="950">SIG 03 · ROUTE OF RECORD</text>
+    <text x="1250" y="910">4 STOPS · 1 ROUTE</text>
+  </g>
+  <defs>
+    <linearGradient id="rmLine" x1="80" y1="0" x2="1540" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#C9A45C"/><stop offset=".55" stop-color="#EFE3C2"/><stop offset="1" stop-color="#34D399"/></linearGradient>
+  </defs>
+</svg>

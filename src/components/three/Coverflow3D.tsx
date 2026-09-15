@@ -3,15 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import type { Project } from '../../types/project';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import roadTopology from '../../assets/road-topology.svg';
-import gestureOrbit from '../../assets/gesture-orbit.svg';
-import weatherFlow from '../../assets/weather-flow.svg';
-
-const ARTWORK: Record<string, string> = {
-  'road-condition-analyzer': roadTopology,
-  'virtual-drawing-board': gestureOrbit,
-  'weather-prediction-gui': weatherFlow,
-};
+import { PROJECT_ARTWORK as ARTWORK } from '../../data/artwork';
 
 /**
  * Draggable 3D coverflow. Drag (or arrow-key) through the projects —

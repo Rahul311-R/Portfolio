@@ -2,9 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowUpRight, Award } from 'lucide-react';
 import type { Project } from '../../types/project';
-import roadTopology from '../../assets/road-topology.svg';
-import gestureOrbit from '../../assets/gesture-orbit.svg';
-import weatherFlow from '../../assets/weather-flow.svg';
+import { PROJECT_ARTWORK } from '../../data/artwork';
 
 interface ProjectCardProps {
   project: Project;
@@ -12,11 +10,7 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, featured = false }) => {
-  const artwork = {
-    'road-condition-analyzer': roadTopology,
-    'virtual-drawing-board': gestureOrbit,
-    'weather-prediction-gui': weatherFlow
-  }[project.id];
+  const artwork = PROJECT_ARTWORK[project.id as keyof typeof PROJECT_ARTWORK];
 
   return (
     <article

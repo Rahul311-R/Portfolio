@@ -6,7 +6,8 @@ import { Magnetic, SplitText } from '../components/ui/Animations';
 import { FlipIn } from '../components/three/Scroll3D';
 import { TiltCard } from '../components/ui/TiltCard';
 import { USES_DATA } from '../data/human';
-import heroField from '../assets/hero-field.svg';
+import { PAGE_ARTWORK } from '../data/artwork';
+import { WaveTunnel3D } from '../components/three/WaveTunnel3D';
 
 export const Uses: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ export const Uses: React.FC = () => {
           eyebrow="Environment"
           title="USES"
           description="The tools, hardware, and workflows I reach for daily. Minimal, borrowed, and constantly edited."
-          artwork={heroField}
+          artwork={PAGE_ARTWORK.uses}
           artworkLabel="Setup / tools / flow"
         />
 
@@ -138,6 +139,12 @@ export const Uses: React.FC = () => {
               </TiltCard>
             </FlipIn>
           ))}
+        </FlipIn>
+
+        {/* Data path tunnel — the journey of a keystroke through this setup */}
+        <FlipIn as="section" delay={800}>
+          <div className="eyebrow-rule mb-4">The data path · keystroke to deploy</div>
+          <WaveTunnel3D />
         </FlipIn>
 
         <FlipIn as="section" delay={850} className="border-t border-[var(--border-color)] pt-8 text-center">

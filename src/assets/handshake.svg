@@ -1,0 +1,43 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0A0B11"/>
+  <g opacity=".12" stroke="#C9A45C" stroke-width="1">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M133 0V1000M266 0V1000M400 0V1000M533 0V1000M666 0V1000M800 0V1000M933 0V1000M1066 0V1000M1200 0V1000M1333 0V1000M1466 0V1000"/>
+  </g>
+  <rect x="120" y="180" width="560" height="640" rx="20" fill="#0D0F17" stroke="#C9A45C" stroke-opacity=".6" stroke-width="2.5"/>
+  <rect x="920" y="180" width="560" height="640" rx="20" fill="#0D0F17" stroke="#EFE3C2" stroke-opacity=".6" stroke-width="2.5"/>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".5">
+    <text x="160" y="250">SENDER</text>
+    <text x="1330" y="250">RECEIVER</text>
+  </g>
+  <g stroke="#F5F7FA" stroke-opacity=".35" stroke-width="2">
+    <path d="M150 340h500M150 420h500M150 500h500M150 580h500M150 660h500M150 740h500"/>
+    <path d="M950 340h500M950 420h500M950 500h500M950 580h500M950 660h500M950 740h500"/>
+  </g>
+  <g stroke-width="4" fill="none">
+    <path d="M180 340c80-40 160 40 240 0s160 40 240 0" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <path d="M180 420c80-40 160 40 240 0s160 40 240 0" stroke="#C9A45C" stroke-opacity=".7"/>
+    <path d="M180 500c80-40 160 40 240 0s160 40 240 0" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <path d="M180 580c80-40 160 40 240 0s160 40 240 0" stroke="#C9A45C" stroke-opacity=".7"/>
+    <path d="M180 660c80-40 160 40 240 0s160 40 240 0" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <path d="M950 340c80-40 160 40 240 0s160 40 240 0" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <path d="M950 420c80-40 160 40 240 0s160 40 240 0" stroke="#C9A45C" stroke-opacity=".7"/>
+    <path d="M950 500c80-40 160 40 240 0s160 40 240 0" stroke="#EFE3C2" stroke-opacity=".8"/>
+    <path d="M950 580c80-40 160 40 240 0s160 40 240 0" stroke="#C9A45C" stroke-opacity=".7"/>
+    <path d="M950 660c80-40 160 40 240 0s160 40 240 0" stroke="#EFE3C2" stroke-opacity=".8"/>
+  </g>
+  <path d="M680 500h240" stroke="#F5F7FA" stroke-opacity=".5" stroke-width="3" stroke-dasharray="16 14"/>
+  <path d="M920 500h44m0 0-12-10m12 10-12 10" stroke="#F5F7FA" stroke-opacity=".7" stroke-width="3" fill="none"/>
+  <g stroke="#34D399" stroke-width="3" fill="none">
+    <path d="M640 250l24 24m0-24-24 24"/>
+    <path d="M960 750l24 24m0-24-24 24"/>
+  </g>
+  <g font-family="monospace" font-size="18" fill="#34D399" fill-opacity=".85">
+    <text x="580" y="220">SYNC ✓</text>
+    <text x="960" y="800">ACK ✓</text>
+  </g>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".4">
+    <text x="60" y="950">SIG 16 · HANDSHAKE PROTOCOL</text>
+    <text x="770" y="470">CH-0</text>
+  </g>
+</svg>

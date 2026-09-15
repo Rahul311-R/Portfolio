@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -9,6 +10,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   as?: 'button' | 'a';
   href?: string;
+  /** Internal route — renders a client-side <Link> with view transitions (no full page reload). */
+  to?: string;
   target?: string;
   rel?: string;
 }
@@ -22,6 +25,7 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   as = 'button',
   href,
+  to,
   target,
   rel,
   disabled,
@@ -57,6 +61,14 @@ export const Button: React.FC<ButtonProps> = ({
       {icon && iconPosition === 'right' && <span className="inline-block">{icon}</span>}
     </>
   );
+
+  if (to) {
+    return (
+      <Link to={to} viewTransition className={classes} onClick={onClick as never}>
+        {content}
+      </Link>
+    );
+  }
 
   if (as === 'a' && href) {
     return (

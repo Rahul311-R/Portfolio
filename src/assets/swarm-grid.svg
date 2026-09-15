@@ -1,0 +1,49 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#0A0B11"/>
+  <g opacity=".12" stroke="#C9A45C" stroke-width="1">
+    <path d="M0 125H1600M0 250H1600M0 375H1600M0 500H1600M0 625H1600M0 750H1600M0 875H1600"/>
+    <path d="M133 0V1000M266 0V1000M400 0V1000M533 0V1000M666 0V1000M800 0V1000M933 0V1000M1066 0V1000M1200 0V1000M1333 0V1000M1466 0V1000"/>
+  </g>
+  <g stroke="#F5F7FA" stroke-opacity=".3" stroke-width="2" fill="none">
+    <path d="M200 500h1200"/>
+    <path d="M250 380c0-60 70-110 150-110h800c80 0 150 50 150 110" stroke-opacity=".2"/>
+    <path d="M250 620c0 60 70 110 150 110h800c80 0 150-50 150-110" stroke-opacity=".2"/>
+  </g>
+  <g fill="#10131D" stroke-width="2.5">
+    <rect x="240" y="465" width="90" height="70" rx="10" stroke="#C9A45C" stroke-opacity=".85"/>
+    <rect x="400" y="465" width="90" height="70" rx="10" stroke="#EFE3C2" stroke-opacity=".85"/>
+    <rect x="560" y="465" width="90" height="70" rx="10" stroke="#C9A45C" stroke-opacity=".85"/>
+    <rect x="720" y="465" width="90" height="70" rx="10" stroke="#EFE3C2" stroke-opacity=".85"/>
+    <rect x="880" y="465" width="90" height="70" rx="10" stroke="#C9A45C" stroke-opacity=".85"/>
+    <rect x="1040" y="465" width="90" height="70" rx="10" stroke="#EFE3C2" stroke-opacity=".85"/>
+    <rect x="1200" y="465" width="90" height="70" rx="10" stroke="#F5F7FA" stroke-opacity=".6"/>
+  </g>
+  <g font-family="monospace" font-size="16" fill="#F5F7FA" fill-opacity=".6" text-anchor="middle">
+    <text x="285" y="508">NODE</text>
+    <text x="445" y="508">SWARM</text>
+    <text x="605" y="508">EDGE</text>
+    <text x="765" y="508">MESH</text>
+    <text x="925" y="508">GRID</text>
+    <text x="1085" y="508">FIELD</text>
+    <text x="1245" y="508">FLEET</text>
+  </g>
+  <g stroke-width="3" fill="none">
+    <path d="M285 465c40-70 120-70 160 0" stroke="#EFE3C2" stroke-opacity=".7"/>
+    <path d="M445 465c40-70 120-70 160 0" stroke="#C9A45C" stroke-opacity=".7"/>
+    <path d="M605 465c40-70 120-70 160 0" stroke="#EFE3C2" stroke-opacity=".7"/>
+    <path d="M765 465c40-70 120-70 160 0" stroke="#C9A45C" stroke-opacity=".7"/>
+    <path d="M925 465c40-70 120-70 160 0" stroke="#EFE3C2" stroke-opacity=".7"/>
+    <path d="M1085 465c40-70 120-70 160 0" stroke="#F5F7FA" stroke-opacity=".5"/>
+    <path d="M285 535c40 70 120 70 160 0" stroke="#C9A45C" stroke-opacity=".55"/>
+    <path d="M445 535c40 70 120 70 160 0" stroke="#EFE3C2" stroke-opacity=".55"/>
+    <path d="M605 535c40 70 120 70 160 0" stroke="#C9A45C" stroke-opacity=".55"/>
+    <path d="M765 535c40 70 120 70 160 0" stroke="#EFE3C2" stroke-opacity=".55"/>
+    <path d="M925 535c40 70 120 70 160 0" stroke="#C9A45C" stroke-opacity=".55"/>
+  </g>
+  <g fill="#EFE3C2"><circle cx="400" cy="380" r="6"/><circle cx="880" cy="380" r="6"/><circle cx="1300" cy="380" r="6"/></g>
+  <g fill="#C9A45C"><circle cx="640" cy="730" r="6"/><circle cx="1100" cy="730" r="6"/></g>
+  <g font-family="monospace" font-size="20" fill="#F5F7FA" fill-opacity=".4">
+    <text x="60" y="950">SIG 15 · SWARM TOPOLOGY</text>
+    <text x="1290" y="290">7 NODES · P2P</text>
+  </g>
+</svg>

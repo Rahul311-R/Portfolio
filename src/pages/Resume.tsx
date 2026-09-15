@@ -5,13 +5,15 @@ import { RESUME_DATA } from '../data/resume';
 import { EXPERIENCES } from '../data/experience';
 import { PROJECTS } from '../data/projects';
 import { PageMasthead } from '../components/ui/PageMasthead';
-import gestureOrbit from '../assets/gesture-orbit.svg';
+import { TerminalPending } from '../components/ui/TerminalPending';
+import { SignalBus } from '../components/transmission/SignalBus';
+import { PAGE_ARTWORK } from '../data/artwork';
 
 export const Resume: React.FC = () => {
   return (
     <PageTransition>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-16 sm:space-y-24">
-        <PageMasthead number="01" eyebrow="Resume" title="WEB RESUME" description="A concise, web-native version of Rahul R's supplied resume." artwork={gestureOrbit} artworkLabel="Skills / projects / experience"><span className="inline-flex items-center gap-2 px-5 py-3 border border-[var(--border-color)] font-mono text-sm text-[var(--text-muted)]"><Download className="w-4 h-4" /> DOWNLOAD CV [ADD UPDATED CV]</span></PageMasthead>
+        <PageMasthead number="01" eyebrow="Resume" title="WEB RESUME" description="A concise, web-native version of Rahul R's supplied resume." artwork={PAGE_ARTWORK.resume} artworkLabel="Skills / projects / experience"><span className="inline-flex items-center gap-2"><Download className="w-4 h-4 text-[var(--text-muted)]" /><TerminalPending label="Download CV — updated file pending" /></span></PageMasthead>
 
         {/* 01 / PROFILE */}
         <section className="bg-[var(--bg-surface)] border border-[var(--border-color)] p-8 rounded-lg space-y-4">
@@ -28,6 +30,12 @@ export const Resume: React.FC = () => {
           <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-3xl">
             Interested in artificial intelligence, data analytics, computer vision and software interfaces. The projects and experience below reflect the supplied resume.
           </p>
+        </section>
+
+        {/* Skill traffic strip */}
+        <section className="studio-panel rounded-xl p-4 sm:p-6">
+          <div className="eyebrow-rule mb-3">Skill traffic · relays live</div>
+          <SignalBus height={110} lanes={3} />
         </section>
 
         {/* 02 / EDUCATION */}
