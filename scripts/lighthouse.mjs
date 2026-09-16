@@ -86,6 +86,10 @@ const chrome = spawn(
     `--user-data-dir=${userDataDir}`,
     '--no-first-run',
     '--no-default-browser-check',
+    // Container/CI-safe: the sandbox can fail for the runner user and the
+    // default /dev/shm is too small for multiple renderer processes.
+    '--no-sandbox',
+    '--disable-dev-shm-usage',
     '--disable-gpu',
     'about:blank',
   ],
@@ -101,16 +105,17 @@ try {
   const lighthouse = mod.default ?? mod;
 
   const runOne = async (route, index) => {
-    const result = await lighthouse(
-      `${BASE}${route}`,
-      {
-        port: CDP_PORT,
-        output: ['json', 'html'],
-        onlyCategories: CATEGORIES,
-        logLevel: 'error',
-      },
-      undefined,
-    );
+      const result = await lighthouse(
+        `${BASE}${route}`,
+        {
+          port: CDP_PORT,
+          output: ['json', 'html'],
+          onlyCategories: CATEGORIES,
+          logLevel: 'error',
+          maxWaitForLoad: 90_000,
+        },
+        undefined,
+      );
     const { lhr, report } = result;
     const safeName = route === '/' ? 'home' : route.replace(/\//g, '');
     await writeFile(
@@ -140,15 +145,21 @@ try {
   });
 
   const failures = [];
+  const routeErrors = [];
 
   // Home: HOME_RUNS runs, median of each category is gated.
   const homeRuns = [];
   for (let i = 1; i <= HOME_RUNS; i++) {
     process.stdout.write(`home run ${i}/${HOME_RUNS}… `);
-    const lhr = await runOne('/', i);
-    const s = summarize(lhr);
-    homeRuns.push(s);
-    console.log(`perf ${(s.scores.performance * 100).toFixed(0)} a11y ${(s.scores.accessibility * 100).toFixed(0)}`);
+    try {
+      const lhr = await runOne('/', i);
+      const s = summarize(lhr);
+      homeRuns.push(s);
+      console.log(`perf ${(s.scores.performance * 100).toFixed(0)} a11y ${(s.scores.accessibility * 100).toFixed(0)}`);
+    } catch (err) {
+      console.log('FAILED');
+      routeErrors.push(`/ run ${i}: ${err?.message ?? err}`);
+    }
   }
   const home = {
     scores: Object.fromEntries(
@@ -164,9 +175,14 @@ try {
   const extra = {};
   for (const route of EXTRA_ROUTES) {
     process.stdout.write(`${route} … `);
-    const lhr = await runOne(route, 1);
-    extra[route] = summarize(lhr);
-    console.log(`perf ${(extra[route].scores.performance * 100).toFixed(0)}`);
+    try {
+      const lhr = await runOne(route, 1);
+      extra[route] = summarize(lhr);
+      console.log(`perf ${(extra[route].scores.performance * 100).toFixed(0)}`);
+    } catch (err) {
+      console.log('FAILED');
+      routeErrors.push(`${route}: ${err?.message ?? err}`);
+    }
   }
 
   // 3. Gates.
@@ -193,6 +209,11 @@ try {
   } else {
     console.log('\n✓ All score gates passed.');
   }
+  if (routeErrors.length) {
+    console.error('\n✖ Audit errors:');
+    for (const e of routeErrors) console.error(`  - ${e}`);
+    exitCode = 1;
+  }
 
   // 4. GitHub job summary — appended when GITHUB_STEP_SUMMARY is set (CI),
   // silently skipped locally.
@@ -205,14 +226,20 @@ try {
       '',
       '| Route | Performance | Accessibility | Best Practices | SEO | LCP | TBT | CLS | Transfer |',
       '|---|---|---|---|---|---:|---:|---:|---:|',
-      sumRow(`\`/\` (median of ${HOME_RUNS} runs)`, home),
-      ...EXTRA_ROUTES.map((r) => sumRow(`\`${r}\``, extra[r])),
+      ...(
+        homeRuns.length
+          ? [sumRow(`\`/\` (median of ${homeRuns.length} runs)`, home)]
+          : []
+      ),
+      ...EXTRA_ROUTES.filter((r) => extra[r]).map((r) => sumRow(`\`${r}\``, extra[r])),
       '',
       `Gates: perf ≥ ${(GATES.performance * 100).toFixed(0)} · a11y ≥ ${(GATES.accessibility * 100).toFixed(0)} · best-practices ≥ ${(GATES['best-practices'] * 100).toFixed(0)} · seo ≥ ${(GATES.seo * 100).toFixed(0)} — ${failures.length ? `❌ ${failures.length} gate failure(s)` : '✅ all passed'}`,
       '',
-      'Reports: `.lighthouseci/` artifact (JSON + HTML per run).',
-      '',
     ];
+    if (routeErrors.length) {
+      lines.push('### Audit errors', '', ...routeErrors.map((e) => `- ${e.replace(/\n/g, ' ')}`), '');
+    }
+    lines.push('Reports: `.lighthouseci/` artifact (JSON + HTML per run).', '');
     await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
   }
 } catch (err) {
