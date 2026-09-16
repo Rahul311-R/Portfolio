@@ -56,6 +56,7 @@ function Rings({ scrollRef, pointerRef }: { scrollRef: React.RefObject<number>; 
     for (let i = 0; i < g.children.length; i++) {
       const ring = g.children[i] as THREE.Mesh;
       const meta = rings[i];
+      if (!meta) continue;
       ring.rotation.x = meta.rotX + Math.sin(t * 0.24 + meta.phase) * 0.16;
       ring.rotation.y = meta.rotY + Math.cos(t * 0.2 + meta.phase) * 0.2;
       const zz = meta.z + ((s * 42) % 90);

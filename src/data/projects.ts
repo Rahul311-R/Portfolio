@@ -1,6 +1,6 @@
-import type { Project } from '../types/project';
+import type { Project } from '@/types/project';
 
-const roadSections = [
+const roadSections: [string, string][] = [
   ['01 / OVERVIEW', 'A road-condition concept that brings together AI, GPS and IoT sensors for real-time road fault detection.'],
   ['02 / PROBLEM', 'Road faults need clear, location-aware information before they can be reviewed and addressed.'],
   ['03 / APPROACH', 'The concept connects visual input, road fault detection, GPS context and an IoT/data layer into one flow.'],
@@ -12,7 +12,7 @@ const roadSections = [
   ['09 / FUTURE WORK', 'Future improvements are to be confirmed from Rahul’s project documentation.']
 ];
 
-const drawingSections = [
+const drawingSections: [string, string][] = [
   ['01 / OVERVIEW', 'A gesture-controlled drawing application that uses hand tracking to create marks without a conventional drawing surface.'],
   ['02 / PROBLEM', 'The project explores an alternate, touch-free way to interact with a drawing interface.'],
   ['03 / APPROACH', 'Hand tracking is used to translate gesture movement into drawing interaction.'],
@@ -24,7 +24,7 @@ const drawingSections = [
   ['09 / FUTURE WORK', 'Further development directions are to be confirmed.']
 ];
 
-const weatherSections = [
+const weatherSections: [string, string][] = [
   ['01 / OVERVIEW', 'A weather GUI that integrates a live weather API with input validation and error handling.'],
   ['02 / PROBLEM', 'API-driven interfaces need to give users useful feedback for invalid input and unavailable responses.'],
   ['03 / APPROACH', 'The application combines a GUI, API integration, validation and robust error handling.'],

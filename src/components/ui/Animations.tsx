@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 interface MagneticProps {
   children: React.ReactElement;

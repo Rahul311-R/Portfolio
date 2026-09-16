@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowUpRight, Mail } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '../ui/SocialIcons';
-import { SOCIAL } from '../../data/social';
-import { SplitText } from '../premium/SplitText';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/SocialIcons';
+import { SOCIAL } from '@/data/social';
+import { SplitText } from '@/components/premium/SplitText';
 
 const CHANNELS = [
   { label: 'GitHub', href: SOCIAL.github, text: SOCIAL.githubLabel, icon: <GithubIcon className="w-4 h-4" /> },

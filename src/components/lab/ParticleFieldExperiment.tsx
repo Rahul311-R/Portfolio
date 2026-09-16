@@ -34,7 +34,7 @@ export const ParticleFieldExperiment: React.FC = () => {
         y: Math.random() * height,
         vx: (Math.random() - 0.5) * 1.5,
         vy: (Math.random() - 0.5) * 1.5,
-        color: colors[Math.floor(Math.random() * colors.length)],
+        color: colors[Math.floor(Math.random() * colors.length)] ?? '#C9A45C',
         size: Math.random() * 2 + 1.5
       });
     }
@@ -112,7 +112,7 @@ export const ParticleFieldExperiment: React.FC = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsRunning(!isRunning)}
-            className="px-3 py-1.5 bg-[var(--accent-color)] text-white rounded flex items-center gap-1 hover:opacity-90"
+            className="px-3 py-1.5 bg-[var(--accent-color)] text-[var(--accent-ink)] rounded flex items-center gap-1 hover:opacity-90"
           >
             {isRunning ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
             <span>{isRunning ? 'Pause' : 'Play'}</span>
@@ -128,7 +128,7 @@ export const ParticleFieldExperiment: React.FC = () => {
                 onClick={() => setSpeed(s)}
                 className={`px-2 py-0.5 rounded border text-[10px] ${
                   speed === s
-                    ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)]'
+                    ? 'bg-[var(--accent-color)] text-[var(--accent-ink)] border-[var(--accent-color)]'
                     : 'bg-[var(--bg-surface-secondary)] text-[var(--text-muted)] border-[var(--border-color)]'
                 }`}
               >

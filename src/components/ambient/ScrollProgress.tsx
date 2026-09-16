@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useMotionEngine } from '../../engine/MotionEngine';
+import { useMotionEngine } from '@/engine/MotionEngine';
 
 /**
  * Signal progress HUD: a gradient bar across the top of the viewport that

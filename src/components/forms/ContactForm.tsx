@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import { Send, CheckCircle2, AlertCircle, Info } from 'lucide-react';
-import { Button } from '../ui/Button';
-
-const contactSchema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Please enter a valid email address.' }),
-  message: z.string().min(10, { message: 'Message must be at least 10 characters long.' })
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { Button } from '@/components/ui/Button';
+import { contactSchema, type ContactFormData } from '@/lib/schemas/contact';
 
 export const ContactForm: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);

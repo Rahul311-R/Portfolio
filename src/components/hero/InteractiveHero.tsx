@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion, type MotionProps } from 'framer-motion';
 import { ArrowDown, ArrowRight, FileText } from 'lucide-react';
-import { Magnetic } from '../ui/Animations';
-import { Typewriter } from '../ui/Typewriter';
-import { Button } from '../ui/Button';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { Magnetic } from '@/components/ui/Animations';
+import { Typewriter } from '@/components/ui/Typewriter';
+import { Button } from '@/components/ui/Button';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 /**
  * Chapter 0 — the intro. Full-viewport, transparent; the cinematic world

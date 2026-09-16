@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 /**
  * Large display text that leans in 3D toward the pointer. Subtle by design

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { useMotionEngine } from '../../engine/MotionEngine';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useMotionEngine } from '@/engine/MotionEngine';
 
 interface Packet {
   lane: number;
@@ -122,7 +122,7 @@ export const SignalBus: React.FC<{
     // while the bus is offscreen so the shared loop costs nothing extra.
     const observer = new IntersectionObserver(
       ([entry]) => {
-        visible = entry.isIntersecting;
+        visible = entry?.isIntersecting ?? false;
       },
       { threshold: 0.05 }
     );

@@ -1,5 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
+
+/* Amber-500 fails contrast on dark tints (~3.0:1); gold-300 is the on-dark
+   signal tone at ~7.6:1 on #0A0B11. Used for badges, ratings and warnings. */
+@theme {
+  --color-gold-300: #FBD38D;
+}
+
+/* Fonts are loaded in index.html <head> via preconnect + stylesheet link,
+   which removes the CSS→font-CSS→font render-blocking chain the old
+   @import created. See docs/COMPETITION-SCORING-PLAN.md (F1). */
 
 :root {
   --bg-primary: #08090D;
@@ -10,6 +19,8 @@
   --accent-primary: #C9A45C;
   --accent-secondary: #EFE3C2;
   --accent-color: #C9A45C;
+  /* Ink color for text/icons sitting ON accent fills (AA on #C9A45C). */
+  --accent-ink: #17130A;
   --accent-glow: rgba(201, 164, 92, 0.18);
   --signal-dim: rgba(201, 164, 92, 0.45);
   --signal-hot: #EFE3C2;
@@ -35,9 +46,12 @@ html.light {
   --bg-surface-secondary: #EEF0F6;
   --text-primary: #111318;
   --text-muted: #596273;
-  --accent-primary: #8A6A2E;
-  --accent-secondary: #6B5A32;
-  --accent-color: #8A6A2E;
+  /* #8A6A2E sits at the AA boundary for normal-size text (~3.4:1 on white);
+     darkened to a 7+:1 ink-gold so badges and mono labels pass on light. */
+  --accent-primary: #6B531F;
+  --accent-secondary: #594418;
+  --accent-color: #6B531F;
+  --accent-ink: #FFFFFF;
   --accent-glow: rgba(138, 106, 46, 0.14);
   --signal-dim: rgba(138, 106, 46, 0.4);
   --signal-hot: #6B5A32;

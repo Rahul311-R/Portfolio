@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 const FACES = [
   { label: 'Python', sub: 'core language', transform: 'rotateY(0deg)' },
@@ -56,7 +56,7 @@ export const DragCube3D: React.FC<{ size?: number }> = ({ size = 260 }) => {
     // Park the spin loop while the cube is scrolled out of view.
     const io = new IntersectionObserver(([entry]) => {
       const was = inView;
-      inView = entry.isIntersecting;
+      inView = entry?.isIntersecting ?? false;
       if (inView && !was) {
         cancelAnimationFrame(raf);
         raf = requestAnimationFrame(render);

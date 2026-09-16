@@ -1,6 +1,6 @@
 import React from 'react';
-import { ParallaxLayer } from '../ui/Animations';
-import { ScrubHero } from '../three/Scroll3D';
+import { ParallaxLayer } from '@/components/ui/Animations';
+import { ScrubHero } from '@/components/three/Scroll3D';
 import { CarrierWave } from './CarrierWave';
 
 interface ArtifactPlateProps {
@@ -40,8 +40,8 @@ export const ArtifactPlate: React.FC<ArtifactPlateProps> = ({
       <div className="absolute left-4 top-4 font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--accent-secondary)]">
         {caption}
       </div>
-      <div className="absolute bottom-4 left-4 right-4 z-10 font-mono text-[10px] uppercase tracking-[0.14em] text-white/65">
-        {label}
+      <div className="absolute bottom-4 left-4 right-4 z-10 font-mono text-[10px] uppercase tracking-[0.14em]">
+        <span className="inline-block rounded bg-[#0A0B11] px-2 py-1 text-white/80">{label}</span>
       </div>
     </div>
   );

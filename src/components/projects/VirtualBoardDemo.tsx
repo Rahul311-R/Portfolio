@@ -49,6 +49,7 @@ export const VirtualBoardDemo: React.FC = () => {
     
     if ('touches' in e) {
       const touch = e.touches[0];
+      if (!touch) return { x: 0, y: 0 };
       return {
         x: touch.clientX - rect.left,
         y: touch.clientY - rect.top
@@ -167,7 +168,7 @@ export const VirtualBoardDemo: React.FC = () => {
               onClick={() => setBrushSize(s)}
               className={`px-2 py-0.5 font-mono text-xs rounded border transition-colors ${
                 brushSize === s
-                  ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)]'
+                  ? 'bg-[var(--accent-color)] text-[var(--accent-ink)] border-[var(--accent-color)]'
                   : 'bg-[var(--bg-surface-secondary)] text-[var(--text-muted)] border-[var(--border-color)]'
               }`}
             >

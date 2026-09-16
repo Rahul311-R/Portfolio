@@ -1,14 +1,14 @@
 import React from 'react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { PageMasthead } from '../components/ui/PageMasthead';
-import { SplitText, Magnetic, Float } from '../components/ui/Animations';
-import { FlipIn } from '../components/three/Scroll3D';
-import { RESUME_DATA } from '../data/resume';
-import { DragCube3D } from '../components/three/DragCube3D';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { PageMasthead } from '@/components/ui/PageMasthead';
+import { SplitText, Magnetic, Float } from '@/components/ui/Animations';
+import { FlipIn } from '@/components/three/Scroll3D';
+import { RESUME_DATA } from '@/data/resume';
+import { DragCube3D } from '@/components/three/DragCube3D';
 import { GraduationCap, Terminal, MapPin, Heart, Music, BookOpen, Coffee, Camera, Gamepad2, Mountain, Sun, Moon } from 'lucide-react';
-import { PAGE_ARTWORK, SECTION_ARTWORK } from '../data/artwork';
-import { ArtifactPlate } from '../components/transmission/ArtifactPlate';
-import { WarpDivider } from '../components/three/WarpDivider';
+import { PAGE_ARTWORK, SECTION_ARTWORK } from '@/data/artwork';
+import { ArtifactPlate } from '@/components/transmission/ArtifactPlate';
+import { WarpDivider } from '@/components/three/WarpDivider';
 
 const JOURNEY = [
   { year: '2022', title: 'Started B.Tech', detail: 'Joined V.S.B College of Engineering, Coimbatore. First time living away from home. Discovered computer vision in second semester.', tone: 'origin' },

@@ -37,9 +37,11 @@ export const WhoamiTerminal: React.FC = () => {
     const node = ref.current;
     if (!node) return;
     const io = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setInView(true),
+      ([entry]) => {
+        if (entry?.isIntersecting) setInView(true);
+      },
       { threshold: 0.05 }
- );
+    );
     io.observe(node);
     return () => io.disconnect();
   }, []);
@@ -74,7 +76,7 @@ export const WhoamiTerminal: React.FC = () => {
         <span className="h-2.5 w-2.5 rounded-full bg-[#C9A45C]/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-        <span className="ml-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+        <span className="ml-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
           rahul@portfolio — zsh
         </span>
       </div>

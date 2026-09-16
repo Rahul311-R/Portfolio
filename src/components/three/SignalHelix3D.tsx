@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { useMotionEngine } from '../../engine/MotionEngine';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useMotionEngine } from '@/engine/MotionEngine';
 
 /**
  * A double helix of signal nodes — two strands carrying paired "packets"
@@ -65,6 +65,7 @@ export const SignalHelix3D: React.FC<{ className?: string; pairs?: number }> = (
       for (let i = 0; i < pairs; i += 2) {
         const a = nodes[i * 2];
         const b = nodes[i * 2 + 1];
+        if (!a || !b) continue;
         ctx.strokeStyle = `rgba(245, 247, 250, ${(0.08 + Math.min(a.depth, b.depth) * 0.16).toFixed(3)})`;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
@@ -120,7 +121,7 @@ export const SignalHelix3D: React.FC<{ className?: string; pairs?: number }> = (
 
     let visible = false;
     const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
+      visible = entry?.isIntersecting ?? false;
     }, { threshold: 0.05 });
     io.observe(canvas);
     canvas.addEventListener('pointerdown', onDown);

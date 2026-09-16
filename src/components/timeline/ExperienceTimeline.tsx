@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, CheckCircle2 } from 'lucide-react';
-import { EXPERIENCES } from '../../data/experience';
+import { EXPERIENCES } from '@/data/experience';
 
 export const ExperienceTimeline: React.FC = () => {
   return (

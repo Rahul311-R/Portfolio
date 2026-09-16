@@ -1,13 +1,13 @@
 import React from 'react';
 import { Download, GraduationCap, Briefcase, Award, Code2, CheckCircle2, FileText } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { RESUME_DATA } from '../data/resume';
-import { EXPERIENCES } from '../data/experience';
-import { PROJECTS } from '../data/projects';
-import { PageMasthead } from '../components/ui/PageMasthead';
-import { TerminalPending } from '../components/ui/TerminalPending';
-import { SignalBus } from '../components/transmission/SignalBus';
-import { PAGE_ARTWORK } from '../data/artwork';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { RESUME_DATA } from '@/data/resume';
+import { EXPERIENCES } from '@/data/experience';
+import { PROJECTS } from '@/data/projects';
+import { PageMasthead } from '@/components/ui/PageMasthead';
+import { TerminalPending } from '@/components/ui/TerminalPending';
+import { SignalBus } from '@/components/transmission/SignalBus';
+import { PAGE_ARTWORK } from '@/data/artwork';
 
 export const Resume: React.FC = () => {
   return (
@@ -106,7 +106,7 @@ export const Resume: React.FC = () => {
               <div key={proj.id} className="border-b border-[var(--border-color)] pb-4 last:border-0 last:pb-0 space-y-2">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h4 className="text-base font-bold font-display text-[var(--text-primary)]">
-                    {proj.title} {proj.badge && <span className="text-amber-400 font-mono text-xs font-normal">({proj.badge})</span>}
+                    {proj.title} {proj.badge && <span className="text-gold-300 font-mono text-xs font-normal">({proj.badge})</span>}
                   </h4>
                   <span className="font-mono text-xs text-[var(--text-muted)]">{proj.year}</span>
                 </div>

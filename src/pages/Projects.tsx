@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { ProjectFilters, CATEGORIES } from '../components/projects/ProjectFilters';
-import type { CategoryFilter } from '../components/projects/ProjectFilters';
-import { ProjectGrid } from '../components/projects/ProjectGrid';
-import { PROJECTS } from '../data/projects';
-import { PageMasthead } from '../components/ui/PageMasthead';
-import { Coverflow3D } from '../components/three/Coverflow3D';
-import { PAGE_ARTWORK } from '../data/artwork';
-import { PacketOrbit3D } from '../components/three/PacketOrbit3D';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { ProjectFilters, CATEGORIES } from '@/components/projects/ProjectFilters';
+import type { CategoryFilter } from '@/components/projects/ProjectFilters';
+import { ProjectGrid } from '@/components/projects/ProjectGrid';
+import { PROJECTS } from '@/data/projects';
+import { PageMasthead } from '@/components/ui/PageMasthead';
+import { Coverflow3D } from '@/components/three/Coverflow3D';
+import { PAGE_ARTWORK } from '@/data/artwork';
+import { PacketOrbit3D } from '@/components/three/PacketOrbit3D';
 
 export const Projects: React.FC = () => {
   const [currentFilter, setCurrentFilter] = useState<CategoryFilter>('ALL');

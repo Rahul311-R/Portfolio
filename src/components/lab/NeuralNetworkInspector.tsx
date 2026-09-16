@@ -129,7 +129,7 @@ export const NeuralNetworkInspector: React.FC = () => {
                 aria-pressed={epochs === ep}
                 className={`px-2 py-0.5 rounded text-[10px] border ${
                   epochs === ep
-                    ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)] font-bold'
+                    ? 'bg-[var(--accent-color)] text-[var(--accent-ink)] border-[var(--accent-color)] font-bold'
                     : 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-color)]'
                 }`}
               >

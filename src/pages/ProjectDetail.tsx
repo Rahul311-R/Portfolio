@@ -1,16 +1,16 @@
 import React from 'react';
 import { useParams, NavLink, Navigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ExternalLink, Award, Layers, Link2Off } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { Button } from '../components/ui/Button';
-import { RoadConditionDemo } from '../components/projects/RoadConditionDemo';
-import { VirtualBoardDemo } from '../components/projects/VirtualBoardDemo';
-import { WeatherApiDemo } from '../components/projects/WeatherApiDemo';
-import { PROJECTS } from '../data/projects';
-import { GithubIcon } from '../components/ui/SocialIcons';
-import { ScrubHero, StickyStack, FlipIn } from '../components/three/Scroll3D';
-import { PROJECT_ARTWORK } from '../data/artwork';
-import { TerminalPending } from '../components/ui/TerminalPending';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { Button } from '@/components/ui/Button';
+import { RoadConditionDemo } from '@/components/projects/RoadConditionDemo';
+import { VirtualBoardDemo } from '@/components/projects/VirtualBoardDemo';
+import { WeatherApiDemo } from '@/components/projects/WeatherApiDemo';
+import { PROJECTS } from '@/data/projects';
+import { GithubIcon } from '@/components/ui/SocialIcons';
+import { ScrubHero, StickyStack, FlipIn } from '@/components/three/Scroll3D';
+import { PROJECT_ARTWORK } from '@/data/artwork';
+import { TerminalPending } from '@/components/ui/TerminalPending';
 
 export const ProjectDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -49,7 +49,7 @@ export const ProjectDetail: React.FC = () => {
               </span>
             ))}
             {project.badge && (
-              <span className="inline-flex items-center gap-1 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold uppercase rounded text-[11px]">
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-gold-300 font-bold uppercase rounded text-[11px]">
                 <Award className="w-3.5 h-3.5" />
                 {project.badge}
               </span>

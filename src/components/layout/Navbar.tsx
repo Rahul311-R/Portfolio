@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Command, Menu as MenuIcon } from 'lucide-react';
-import { MotionToggle } from '../ui/MotionToggle';
-import { useTheme } from '../../context/ThemeContext';
+import { MotionToggle } from '@/components/ui/MotionToggle';
+import { useTheme } from '@/context/ThemeContext';
 import { FullscreenMenu, type MenuLink } from './FullscreenMenu';
 
 export const NAV_LINKS: MenuLink[] = [
@@ -89,7 +89,7 @@ export const Navbar: React.FC = () => {
               <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors">
                 Menu
               </span>
-              <span className="grid h-10 w-10 place-items-center rounded-full border border-[var(--border-color)] group-hover:border-[var(--accent-color)] group-hover:shadow-[0_0_18px_var(--accent-glow)] transition-all">
+              <span className="grid h-11 w-11 place-items-center rounded-full border border-[var(--border-color)] group-hover:border-[var(--accent-color)] group-hover:shadow-[0_0_18px_var(--accent-glow)] transition-all">
                 <MenuIcon className="w-4 h-4 text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors" />
               </span>
             </button>

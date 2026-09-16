@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { Project } from '../../types/project';
+import type { Project } from '@/types/project';
 import { ProjectCard } from './ProjectCard';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 interface ProjectGridProps {
   projects: Project[];

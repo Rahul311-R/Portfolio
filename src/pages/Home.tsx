@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { InteractiveHero } from '../components/hero/InteractiveHero';
-import { CinematicStage } from '../components/three/CinematicStage';
-import { ProjectPreview } from '../components/home/ProjectPreview';
-import { WhoamiTerminal } from '../components/home/WhoamiTerminal';
-import { SectionMarker } from '../components/ui/SectionMarker';
-import { SplitText } from '../components/premium/SplitText';
-import { PROJECTS } from '../data/projects';
-import { EXPERIENCES } from '../data/experience';
-import { PROJECT_ARTWORK } from '../data/artwork';
-import { RESUME_DATA } from '../data/resume';
-import { CountUp } from '../components/ui/CountUp';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { InteractiveHero } from '@/components/hero/InteractiveHero';
+import { CinematicStage } from '@/components/three/CinematicStage';
+import { ProjectPreview } from '@/components/home/ProjectPreview';
+import { WhoamiTerminal } from '@/components/home/WhoamiTerminal';
+import { SectionMarker } from '@/components/ui/SectionMarker';
+import { SplitText } from '@/components/premium/SplitText';
+import { PROJECTS } from '@/data/projects';
+import { EXPERIENCES } from '@/data/experience';
+import { PROJECT_ARTWORK } from '@/data/artwork';
+import { RESUME_DATA } from '@/data/resume';
+import { CountUp } from '@/components/ui/CountUp';
 
 /**
  * Home — the cinematic version. One scroll-driven 3D corridor sits fixed
@@ -75,7 +75,7 @@ export const Home: React.FC = () => {
                   className="group relative flex items-baseline gap-5 sm:gap-10 py-8 sm:py-10"
                   onMouseEnter={() =>
                     setPreview({
-                      src: PROJECT_ARTWORK[project.slug],
+                      src: PROJECT_ARTWORK[project.slug] ?? '',
                       label: project.categories[0] ?? 'Project',
                     })
                   }

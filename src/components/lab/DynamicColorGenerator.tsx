@@ -66,6 +66,7 @@ export const DynamicColorGenerator: React.FC = () => {
 
         <input
           type="range"
+          aria-label="Hue"
           min={0}
           max={359}
           value={hue}

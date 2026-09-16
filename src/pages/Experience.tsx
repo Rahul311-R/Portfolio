@@ -1,12 +1,12 @@
 import React from 'react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { ExperienceTimeline } from '../components/timeline/ExperienceTimeline';
-import { MetricCard } from '../components/ui/MetricCard';
-import { PageMasthead } from '../components/ui/PageMasthead';
-import { FlipIn } from '../components/three/Scroll3D';
-import { PAGE_ARTWORK, SECTION_ARTWORK } from '../data/artwork';
-import { ArtifactPlate } from '../components/transmission/ArtifactPlate';
-import { SignalBus } from '../components/transmission/SignalBus';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { ExperienceTimeline } from '@/components/timeline/ExperienceTimeline';
+import { MetricCard } from '@/components/ui/MetricCard';
+import { PageMasthead } from '@/components/ui/PageMasthead';
+import { FlipIn } from '@/components/three/Scroll3D';
+import { PAGE_ARTWORK, SECTION_ARTWORK } from '@/data/artwork';
+import { ArtifactPlate } from '@/components/transmission/ArtifactPlate';
+import { SignalBus } from '@/components/transmission/SignalBus';
 
 export const Experience: React.FC = () => {
   return (

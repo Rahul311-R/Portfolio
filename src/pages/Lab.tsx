@@ -1,19 +1,19 @@
 import React, { Suspense, lazy } from 'react';
 import { FlaskConical, ArrowDownRight, ShieldAlert } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { ParticleFieldExperiment } from '../components/lab/ParticleFieldExperiment';
-import { NeuralNetworkInspector } from '../components/lab/NeuralNetworkInspector';
-import { DynamicColorGenerator } from '../components/lab/DynamicColorGenerator';
-import { ParticleSphere3D } from '../components/three/ParticleSphere3D';
-import { TiltCard } from '../components/ui/TiltCard';
-import { LazyMount } from '../components/ui/LazyMount';
-import { PAGE_ARTWORK } from '../data/artwork';
-import { WaveTunnel3D } from '../components/three/WaveTunnel3D';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { ParticleFieldExperiment } from '@/components/lab/ParticleFieldExperiment';
+import { NeuralNetworkInspector } from '@/components/lab/NeuralNetworkInspector';
+import { DynamicColorGenerator } from '@/components/lab/DynamicColorGenerator';
+import { ParticleSphere3D } from '@/components/three/ParticleSphere3D';
+import { TiltCard } from '@/components/ui/TiltCard';
+import { LazyMount } from '@/components/ui/LazyMount';
+import { PAGE_ARTWORK } from '@/data/artwork';
+import { WaveTunnel3D } from '@/components/three/WaveTunnel3D';
 
-const InteractiveCanvas = lazy(() => import('../components/lab/InteractiveCanvas').then((m) => ({ default: m.InteractiveCanvas })));
-const DataVisExperiment = lazy(() => import('../components/lab/DataVisExperiment').then((m) => ({ default: m.DataVisExperiment })));
-const SphereExperiment = lazy(() => import('../components/lab/SphereExperiment').then((m) => ({ default: m.SphereExperiment })));
-const TerrainExperiment = lazy(() => import('../components/lab/TerrainExperiment').then((m) => ({ default: m.TerrainExperiment })));
+const InteractiveCanvas = lazy(() => import('@/components/lab/InteractiveCanvas').then((m) => ({ default: m.InteractiveCanvas })));
+const DataVisExperiment = lazy(() => import('@/components/lab/DataVisExperiment').then((m) => ({ default: m.DataVisExperiment })));
+const SphereExperiment = lazy(() => import('@/components/lab/SphereExperiment').then((m) => ({ default: m.SphereExperiment })));
+const TerrainExperiment = lazy(() => import('@/components/lab/TerrainExperiment').then((m) => ({ default: m.TerrainExperiment })));
 
 const ExperimentFallback: React.FC<{ label: string }> = ({ label }) => (
   <div className="grid min-h-[20rem] w-full place-items-center rounded-lg border border-[var(--border-color)] bg-[var(--bg-surface)] font-mono text-xs text-[var(--text-muted)]">

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useMotionEngine, type FrameEnv } from '../../engine/MotionEngine';
+import { useMotionEngine, type FrameEnv } from '@/engine/MotionEngine';
 
 interface Mote {
   x: number;

@@ -37,7 +37,7 @@ export const RoadConditionDemo: React.FC = () => {
           <div className="flex flex-wrap gap-2">
             {stages.map((stage, index) => (
               <button key={stage} type="button" onClick={() => setSelectedStage(index)} aria-pressed={selectedStage === index}
-                className={`px-3 py-1.5 text-xs rounded border transition-colors ${selectedStage === index ? 'bg-[var(--accent-color)] text-white border-[var(--accent-color)] font-bold' : 'bg-[var(--bg-surface-secondary)] text-[var(--text-muted)] border-[var(--border-color)]'}`}>
+                className={`px-3 py-1.5 text-xs rounded border transition-colors ${selectedStage === index ? 'bg-[var(--accent-color)] text-[var(--accent-ink)] border-[var(--accent-color)] font-bold' : 'bg-[var(--bg-surface-secondary)] text-[var(--text-muted)] border-[var(--border-color)]'}`}>
                 {stage}
               </button>
             ))}

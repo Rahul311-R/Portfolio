@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Rotate3d } from 'lucide-react';
-import { ParticleSphere3D } from '../three/ParticleSphere3D';
+import { ParticleSphere3D } from '@/components/three/ParticleSphere3D';
 
 export const SphereExperiment: React.FC = () => {
   const [density, setDensity] = useState(160);
@@ -33,7 +33,7 @@ export const SphereExperiment: React.FC = () => {
             aria-pressed={density === d}
             className={`rounded border px-2 py-0.5 text-[10px] transition-colors ${
               density === d
-                ? 'border-[var(--accent-color)] bg-[var(--accent-color)] text-white'
+                ? 'border-[var(--accent-color)] bg-[var(--accent-color)] text-[var(--accent-ink)]'
                 : 'border-[var(--border-color)] bg-[var(--bg-surface-secondary)] text-[var(--text-muted)]'
             }`}
           >

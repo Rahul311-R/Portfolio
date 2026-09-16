@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { useMotionEngine } from '../../engine/MotionEngine';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useMotionEngine } from '@/engine/MotionEngine';
 
 /**
  * A perspective "signal tunnel": rings of light recede toward a vanishing
@@ -110,7 +110,7 @@ export const WaveTunnel3D: React.FC<{ className?: string; rings?: number }> = ({
 
     let visible = false;
     const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
+      visible = entry?.isIntersecting ?? false;
     }, { threshold: 0.05 });
     io.observe(canvas);
     canvas.addEventListener('pointerdown', onDown);

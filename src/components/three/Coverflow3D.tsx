@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
-import type { Project } from '../../types/project';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { PROJECT_ARTWORK as ARTWORK } from '../../data/artwork';
+import type { Project } from '@/types/project';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { PROJECT_ARTWORK as ARTWORK } from '@/data/artwork';
 
 /**
  * Draggable 3D coverflow. Drag (or arrow-key) through the projects —
@@ -118,7 +118,7 @@ export const Coverflow3D: React.FC<{ projects: Project[] }> = ({ projects }) => 
   };
 
   if (projects.length === 0) return null;
-  const current = projects[active] ?? projects[0];
+  const current = projects[active] ?? projects[0]!;
 
   if (reducedMotion) {
     return (
@@ -218,7 +218,7 @@ export const Coverflow3D: React.FC<{ projects: Project[] }> = ({ projects }) => 
           </button>
           <NavLink
             to={`/projects/${current.slug}`}
-            className="ml-1 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-color)] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-white transition-opacity hover:opacity-90"
+            className="ml-1 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-color)] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[var(--accent-ink)] transition-opacity hover:opacity-90"
           >
             Open case study <ArrowUpRight className="h-4 w-4" />
           </NavLink>

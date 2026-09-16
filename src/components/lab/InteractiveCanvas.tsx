@@ -1,5 +1,5 @@
 import React from 'react';
-import { VirtualBoardDemo } from '../projects/VirtualBoardDemo';
+import { VirtualBoardDemo } from '@/components/projects/VirtualBoardDemo';
 
 export const InteractiveCanvas: React.FC = () => {
   return (

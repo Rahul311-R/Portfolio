@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ThemeToggle } from '../ui/ThemeToggle';
-import { MotionToggle } from '../ui/MotionToggle';
-import { GithubIcon, LinkedinIcon } from '../ui/SocialIcons';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { MotionToggle } from '@/components/ui/MotionToggle';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/SocialIcons';
 import { Mail, Command } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
-import { SOCIAL } from '../../data/social';
-import { lockScroll } from '../../lib/smoothScroll';
+import { useTheme } from '@/context/ThemeContext';
+import { SOCIAL } from '@/data/social';
+import { lockScroll } from '@/lib/smoothScroll';
 
 export interface MenuLink {
   name: string;
@@ -183,7 +183,7 @@ export const FullscreenMenu: React.FC<{
                   window.setTimeout(toggleCommandMenu, 350);
                 }}
                 type="button"
-                className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40 hover:text-[#EFE3C2] transition-colors"
+                className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/60 hover:text-[#EFE3C2] transition-colors"
                 title="Open command menu"
               >
                 <Command className="w-3.5 h-3.5" /> Search <span className="border border-white/20 rounded px-1">/</span>
@@ -192,7 +192,7 @@ export const FullscreenMenu: React.FC<{
               <ThemeToggle />
             </div>
 
-            <span className="font-mono text-[10px] tracking-[0.2em] text-white/35 tabular-nums">
+            <span className="font-mono text-[10px] tracking-[0.2em] text-white/60 tabular-nums">
               COIMBATORE {clock} IST
             </span>
           </motion.div>

@@ -1,4 +1,4 @@
-import type { Certification } from '../types/project';
+import type { Certification } from '@/types/project';
 
 export const RESUME_DATA = {
   name: 'RAHUL R',

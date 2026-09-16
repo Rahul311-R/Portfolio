@@ -19,7 +19,7 @@ import {
   PenTool,
   BookOpen
 } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 
 export const CommandMenu: React.FC = () => {
   const { commandMenuOpen, setCommandMenuOpen, theme, toggleTheme, reducedMotion, toggleReducedMotion } = useTheme();
@@ -116,6 +116,7 @@ export const CommandMenu: React.FC = () => {
           <button
             onClick={() => setCommandMenuOpen(false)}
             type="button"
+            aria-label="Close command menu"
             className="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1"
           >
             <X className="w-4 h-4" />

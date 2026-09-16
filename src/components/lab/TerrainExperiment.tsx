@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Mountain } from 'lucide-react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 /**
  * EXPERIMENT 07 — a wireframe terrain sheet drifting on sine waves.
@@ -193,7 +193,7 @@ export const TerrainExperiment: React.FC = () => {
             aria-pressed={storm === opt.value}
             className={`rounded border px-2 py-0.5 text-[10px] transition-colors ${
               storm === opt.value
-                ? 'border-[var(--accent-color)] bg-[var(--accent-color)] text-white'
+                ? 'border-[var(--accent-color)] bg-[var(--accent-color)] text-[var(--accent-ink)]'
                 : 'border-[var(--border-color)] bg-[var(--bg-surface-secondary)] text-[var(--text-muted)]'
             }`}
           >

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 interface TypewriterProps {
   phrases: string[];
@@ -29,7 +29,7 @@ export const Typewriter: React.FC<TypewriterProps> = ({
 
   useEffect(() => {
     if (reducedMotion || phrases.length === 0) return;
-    const current = phrases[phraseIndex % phrases.length];
+    const current = phrases[phraseIndex % phrases.length] ?? '';
     let delay = deleting ? deleteSpeed : typeSpeed;
     if (!deleting && charCount === current.length) delay = pause;
     if (deleting && charCount === 0) delay = 320;
@@ -47,7 +47,7 @@ export const Typewriter: React.FC<TypewriterProps> = ({
     return () => clearTimeout(timer);
   }, [charCount, deleting, phraseIndex, phrases, typeSpeed, deleteSpeed, pause, reducedMotion]);
 
-  const visible = phrases.length === 0 ? '' : phrases[phraseIndex % phrases.length].slice(0, charCount);
+  const visible = (phrases[phraseIndex % phrases.length] ?? '').slice(0, charCount);
 
   return (
     <span className={className}>

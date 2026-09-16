@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 interface Star {
   x: number;
@@ -49,7 +49,7 @@ export const WarpDivider: React.FC<{ className?: string; stars?: number }> = ({
     // Park the loop entirely while offscreen — no draw cost when scrolled away.
     const io = new IntersectionObserver(([entry]) => {
       const was = inView;
-      inView = entry.isIntersecting;
+      inView = entry?.isIntersecting ?? false;
       if (inView && !was && !reducedMotion) {
         cancelAnimationFrame(raf);
         raf = requestAnimationFrame(render);

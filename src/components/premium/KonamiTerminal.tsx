@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { SOCIAL } from '../../data/social';
+import { SOCIAL } from '@/data/social';
 
 const SEQ = [
   'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -23,7 +23,7 @@ export const KonamiTerminal: React.FC = () => {
         if (e.key === 'Escape') setOpen(false);
         return;
       }
-      const expected = SEQ[progress];
+      const expected = SEQ[progress] ?? SEQ[0]!;
       if (e.key.toLowerCase() === expected.toLowerCase()) {
         if (progress + 1 === SEQ.length) {
           setProgress(0);
@@ -32,7 +32,7 @@ export const KonamiTerminal: React.FC = () => {
           setProgress(progress + 1);
         }
       } else {
-        setProgress(e.key.toLowerCase() === SEQ[0].toLowerCase() ? 1 : 0);
+        setProgress(e.key.toLowerCase() === (SEQ[0] ?? '').toLowerCase() ? 1 : 0);
       }
     };
     window.addEventListener('keydown', onKey);

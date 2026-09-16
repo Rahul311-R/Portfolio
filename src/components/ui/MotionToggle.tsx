@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pause, Play } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
+import { useTheme } from '@/context/ThemeContext';
 
 export const MotionToggle: React.FC<{ className?: string }> = ({ className = '' }) => {
   const { reducedMotion, toggleReducedMotion } = useTheme();

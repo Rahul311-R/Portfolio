@@ -1,17 +1,18 @@
 import React from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 interface MarqueeProps {
   items: string[];
   label?: string;
+  className?: string;
 }
 
-export const Marquee: React.FC<MarqueeProps> = ({ items, label = 'Ticker' }) => {
+export const Marquee: React.FC<MarqueeProps> = ({ items, label = 'Ticker', className }) => {
   const reducedMotion = useReducedMotion();
   const row = [...items, ...items];
 
   return (
-    <div aria-label={label} className="relative overflow-hidden border-y border-[var(--border-color)] bg-[var(--bg-surface)]">
+    <div aria-label={label} className={`relative overflow-hidden border-y border-[var(--border-color)] bg-[var(--bg-surface)] ${className ?? ''}`}>
       <div
         className={reducedMotion ? 'flex flex-wrap gap-x-8 gap-y-2 px-5 py-4' : 'marquee-track flex w-max items-center gap-10 px-5 py-4'}
       >

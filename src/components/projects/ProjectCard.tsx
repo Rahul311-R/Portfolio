@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowUpRight, Award } from 'lucide-react';
-import type { Project } from '../../types/project';
-import { PROJECT_ARTWORK } from '../../data/artwork';
+import type { Project } from '@/types/project';
+import { PROJECT_ARTWORK } from '@/data/artwork';
 
 interface ProjectCardProps {
   project: Project;

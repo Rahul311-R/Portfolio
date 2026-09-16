@@ -12,7 +12,7 @@ export function useInView<T extends Element>(threshold = 0.05): [React.RefObject
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold });
+    const io = new IntersectionObserver(([entry]) => setInView(entry?.isIntersecting ?? false), { threshold });
     io.observe(node);
     return () => io.disconnect();
   }, [threshold]);

@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowLeft, Compass } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { Button } from '../components/ui/Button';
-import { PAGE_ARTWORK } from '../data/artwork';
-import { SignalBus } from '../components/transmission/SignalBus';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { Button } from '@/components/ui/Button';
+import { PAGE_ARTWORK } from '@/data/artwork';
+import { SignalBus } from '@/components/transmission/SignalBus';
 
 export const NotFound: React.FC = () => {
   return (
@@ -35,7 +35,7 @@ export const NotFound: React.FC = () => {
                 ['/resume', 'Resume'],
                 ['/contact', 'Contact'],
               ].map(([path, label]) => (
-                <NavLink key={path} to={path} className="hover:text-[var(--accent-color)]">
+                <NavLink key={path} to={path ?? '/'} className="hover:text-[var(--accent-color)]">
                   {label}
                 </NavLink>
               ))}

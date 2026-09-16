@@ -1,15 +1,15 @@
 import React from 'react';
 import { FileText, ExternalLink, Star, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { PageMasthead } from '../components/ui/PageMasthead';
-import { Magnetic, SplitText } from '../components/ui/Animations';
-import { FlipIn } from '../components/three/Scroll3D';
-import { READING_DATA } from '../data/human';
-import { TerminalPending } from '../components/ui/TerminalPending';
-import { ArtifactPlate } from '../components/transmission/ArtifactPlate';
-import { SECTION_ARTWORK } from '../data/artwork';
-import { SignalBus } from '../components/transmission/SignalBus';
-import { PAGE_ARTWORK } from '../data/artwork';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { PageMasthead } from '@/components/ui/PageMasthead';
+import { Magnetic, SplitText } from '@/components/ui/Animations';
+import { FlipIn } from '@/components/three/Scroll3D';
+import { READING_DATA } from '@/data/human';
+import { TerminalPending } from '@/components/ui/TerminalPending';
+import { ArtifactPlate } from '@/components/transmission/ArtifactPlate';
+import { SECTION_ARTWORK } from '@/data/artwork';
+import { SignalBus } from '@/components/transmission/SignalBus';
+import { PAGE_ARTWORK } from '@/data/artwork';
 
 const statusLabel = {
   reading: { label: 'Reading', color: 'text-[var(--accent-color)]', bg: 'bg-[var(--accent-glow)] border-[var(--accent-color)]/30' },

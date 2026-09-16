@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion, type MotionProps } from 'framer-motion';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { ParallaxLayer } from './Animations';
-import { ScrubHero } from '../three/Scroll3D';
-import { CarrierWave } from '../transmission/CarrierWave';
-import { SplitText } from '../premium/SplitText';
-import { PAGE_ARTWORK } from '../../data/artwork';
+import { ScrubHero } from '@/components/three/Scroll3D';
+import { CarrierWave } from '@/components/transmission/CarrierWave';
+import { SplitText } from '@/components/premium/SplitText';
+import { PAGE_ARTWORK } from '@/data/artwork';
 
 interface PageMastheadProps {
   number: string;

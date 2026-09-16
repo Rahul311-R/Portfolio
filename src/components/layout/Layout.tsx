@@ -3,11 +3,11 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { CommandMenu } from './CommandMenu';
 import { ScrollControls } from './ScrollControls';
-import { AmbientField } from '../ambient/AmbientField';
-import { ScrollProgress } from '../ambient/ScrollProgress';
-import { Cursor } from '../premium/Cursor';
-import { KonamiTerminal } from '../premium/KonamiTerminal';
-import { initSmoothScroll } from '../../lib/smoothScroll';
+import { AmbientField } from '@/components/ambient/AmbientField';
+import { ScrollProgress } from '@/components/ambient/ScrollProgress';
+import { Cursor } from '@/components/premium/Cursor';
+import { KonamiTerminal } from '@/components/premium/KonamiTerminal';
+import { initSmoothScroll } from '@/lib/smoothScroll';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Lenis inertial scrolling for the whole app; destroyed on unmount.

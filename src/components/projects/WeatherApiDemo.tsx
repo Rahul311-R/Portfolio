@@ -21,7 +21,7 @@ const MOCK_DATA: Record<string, MockWeather> = {
 export const WeatherApiDemo: React.FC = () => {
   const [query, setQuery] = useState('Coimbatore');
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<MockWeather | null>(MOCK_DATA.coimbatore);
+  const [result, setResult] = useState<MockWeather | null>(MOCK_DATA.coimbatore ?? null);
   const [error, setError] = useState<string | null>(null);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -73,7 +73,7 @@ export const WeatherApiDemo: React.FC = () => {
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-[var(--accent-color)] text-white text-xs font-mono rounded flex items-center gap-1.5 hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="px-4 py-2 bg-[var(--accent-color)] text-[var(--accent-ink)] text-xs font-mono rounded flex items-center gap-1.5 hover:opacity-90 transition-opacity disabled:opacity-50"
         >
           {loading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : 'Preview response'}
         </button>

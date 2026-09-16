@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { useMotionEngine } from '../../engine/MotionEngine';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { useMotionEngine } from '@/engine/MotionEngine';
 
 interface Satellite {
   ring: number;
@@ -84,6 +84,7 @@ export const PacketOrbit3D: React.FC<{ className?: string; perRing?: number }> =
       const order = [...satellites].sort((a, b) => a.phase - b.phase);
       for (let ring = 0; ring < 3; ring++) {
         const t = tilts[ring];
+        if (!t) continue;
         ctx.strokeStyle = `hsla(${ring === 0 ? 190 : ring === 1 ? 258 : 0}, 85%, 66%, 0.22)`;
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -105,6 +106,7 @@ export const PacketOrbit3D: React.FC<{ className?: string; perRing?: number }> =
 
       for (const sat of order) {
         const t = tilts[sat.ring];
+        if (!t) continue;
         const a = sat.phase;
         const x = Math.cos(a);
         const y0 = Math.sin(a);
@@ -175,7 +177,7 @@ export const PacketOrbit3D: React.FC<{ className?: string; perRing?: number }> =
 
     let visible = false;
     const io = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
+      visible = entry?.isIntersecting ?? false;
     }, { threshold: 0.05 });
     io.observe(canvas);
     canvas.addEventListener('pointerdown', onDown);

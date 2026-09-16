@@ -1,13 +1,13 @@
 import React from 'react';
 import { Mail, MapPin, Terminal } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { ContactForm } from '../components/forms/ContactForm';
-import { GithubIcon, LinkedinIcon } from '../components/ui/SocialIcons';
-import { PageMasthead } from '../components/ui/PageMasthead';
-import { SOCIAL } from '../data/social';
-import { PAGE_ARTWORK, SECTION_ARTWORK } from '../data/artwork';
-import { ArtifactPlate } from '../components/transmission/ArtifactPlate';
-import { PacketOrbit3D } from '../components/three/PacketOrbit3D';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { ContactForm } from '@/components/forms/ContactForm';
+import { GithubIcon, LinkedinIcon } from '@/components/ui/SocialIcons';
+import { PageMasthead } from '@/components/ui/PageMasthead';
+import { SOCIAL } from '@/data/social';
+import { PAGE_ARTWORK, SECTION_ARTWORK } from '@/data/artwork';
+import { ArtifactPlate } from '@/components/transmission/ArtifactPlate';
+import { PacketOrbit3D } from '@/components/three/PacketOrbit3D';
 
 export const Contact: React.FC = () => {
   return (

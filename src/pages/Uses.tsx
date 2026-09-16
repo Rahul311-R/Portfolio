@@ -1,13 +1,13 @@
 import React from 'react';
 import { Monitor, Terminal, Code, Database, Server, Palette, Link as LinkIcon } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { PageMasthead } from '../components/ui/PageMasthead';
-import { Magnetic, SplitText } from '../components/ui/Animations';
-import { FlipIn } from '../components/three/Scroll3D';
-import { TiltCard } from '../components/ui/TiltCard';
-import { USES_DATA } from '../data/human';
-import { PAGE_ARTWORK } from '../data/artwork';
-import { WaveTunnel3D } from '../components/three/WaveTunnel3D';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { PageMasthead } from '@/components/ui/PageMasthead';
+import { Magnetic, SplitText } from '@/components/ui/Animations';
+import { FlipIn } from '@/components/three/Scroll3D';
+import { TiltCard } from '@/components/ui/TiltCard';
+import { USES_DATA } from '@/data/human';
+import { PAGE_ARTWORK } from '@/data/artwork';
+import { WaveTunnel3D } from '@/components/three/WaveTunnel3D';
 
 export const Uses: React.FC = () => {
   return (

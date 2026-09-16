@@ -1,12 +1,12 @@
 import React from 'react';
 import { Zap, Music, BookOpen, Heart } from 'lucide-react';
-import { PageTransition } from '../components/ui/PageTransition';
-import { PageMasthead } from '../components/ui/PageMasthead';
-import { SplitText } from '../components/ui/Animations';
-import { FlipIn } from '../components/three/Scroll3D';
-import { NOW_DATA } from '../data/human';
-import { PAGE_ARTWORK } from '../data/artwork';
-import { SignalBus } from '../components/transmission/SignalBus';
+import { PageTransition } from '@/components/ui/PageTransition';
+import { PageMasthead } from '@/components/ui/PageMasthead';
+import { SplitText } from '@/components/ui/Animations';
+import { FlipIn } from '@/components/three/Scroll3D';
+import { NOW_DATA } from '@/data/human';
+import { PAGE_ARTWORK } from '@/data/artwork';
+import { SignalBus } from '@/components/transmission/SignalBus';
 
 export const Now: React.FC = () => {
   const now = new Date();
