@@ -96,15 +96,22 @@ jobs:
       - name: Build for production
         run: npm run build
 
-      # Playwright's chromium is the known-good CDP binary on runner images
-      # (the e2e job launches it every run); stock google-chrome never exposed
-      # its DevTools endpoint here. The runner resolves the bundled chromium
-      # through Playwright's own registry — no path globs to get wrong.
-      - name: Install Playwright chromium
-        run: npx playwright install chromium --with-deps
+      # Stock LHCI for CI: its chrome-launcher is battle-tested on Linux
+      # runners. The custom scripts/lighthouse.mjs remains `npm run lh` for
+      # Windows dev boxes, where chrome-launcher's temp-profile cleanup breaks.
+      # Point chrome-launcher at Playwright's chromium via its registry path
+      # (deterministic, no shell globs).
+      - name: Resolve Playwright chromium path
+        id: chromepath
+        run: |
+          node --input-type=module -e \
+            "import {chromium} from 'playwright-core'; console.log('::output name=path::' + chromium.executablePath())" \
+            >> "$GITHUB_OUTPUT"
 
-      - name: Run Lighthouse audits (mobile, gated)
-        run: npm run lh
+      - name: Run Lighthouse CI (mobile, gated)
+        run: npx lhci autorun
+        env:
+          CHROME_PATH: ${{ steps.chromepath.outputs.path }}
 
       - name: Upload Lighthouse reports
         if: always()
