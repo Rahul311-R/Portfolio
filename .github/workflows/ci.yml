@@ -96,10 +96,19 @@ jobs:
       - name: Build for production
         run: npm run build
 
+      # Playwright's chromium is the known-good CDP binary on runner images
+      # (the e2e job launches it every run); stock google-chrome never exposed
+      # its DevTools endpoint here.
+      - name: Install Playwright chromium
+        run: npx playwright install chromium --with-deps
+
       - name: Run Lighthouse audits (mobile, gated)
-        run: npm run lh
-        env:
-          CHROME_PATH: /usr/bin/google-chrome
+        run: |
+          CHROME_PATH="$(ls "$HOME/.cache/ms-playwright"/chromium-*/chrome-linux/chrome 2>/dev/null | head -n1 || true)"
+          [ -z "$CHROME_PATH" ] && CHROME_PATH=/usr/bin/google-chrome
+          export CHROME_PATH
+          echo "Using CHROME_PATH=$CHROME_PATH"
+          npm run lh
 
       - name: Upload Lighthouse reports
         if: always()

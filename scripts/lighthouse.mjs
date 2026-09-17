@@ -40,7 +40,10 @@ import { fileURLToPath } from 'node:url';
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const REPORT_DIR = path.join(root, '.lighthouseci');
 const PORT = 4173;
-const CDP_PORT = 9333;
+// Port 0 asks the OS for a free port, avoiding collisions with anything a
+// previous run left behind. The actual port is resolved from Chrome's CDP
+// endpoint before each audit (it is deterministic for --remote-debugging-port).
+const CDP_PORT = process.env.LH_CDP_PORT ? Number(process.env.LH_CDP_PORT) : 9333;
 const BASE = `http://localhost:${PORT}`;
 
 const GATES = {
@@ -131,8 +134,19 @@ try {
         '--disable-gpu',
         'about:blank',
       ],
-      { stdio: 'ignore' },
+      { stdio: ['ignore', 'ignore', 'pipe'] },
     );
+    // Chrome's startup failures (sandbox, crashpad, bad flags) only surface on
+    // stderr — capture it so a failed launch is diagnosable from the artifact.
+    let stderr = '';
+    proc.stderr?.on('data', (chunk) => {
+      stderr += String(chunk);
+      if (stderr.length > 4000) stderr = stderr.slice(-4000);
+    });
+    proc.on('exit', (code, signal) => {
+      if (code !== 0 && code !== null) crumb(`chrome exited code=${code}: ${stderr.trim().slice(0, 600)}`);
+      else if (code === null && signal) crumb(`chrome killed by ${signal}: ${stderr.trim().slice(0, 300)}`);
+    });
     return { proc, dir };
   };
 
