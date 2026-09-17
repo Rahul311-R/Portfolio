@@ -36,7 +36,7 @@ export const App: React.FC = () => {
   return (
     <ThemeProvider>
       <Preloader />
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <MotionEngineProvider>
         <ErrorBoundary>
           <PageMeta />

@@ -4,6 +4,10 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://vite.dev/config/
+// base: the default ('/') matches local dev, `vite preview` and Lighthouse.
+// The GitHub Pages deploy overrides it on the CLI (`npx vite build
+// --base=/Portfolio/`) so asset URLs carry the repo subpath; BrowserRouter
+// follows `import.meta.env.BASE_URL`, so routing needs no separate config.
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {

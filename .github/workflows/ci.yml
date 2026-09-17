@@ -101,3 +101,45 @@ jobs:
           name: lighthouse-reports
           path: .lighthouseci/
           retention-days: 14
+
+  # Publishes the production build to GitHub Pages — only after every gate
+  # above passed, and only for pushes to main (PRs verify but never deploy).
+  # Rebuilds with the repo-subpath base (`npm run build:pages`) because Pages
+  # serves this repo under /Portfolio/: the verify job's dist/ artifact has
+  # the default '/' base used by vite preview and Lighthouse.
+  # One-time repo setting: Pages → Source → "GitHub Actions".
+  deploy:
+    needs: [verify, e2e, lighthouse]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for GitHub Pages (repo-subpath base + SPA fallback)
+        run: npm run build:pages
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

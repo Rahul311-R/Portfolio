@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### GitHub Pages deploy (after CI passes)
+
+#### Added
+- **`deploy` job** in `.github/workflows/ci.yml`: runs only after `verify`, `e2e` and `lighthouse` all pass, and only on pushes to `main` — PRs verify but never deploy. Publishes `dist/` via the official `actions/configure-pages` + `upload-pages-artifact` + `deploy-pages` chain with a `github-pages` deployment environment; requires the one-time repo setting **Settings → Pages → Source → GitHub Actions**.
+- **Subpath-correct deploy build** — `npm run build:pages` = `vite build --base=/Portfolio/ && node scripts/generate-404.mjs`. Pages serves the repo under `/Portfolio/`, so the deploy build carries the repo-subpath base while local dev, `vite preview`, and Lighthouse keep the default `/`. The job rebuilds rather than reusing the verify artifact because the two builds intentionally differ.
+- **SPA deep-link fallback** — `scripts/generate-404.mjs` copies `index.html` to `dist/404.html`; React Router picks the route up client-side (`/projects/…` no longer 404s on Pages).
+- `BrowserRouter` now reads `basename` from `import.meta.env.BASE_URL`, so the router honors whichever base the build used (verified by grepping the compiled bundle and by the full e2e suite on the default build).
+- `og:image` / `twitter:image` upgraded from root-absolute to absolute `https://rahul311-r.github.io/Portfolio/og.png` — subpath-relative previews were broken for scrapers, and OG images must be absolute.
+
 ### GitHub Actions CI pipeline
 
 #### Added

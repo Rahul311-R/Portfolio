@@ -83,6 +83,19 @@ before/after story of the bundle-graph optimization: **[docs/PERFORMANCE.md](doc
 | Responsive | Playwright | no horizontal scroll at 360/390px, 44px touch-target floor, Pixel 7 device profile |
 | Lighthouse | custom runner (`scripts/lighthouse.mjs`) | mobile-emulated audits of `/` (3-run median), `/projects`, `/lab` with CI score gates; JSON + HTML reports in `.lighthouseci/` |
 
+### 8. Deployment (GitHub Pages)
+
+Every push to `main` runs the three CI jobs above and — only if all of them pass — publishes the site to **GitHub Pages** (see the `deploy` environment on any workflow run for the live URL).
+
+The deploy build runs `npm run build:pages`, which compiles with the `/Portfolio/` base and copies `index.html` to `404.html` so deep links like `/projects/weather-prediction-gui` resolve client-side instead of 404ing.
+
+One-time repo setting: **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+
+Manual local equivalent of the deploy build:
+```bash
+npm run build:pages
+```
+
 ---
 
 ## ⚡ Performance
