@@ -56,6 +56,13 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install chromium --with-deps
 
+      # The webServer config runs `vite preview`, which serves dist/ — so the
+      # suite has something to test, dist/ must exist first. (Missing build
+      # here is why the first pipeline runs failed: preview refuses to start,
+      # and every render-dependent test timed out on a dead server.)
+      - name: Build for production
+        run: npm run build
+
       - name: Run e2e suite
         run: npm run e2e
 

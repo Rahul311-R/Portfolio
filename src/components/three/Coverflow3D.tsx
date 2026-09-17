@@ -185,7 +185,7 @@ export const Coverflow3D: React.FC<{ projects: Project[] }> = ({ projects }) => 
       </div>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-2" role="tablist" aria-label="Choose project">
+        <div className="group flex items-center gap-1" role="tablist" aria-label="Choose project">
           {projects.map((p, i) => (
             <button
               key={p.id}
@@ -193,10 +193,18 @@ export const Coverflow3D: React.FC<{ projects: Project[] }> = ({ projects }) => 
               aria-selected={i === active}
               aria-label={`Show ${p.title}`}
               onClick={() => goTo(i)}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === active ? 'w-8 bg-[var(--accent-color)]' : 'w-2 bg-[var(--border-color)] hover:bg-[var(--text-muted)]'
-              }`}
-            />
+              className="grid h-6 w-6 place-items-center"
+            >
+              {/* Visual dot lives on an inner span so the button itself meets
+                  the 24px minimum target-size (Lighthouse/axe WCAG 2.5.8). */}
+              <span
+                className={`block rounded-full transition-all duration-300 ${
+                  i === active
+                    ? 'h-2 w-8 bg-[var(--accent-color)]'
+                    : 'h-2 w-2 bg-[var(--border-color)] group-hover:bg-[var(--text-muted)]'
+                }`}
+              />
+            </button>
           ))}
         </div>
         <div className="flex items-center gap-2">

@@ -26,7 +26,9 @@ const RULES = [
 
 async function scan(page: import('@playwright/test').Page, route: string) {
   await page.goto(route, { waitUntil: 'domcontentloaded' });
-  await page.waitForLoadState('networkidle').catch(() => {});
+  // No networkidle here: on CI's 2-core runners it can burn the entire test
+  // timeout before the heading wait below gets any budget. The masthead wait
+  // plus a settle is what axe actually needs.
   await page.getByRole('heading').first().waitFor({ state: 'visible', timeout: 20_000 });
   await page.waitForTimeout(250);
   return new AxeBuilder({ page }).withRules(RULES).analyze();

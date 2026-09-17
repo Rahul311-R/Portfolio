@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **CI (e2e):** the e2e job never built `dist/`, so `vite preview` refused to start
+  and every render-dependent test timed out on a dead server — the job now runs
+  `npm run build` before the suite, and CI workers are pinned to 1 (with a 90s
+  per-test budget) because 2-core GitHub runners starve under Playwright's
+  default parallelism. The axe `scan()` helper no longer burns its timeout on
+  `networkidle` before waiting for the masthead.
+- **CI (lighthouse):** hardened the runner for CI — a fresh headless Chrome per
+  audit (one dead browser can no longer cascade-fail every remaining run),
+  `forceFlushProtocol` against the known slow-runner protocol race, breadcrumbs
+  written to the report artifact even on hard crashes, and a dynamic CDP port to
+  avoid collisions. Root cause of the earlier silent 60s deaths is now
+  observable from the artifact if it ever recurs.
+- **Gates:** the perf-score gate is now a catastrophic tripwire (0.65) because
+  the throttled score swings ±10 points with machine load even for a healthy
+  build; a new deterministic home-transfer gate (≤ 480KB, vs ~336KB measured)
+  is the precise hardware-independent bundle regression catch (+98KB when the
+  eager-charts bug returns).
+- **a11y:** `/projects` carousel dots were 8px buttons (WCAG 2.5.8 target-size,
+  Lighthouse 0.96 on that route) — now real 24px buttons with the visual dot as
+  an inner span; axe suite stays green.
+
 ### GitHub Pages deploy (after CI passes)
 
 #### Added
