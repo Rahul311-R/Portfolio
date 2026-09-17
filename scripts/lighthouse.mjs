@@ -252,7 +252,7 @@ try {
       console.log(`perf ${(s.scores.performance * 100).toFixed(0)} a11y ${(s.scores.accessibility * 100).toFixed(0)}`);
     } catch (err) {
       console.log('FAILED');
-      ghError(`home run ${i} (${route}): ${String(err?.stack || err).slice(0, 400)}`);
+      ghError(`home run ${i}: ${String(err?.stack || err).slice(0, 400)}`);
       crumb(`home run ${i} FAILED: ${String(err).slice(0, 400)}`);
       routeErrors.push(`/ run ${i}: ${err?.message ?? err}`);
     }
@@ -285,6 +285,16 @@ try {
   }
 
   // 3. Gates.
+  // A run with zero completed home audits has no medians to gate: bail out
+  // loudly instead of evaluating gates against undefined values (which would
+  // compare NaN < gate → false and "pass" vacuously).
+  if (!homeRuns.length) {
+    const msg = 'no home audits completed — every run failed';
+    ghError(msg);
+    console.error(`✖ ${msg}`);
+    writeCrumbs();
+    process.exit(1);
+  }
   console.log('\n=== Scores (mobile emulation) ===');
   const row = (label, s) =>
     console.log(
