@@ -45,6 +45,26 @@ const writeCrumbs = () => {
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const REPORT_DIR = path.join(root, '.lighthouseci');
+
+// Full stdout/stderr mirror inside the report artifact: CI log files are
+// private, ::error annotations can be lost by process.exit racing stdout
+// flush, but the artifact is always uploaded (`if: always()`). Every run's
+// complete console output lands in .lighthouseci/runner-output.log.
+mkdirSync(REPORT_DIR, { recursive: true });
+const TEE = path.join(REPORT_DIR, 'runner-output.log');
+const origWrite = process.stdout.write.bind(process.stdout);
+const origErrWrite = process.stderr.write.bind(process.stderr);
+const tee = (orig, chunk) => {
+  try {
+    appendFileSync(TEE, typeof chunk === 'string' ? chunk : String(chunk));
+  } catch {
+    /* best effort */
+  }
+  return orig(chunk);
+};
+process.stdout.write = (chunk, ...rest) => tee(origWrite, chunk, ...rest);
+process.stderr.write = (chunk, ...rest) => tee(origErrWrite, chunk, ...rest);
+
 const PORT = 4173;
 // Port 0 asks the OS for a free port, avoiding collisions with anything a
 // previous run left behind. The actual port is resolved from Chrome's CDP
@@ -81,13 +101,15 @@ process.on('uncaughtException', (err) => {
   crumb(`UNCAUGHT: ${String(err?.stack || err).slice(0, 800)}`);
   ghError(`lighthouse runner uncaught: ${String(err?.stack || err).slice(0, 500)}`);
   writeCrumbs();
-  process.exit(2);
+  // process.exit() can race async stdout flushes (losing ::error lines);
+  // exitCode lets Node drain streams first. The tee'd log is in the artifact.
+  process.exitCode = 2;
 });
 process.on('unhandledRejection', (err) => {
   crumb(`UNHANDLED REJECTION: ${String(err?.stack || err).slice(0, 800)}`);
   ghError(`lighthouse runner unhandled rejection: ${String(err?.stack || err).slice(0, 500)}`);
   writeCrumbs();
-  process.exit(2);
+  process.exitCode = 2;
 });
 
 async function waitFor(url, label, tries = 80) {
@@ -293,11 +315,9 @@ try {
   // loudly instead of evaluating gates against undefined values (which would
   // compare NaN < gate → false and "pass" vacuously).
   if (!homeRuns.length) {
-    const msg = 'no home audits completed — every run failed';
-    ghError(msg);
-    console.error(`✖ ${msg}`);
-    writeCrumbs();
-    process.exit(1);
+    // Throwing (not process.exit) so the finally-block cleanup runs and the
+    // outer catch reports it through the normal path.
+    throw new Error('no home audits completed — every run failed');
   }
   console.log('\n=== Scores (mobile emulation) ===');
   const row = (label, s) =>
@@ -373,5 +393,7 @@ try {
     preview.kill();
   }
   await sleep(400);
-  process.exit(exitCode);
+  // Not process.exit(): it can truncate async stdout flushes, losing ::error
+  // annotations. exitCode lets Node drain streams and exit naturally.
+  process.exitCode = exitCode;
 }
