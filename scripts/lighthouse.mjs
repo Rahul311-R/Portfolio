@@ -71,6 +71,25 @@ const EXTRA_ROUTES = ['/projects', '/lab'];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// CI log files are private, but `::error::` workflow commands and check-run
+// annotations are PUBLIC. Emit every failure through both channels so a red
+// Lighthouse job is always diagnosable from the API without repo access.
+const ghError = (msg) => {
+  process.stdout.write(`::error::${String(msg).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A')}\n`);
+};
+process.on('uncaughtException', (err) => {
+  crumb(`UNCAUGHT: ${String(err?.stack || err).slice(0, 800)}`);
+  ghError(`lighthouse runner uncaught: ${String(err?.stack || err).slice(0, 500)}`);
+  writeCrumbs();
+  process.exit(2);
+});
+process.on('unhandledRejection', (err) => {
+  crumb(`UNHANDLED REJECTION: ${String(err?.stack || err).slice(0, 800)}`);
+  ghError(`lighthouse runner unhandled rejection: ${String(err?.stack || err).slice(0, 500)}`);
+  writeCrumbs();
+  process.exit(2);
+});
+
 async function waitFor(url, label, tries = 80) {
   for (let i = 0; i < tries; i++) {
     try {
@@ -233,6 +252,7 @@ try {
       console.log(`perf ${(s.scores.performance * 100).toFixed(0)} a11y ${(s.scores.accessibility * 100).toFixed(0)}`);
     } catch (err) {
       console.log('FAILED');
+      ghError(`home run ${i} (${route}): ${String(err?.stack || err).slice(0, 400)}`);
       crumb(`home run ${i} FAILED: ${String(err).slice(0, 400)}`);
       routeErrors.push(`/ run ${i}: ${err?.message ?? err}`);
     }
@@ -258,6 +278,7 @@ try {
       console.log(`perf ${(extra[route].scores.performance * 100).toFixed(0)}`);
     } catch (err) {
       console.log('FAILED');
+      ghError(`${route}: ${String(err?.stack || err).slice(0, 400)}`);
       crumb(`${route} FAILED: ${String(err).slice(0, 400)}`);
       routeErrors.push(`${route}: ${err?.message ?? err}`);
     }
@@ -325,6 +346,7 @@ try {
   }
 } catch (err) {
   console.error(err);
+  ghError(`lighthouse runner fatal: ${String(err?.stack || err).slice(0, 500)}`);
   crumb(`FATAL: ${String(err).slice(0, 600)}`);
   writeCrumbs();
   exitCode = 1;
