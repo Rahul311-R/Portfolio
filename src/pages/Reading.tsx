@@ -13,12 +13,12 @@ import { PAGE_ARTWORK } from '@/data/artwork';
 
 const statusLabel = {
   reading: { label: 'Reading', color: 'text-[var(--accent-color)]', bg: 'bg-[var(--accent-glow)] border-[var(--accent-color)]/30' },
-  're-reading': { label: 'Re-reading', color: 'text-cyan-400', bg: 'bg-cyan-400/20 border-cyan-400/30' },
-  finished: { label: 'Finished', color: 'text-emerald-400', bg: 'bg-emerald-400/20 border-emerald-400/30' },
+  're-reading': { label: 'Re-reading', color: 'text-[var(--tone-cyan)]', bg: 'bg-cyan-400/20 border-cyan-400/30' },
+  finished: { label: 'Finished', color: 'text-[var(--tone-emerald)]', bg: 'bg-emerald-400/20 border-emerald-400/30' },
   queue: { label: 'Queue', color: 'text-[var(--text-muted)]', bg: 'bg-[var(--bg-surface-secondary)] border-[var(--border-color)]' },
-  studied: { label: 'Studied', color: 'text-purple-400', bg: 'bg-purple-400/20 border-purple-400/30' },
-  read: { label: 'Read', color: 'text-emerald-400', bg: 'bg-emerald-400/20 border-emerald-400/30' },
-  skimmed: { label: 'Skimmed', color: 'text-amber-400', bg: 'bg-amber-400/20 border-amber-400/30' },
+  studied: { label: 'Studied', color: 'text-[var(--tone-purple)]', bg: 'bg-purple-400/20 border-purple-400/30' },
+  read: { label: 'Read', color: 'text-[var(--tone-emerald)]', bg: 'bg-emerald-400/20 border-emerald-400/30' },
+  skimmed: { label: 'Skimmed', color: 'text-[var(--tone-amber)]', bg: 'bg-amber-400/20 border-amber-400/30' },
 };
 
 export const Reading: React.FC = () => {
@@ -40,7 +40,7 @@ export const Reading: React.FC = () => {
 
         <FlipIn as="section" delay={100} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--text-primary)]">{totalBooks}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Books tracked</div></div>
-          <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-emerald-400">{finishedBooks}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Finished</div></div>
+          <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--tone-emerald)]">{finishedBooks}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">Finished</div></div>
           <div className="studio-panel p-4 rounded-xl text-center"><span className="font-display text-3xl font-bold text-[var(--accent-color)]">{readingBooks}</span><div className="text-[var(--text-muted)] font-mono text-xs uppercase">In progress</div></div>
         </FlipIn>
 
@@ -63,7 +63,7 @@ export const Reading: React.FC = () => {
                         <span className={`px-2.5 py-1 font-mono text-[10px] uppercase rounded ${s.bg} ${s.color}`}>{s.label}</span>
                         {book.rating && (
                           <div className="flex items-center gap-1" aria-label={`Rating ${book.rating}/5`}>
-                            {[1, 2, 3, 4, 5].map((n) => <Star key={n} className={`h-3.5 w-3.5 ${n <= book.rating ? 'fill-current text-amber-400' : 'text-[var(--border-color)]'} `} />)}
+                            {[1, 2, 3, 4, 5].map((n) => <Star key={n} className={`h-3.5 w-3.5 ${n <= book.rating ? 'fill-current text-[var(--tone-amber)]' : 'text-[var(--border-color)]'} `} />)}
                           </div>
                         )}
                       </div>
@@ -76,7 +76,7 @@ export const Reading: React.FC = () => {
                           <p className="mt-1 text-[11px] font-mono text-[var(--text-muted)]">{progress}% through</p>
                         </div>
                     ) : book.status === 'finished' ? (
-                      <CheckCircle2 className="h-6 w-6 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="h-6 w-6 text-[var(--tone-emerald)] shrink-0" />
                     ) : (
                       <div className="shrink-0" />
                     )}

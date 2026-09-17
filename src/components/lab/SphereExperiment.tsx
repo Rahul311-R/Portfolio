@@ -8,11 +8,11 @@ export const SphereExperiment: React.FC = () => {
   return (
     <div className="space-y-4 rounded-lg border border-[var(--border-color)] bg-[var(--bg-surface)] p-5">
       <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
-        <h3 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[var(--accent-color)]">
+        <h2 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-[var(--accent-color)]">
           <Rotate3d className="h-4 w-4" />
           EXPERIMENT 06 // DRAGGABLE 3D PARTICLE SPHERE
-        </h3>
-        <span className="rounded border border-rose-500/30 bg-rose-500/10 px-2 py-0.5 font-mono text-[10px] text-rose-400">
+        </h2>
+        <span className="rounded border border-rose-500/30 bg-rose-500/10 px-2 py-0.5 font-mono text-[10px] text-[var(--tone-rose)]">
           Experimental / Personal Work
         </span>
       </div>

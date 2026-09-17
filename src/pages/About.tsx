@@ -87,9 +87,9 @@ export const About: React.FC = () => {
                     <h3 className="font-display text-lg font-bold text-[var(--text-primary)]">{item.title}</h3>
                     <span className={`px-2 py-0.5 text-[10px] font-mono uppercase rounded ${
                       item.tone === 'origin' ? 'bg-blue-500/20 border-blue-500/30 text-blue-400' :
-                      item.tone === 'growth' ? 'bg-emerald-500/20 border-emerald-500/30 text-emerald-400' :
-                      item.tone === 'acceleration' ? 'bg-purple-500/20 border-purple-500/30 text-purple-400' :
-                      item.tone === 'synthesis' ? 'bg-amber-500/20 border-amber-500/30 text-amber-400' :
+                      item.tone === 'growth' ? 'bg-emerald-500/20 border-emerald-500/30 text-[var(--tone-emerald)]' :
+                      item.tone === 'acceleration' ? 'bg-purple-500/20 border-purple-500/30 text-[var(--tone-purple)]' :
+                      item.tone === 'synthesis' ? 'bg-amber-500/20 border-amber-500/30 text-[var(--tone-amber)]' :
                       'bg-[var(--accent-color)]/20 border-[var(--accent-color)]/30 text-[var(--accent-color)]'
                     }`}>{item.tone}</span>
                   </div>

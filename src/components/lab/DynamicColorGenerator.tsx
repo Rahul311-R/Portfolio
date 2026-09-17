@@ -45,10 +45,10 @@ export const DynamicColorGenerator: React.FC = () => {
   return (
     <div className="bg-[var(--bg-surface)] border border-[var(--border-color)] p-5 rounded-lg space-y-4 font-mono">
       <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
-        <h3 className="text-xs text-[var(--accent-color)] uppercase font-bold tracking-wider">
+        <h2 className="text-xs text-[var(--accent-color)] uppercase font-bold tracking-wider">
           EXPERIMENT 04 // ALGORITHMIC PALETTE HARMONIZER
-        </h3>
-        <span className="px-2 py-0.5 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-[10px] rounded">
+        </h2>
+        <span className="px-2 py-0.5 bg-rose-500/10 border border-rose-500/30 text-[var(--tone-rose)] text-[10px] rounded">
           Experimental / Personal Work
         </span>
       </div>
@@ -86,7 +86,7 @@ export const DynamicColorGenerator: React.FC = () => {
               <div className="text-xs font-bold text-[var(--text-primary)] flex items-center justify-between">
                 <span>{hex}</span>
                 {copied === hex ? (
-                  <Check className="w-3 h-3 text-emerald-400" />
+                  <Check className="w-3 h-3 text-[var(--tone-emerald)]" />
                 ) : (
                   <Copy className="w-3 h-3 text-[var(--text-muted)] opacity-0 group-hover:opacity-100 transition-opacity" />
                 )}

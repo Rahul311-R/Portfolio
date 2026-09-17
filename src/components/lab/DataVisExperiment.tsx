@@ -36,11 +36,11 @@ export const DataVisExperiment: React.FC = () => {
       <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
         <div className="flex items-center gap-2">
           <Activity className="w-4 h-4 text-[var(--accent-color)]" />
-          <h3 className="text-xs text-[var(--accent-color)] uppercase font-bold tracking-wider">
+          <h2 className="text-xs text-[var(--accent-color)] uppercase font-bold tracking-wider">
             EXPERIMENT 05 // GENERATIVE DATA SKETCH
-          </h3>
+          </h2>
         </div>
-        <span className="px-2 py-0.5 bg-rose-500/10 border border-rose-500/30 text-rose-400 text-[10px] rounded">
+        <span className="px-2 py-0.5 bg-rose-500/10 border border-rose-500/30 text-[var(--tone-rose)] text-[10px] rounded">
           Experimental / Personal Work
         </span>
       </div>
@@ -52,7 +52,7 @@ export const DataVisExperiment: React.FC = () => {
 
       <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
         <div className="flex items-center gap-2">
-          <Radio className="w-3.5 h-3.5 text-emerald-400" />
+          <Radio className="w-3.5 h-3.5 text-[var(--tone-emerald)]" />
           <span>Synthetic wave · redraws every 2s</span>
         </div>
         <div className="text-[10px]">12-POINT WINDOW</div>

@@ -93,7 +93,7 @@ export const Writing: React.FC = () => {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="px-2 py-0.5 bg-amber-400/20 border border-amber-400/40 text-amber-300 font-mono text-[10px] uppercase rounded">Draft</span>
-                        <Loader2 className="h-4 w-4 text-amber-400 animate-spin" aria-hidden="true" />
+                        <Loader2 className="h-4 w-4 text-[var(--tone-amber)] animate-spin" aria-hidden="true" />
                       </div>
                       <h3 className="mt-2 font-display text-lg font-bold text-[var(--text-primary)]">{post.title}</h3>
                       <p className="mt-2 text-sm text-[var(--text-muted)] line-clamp-2">{post.excerpt}</p>

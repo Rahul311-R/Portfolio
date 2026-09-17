@@ -81,7 +81,7 @@ export const WeatherApiDemo: React.FC = () => {
 
       {/* Result Display */}
       {error && (
-        <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 rounded text-xs font-mono flex items-center gap-2">
+        <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-[var(--tone-rose)] rounded text-xs font-mono flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
@@ -93,7 +93,7 @@ export const WeatherApiDemo: React.FC = () => {
             <span className="text-[var(--accent-color)] font-bold">
               Sample response / city={result.city}
             </span>
-            <span className="text-emerald-400 text-[10px] flex items-center gap-1">
+            <span className="text-[var(--tone-emerald)] text-[10px] flex items-center gap-1">
               <CheckCircle2 className="w-3 h-3" /> SAMPLE DATA
             </span>
           </div>

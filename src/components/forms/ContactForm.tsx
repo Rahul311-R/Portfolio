@@ -32,7 +32,7 @@ export const ContactForm: React.FC = () => {
 
       {submitted ? (
         <div className="p-8 bg-emerald-500/10 border border-emerald-500/30 rounded text-center space-y-3">
-          <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
+          <CheckCircle2 className="w-12 h-12 text-[var(--tone-emerald)] mx-auto" />
           <h3 className="text-xl font-bold font-display text-[var(--text-primary)]">
             FORM VALIDATED
           </h3>
@@ -67,7 +67,7 @@ export const ContactForm: React.FC = () => {
               }`}
             />
             {errors.name && (
-              <p id="name-error" className="text-xs font-mono text-rose-400 flex items-center gap-1">
+              <p id="name-error" className="text-xs font-mono text-[var(--tone-rose)] flex items-center gap-1">
                 <AlertCircle className="w-3.5 h-3.5" />
                 <span>{errors.name.message}</span>
               </p>
@@ -93,7 +93,7 @@ export const ContactForm: React.FC = () => {
               }`}
             />
             {errors.email && (
-              <p id="email-error" className="text-xs font-mono text-rose-400 flex items-center gap-1">
+              <p id="email-error" className="text-xs font-mono text-[var(--tone-rose)] flex items-center gap-1">
                 <AlertCircle className="w-3.5 h-3.5" />
                 <span>{errors.email.message}</span>
               </p>
@@ -119,7 +119,7 @@ export const ContactForm: React.FC = () => {
               }`}
             />
             {errors.message && (
-              <p id="message-error" className="text-xs font-mono text-rose-400 flex items-center gap-1">
+              <p id="message-error" className="text-xs font-mono text-[var(--tone-rose)] flex items-center gap-1">
                 <AlertCircle className="w-3.5 h-3.5" />
                 <span>{errors.message.message}</span>
               </p>

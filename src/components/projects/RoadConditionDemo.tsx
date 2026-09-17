@@ -13,7 +13,7 @@ export const RoadConditionDemo: React.FC = () => {
           <Camera className="w-5 h-5 text-[var(--accent-color)]" />
           <h3 className="font-display text-base font-bold text-[var(--text-primary)]">CONCEPTUAL SYSTEM WALKTHROUGH</h3>
         </div>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold uppercase rounded text-[11px]">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-[var(--tone-amber)] font-bold uppercase rounded text-[11px]">
           <Award className="w-4 h-4" /> PATENT PUBLISHED
         </span>
       </div>

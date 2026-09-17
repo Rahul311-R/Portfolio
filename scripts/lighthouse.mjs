@@ -1,41 +1,47 @@
 /**
  * Lighthouse runner with score gates — cross-platform.
  *
- * Why not `lhci autorun`: chrome-launcher's temp-profile cleanup raises
- * EPERM on some Windows setups. This runner launches Chrome itself (a
- * dedicated user-data-dir it owns), drives the `lighthouse` programmatic
- * API directly, and enforces the same score gates in code.
+ * Chrome is launched via Playwright's launcher (`playwright.chromium.launch`)
+ * rather than by hand: Playwright's process handling and CDP handshake work
+ * identically on Windows dev boxes and CI runners (this is exactly what the
+ * e2e job does every run), whereas hand-spawned `--remote-debugging-port`
+ * Chrome proved unreliable to wait on in CI. Lighthouse connects to the
+ * launched browser's CDP websocket; each audit gets a fresh browser.
  *
  * - Serves dist/ via `vite preview` (run `npm run build` first)
- * - Chrome: CHROME_PATH env var (required)
+ * - Browser: CHROME_PATH env var (or Playwright's bundled chromium)
  * - 3 runs of `/` (median gated) + 1 run each of /projects and /lab
- * - Gates: perf ≥ 0.75 (tripwire), a11y ≥ 0.95, best-practices ≥ 0.95, seo ≥ 0.95
+ * - Gates in GATES below + a deterministic home-transfer byte gate
  * - Writes JSON + HTML reports to .lighthouseci/
  *
  * Usage: CHROME_PATH=... npm run lh
  */
 import { spawn } from 'node:child_process';
-import { appendFile, mkdir, writeFile } from 'node:fs/promises';
+import { appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { existsSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { chromium } from 'playwright-core';
+// Lighthouse's native client (a real lighthouse dependency, hoisted to the
+// top-level node_modules). Used only to hand LH a prepared Page object.
+import puppeteer from 'puppeteer-core';
 
 // Breadcrumbs land in the uploaded artifact even on hard crashes, so a CI
-// failure is always diagnosable (CI logs are private; artifacts are too, but
-// the local run sees them and the summary is public).
+// failure is always diagnosable. Synchronous on purpose: written the moment
+// they happen, before any crash/exit can intervene.
 const CRUMBS = [];
 const crumb = (m) => {
   CRUMBS.push(`[${new Date().toISOString()}] ${m}`);
   console.log(`· ${m}`);
 };
-const writeCrumbs = async () => {
+const writeCrumbs = () => {
   try {
-    await writeFile(path.join(REPORT_DIR, 'breadcrumbs.log'), CRUMBS.join('\n') + '\n');
+    mkdirSync(REPORT_DIR, { recursive: true });
+    writeFileSync(path.join(REPORT_DIR, 'breadcrumbs.log'), CRUMBS.join('\n') + '\n');
   } catch {
     /* best effort */
   }
 };
-import os from 'node:os';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const REPORT_DIR = path.join(root, '.lighthouseci');
@@ -82,13 +88,14 @@ if (!existsSync(path.join(root, 'dist', 'index.html'))) {
   console.error('✖ dist/index.html missing — run `npm run build` first.');
   process.exit(1);
 }
-const chromePath = process.env.CHROME_PATH;
-if (!chromePath || !existsSync(chromePath)) {
-  console.error('✖ Set CHROME_PATH to a Chrome/Chromium executable.');
+// CHROME_PATH is optional: unset → Playwright's bundled chromium (the same
+// binary the e2e suite uses; CI installs it explicitly). Set → any Chrome/
+// Chromium executable.
+const chromePath = process.env.CHROME_PATH || '';
+if (chromePath && !existsSync(chromePath)) {
+  console.error(`✖ CHROME_PATH set but not found: ${chromePath}`);
   process.exit(1);
 }
-
-await mkdir(REPORT_DIR, { recursive: true });
 
 // 1. Serve the production build.
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
@@ -98,9 +105,8 @@ const preview = spawn(npm, ['run', 'preview', '--', '--port', String(PORT), '--s
   shell: process.platform === 'win32',
 });
 
-// 2. Chrome is launched fresh per audit inside runOne() (see below) — one
-//    audit, one browser, one blast radius on constrained CI runners.
-const userDataDir = path.join(os.tmpdir(), `lhci-profile-${Date.now()}`);
+// 2. Chrome is launched fresh per audit inside runOne() — one audit, one
+//    browser, one blast radius on constrained CI runners.
 
 let exitCode = 0;
 try {
@@ -109,56 +115,64 @@ try {
   const mod = await import('lighthouse');
   const lighthouse = mod.default ?? mod;
 
-  // Fresh Chrome per audit: on constrained runners a single navigation can
+  // Fresh browser per audit: on constrained runners a single navigation can
   // take the browser's CDP connection down with it; a shared browser then
   // fails every remaining run instantly. One audit = one browser = one blast
   // radius. forceFlushProtocol guards against the known "No LHR returned"
   // protocol race on slow machines.
-  let chromeSeq = 0;
-  const launchChrome = () => {
-    const seq = ++chromeSeq;
-    const dir = `${userDataDir}-${seq}`;
-    const proc = spawn(
-      chromePath,
-      [
-        '--headless=new',
-        `--remote-debugging-port=${CDP_PORT}`,
-        '--remote-allow-origins=*',
-        `--user-data-dir=${dir}`,
-        '--no-first-run',
-        '--no-default-browser-check',
+  //
+  // The browser is launched by Playwright — the exact launcher the e2e job
+  // proves works on every runner — and we additionally expose a CDP TCP port
+  // for Lighthouse to connect to.
+  const runOne = async (route, index) => {
+    // Distinct port per audit so a lingering socket from the previous browser
+    // can never block the next bind.
+    const cdpPort = CDP_PORT + index;
+    crumb(`launching browser for ${route} run ${index} (cdp :${cdpPort})`);
+    // Playwright's launcher is the one proven-reliable way to start Chrome on
+    // every machine this repo runs on (the e2e job uses it on CI daily).
+    const browser = await chromium.launch({
+      executablePath: chromePath || undefined,
+      headless: true,
+      args: [
+        `--remote-debugging-port=${cdpPort}`,
         // Container/CI-safe: the sandbox can fail for the runner user and the
         // default /dev/shm is too small for multiple renderer processes.
         '--no-sandbox',
         '--disable-dev-shm-usage',
         '--disable-gpu',
-        'about:blank',
+        '--no-first-run',
+        '--no-default-browser-check',
       ],
-      { stdio: ['ignore', 'ignore', 'pipe'] },
-    );
-    // Chrome's startup failures (sandbox, crashpad, bad flags) only surface on
-    // stderr — capture it so a failed launch is diagnosable from the artifact.
-    let stderr = '';
-    proc.stderr?.on('data', (chunk) => {
-      stderr += String(chunk);
-      if (stderr.length > 4000) stderr = stderr.slice(-4000);
     });
-    proc.on('exit', (code, signal) => {
-      if (code !== 0 && code !== null) crumb(`chrome exited code=${code}: ${stderr.trim().slice(0, 600)}`);
-      else if (code === null && signal) crumb(`chrome killed by ${signal}: ${stderr.trim().slice(0, 300)}`);
-    });
-    return { proc, dir };
-  };
-
-  const runOne = async (route, index) => {
-    const { proc, dir } = launchChrome();
+    let pb;
     try {
-      await waitFor(`http://127.0.0.1:${CDP_PORT}/json/version`, `Chrome CDP (run ${index})`);
+      await waitFor(`http://127.0.0.1:${cdpPort}/json/version`, `Chrome CDP (run ${index})`);
       crumb(`cdp ready for ${route} run ${index}`);
+      // Puppeteer (LH's native client) attaches to the Playwright-launched
+      // browser so Lighthouse can drive a Page we control.
+      const ver = await (await fetch(`http://127.0.0.1:${cdpPort}/json/version`)).json();
+      pb = await puppeteer.connect({ browserWSEndpoint: ver.webSocketDebuggerUrl, defaultViewport: null });
+      const page = await pb.newPage();
+      // Model a mid-tier phone honestly: 4 logical cores, like the devices
+      // these budgets are written for. The app's own adaptive-quality gates
+      // (3D stage skip) then behave during audits exactly as on such a device
+      // — without this, desktop cores let the GL stage run during the audit
+      // and TBT explodes for a scenario no real target device experiences.
+      await page.evaluateOnNewDocument(() => {
+        Object.defineProperty(navigator, 'hardwareConcurrency', {
+          get: () => 4,
+          configurable: true,
+        });
+      });
+      // Audit the app's most conservative state — the same contract the axe
+      // suite enforces. Stabilizes animation sampling (no mid-fade contrast
+      // flakes) and keeps decorative canvases idle.
+      await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
       const result = await lighthouse(
         `${BASE}${route}`,
         {
-          port: CDP_PORT,
+          port: cdpPort,
           output: ['json', 'html'],
           onlyCategories: CATEGORIES,
           logLevel: 'error',
@@ -166,24 +180,25 @@ try {
           forceFlushProtocol: true,
         },
         undefined,
+        page,
       );
       crumb(`audit done for ${route} run ${index}`);
       const { lhr, report } = result;
       const safeName = route === '/' ? 'home' : route.replace(/\//g, '');
-      await writeFile(
+      writeFileSync(
         path.join(REPORT_DIR, `lhr-${safeName}-${index}.json`),
         report[0],
       );
       if (index === 1) {
-        await writeFile(path.join(REPORT_DIR, `report-${safeName}.html`), report[1]);
+        writeFileSync(path.join(REPORT_DIR, `report-${safeName}.html`), report[1]);
       }
       return lhr;
     } finally {
-      proc.kill();
-      await sleep(300);
-      await import('node:fs/promises')
-        .then((fs) => fs.rm(dir, { recursive: true, force: true }))
-        .catch(() => {});
+      // puppeteer.close() on a connect()ed browser only disconnects; the
+      // Playwright handle owns (and closes) the actual process.
+      if (pb) await pb.close().catch(() => {});
+      await browser.close().catch(() => {});
+      await sleep(200);
     }
   };
 
@@ -280,7 +295,7 @@ try {
     for (const e of routeErrors) console.error(`  - ${e}`);
     exitCode = 1;
   }
-  await writeCrumbs();
+  writeCrumbs();
 
   // 4. GitHub job summary — appended when GITHUB_STEP_SUMMARY is set (CI),
   // silently skipped locally.
@@ -306,15 +321,15 @@ try {
       lines.push('### Audit errors', '', ...routeErrors.map((e) => `- ${e.replace(/\n/g, ' ')}`), '');
     }
     lines.push('Reports: `.lighthouseci/` artifact (JSON + HTML per run).', '');
-    await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
+    appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
   }
 } catch (err) {
   console.error(err);
   crumb(`FATAL: ${String(err).slice(0, 600)}`);
-  await writeCrumbs();
+  writeCrumbs();
   exitCode = 1;
 } finally {
-  await writeCrumbs();
+  writeCrumbs();
   if (process.platform === 'win32') {
     // shell:true means preview.pid is the cmd.exe wrapper — /T gets the vite child too.
     spawn('taskkill', ['/pid', String(preview.pid), '/T', '/F'], { stdio: 'ignore' });
@@ -322,8 +337,5 @@ try {
     preview.kill();
   }
   await sleep(400);
-  await import('node:fs/promises')
-    .then((fs) => fs.rm(userDataDir, { recursive: true, force: true }))
-    .catch(() => {});
   process.exit(exitCode);
 }

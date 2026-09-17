@@ -4,6 +4,13 @@
    signal tone at ~7.6:1 on #0A0B11. Used for badges, ratings and warnings. */
 @theme {
   --color-gold-300: #FBD38D;
+  /* Semantic tone utilities (text-tone-rose etc.) resolve against the
+     theme-scoped raw tokens above, so one class works in both themes. */
+  --color-tone-rose: var(--tone-rose);
+  --color-tone-cyan: var(--tone-cyan);
+  --color-tone-emerald: var(--tone-emerald);
+  --color-tone-purple: var(--tone-purple);
+  --color-tone-amber: var(--tone-amber);
 }
 
 /* Fonts are loaded in index.html <head> via preconnect + stylesheet link,
@@ -30,6 +37,15 @@
   --color-error: #FF007F;
   --border-color: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
+  /* Semantic tone tokens (rose/cyan/emerald/purple/amber). Tailwind's -400
+     shades pass on dark surfaces but fall to ~2:1 on white, so the light
+     theme swaps in darker, hue-faithful shades below. Text-level colors MUST
+     use these tokens, not fixed Tailwind classes. */
+  --tone-rose: #FB7185;
+  --tone-cyan: #22D3EE;
+  --tone-emerald: #34D399;
+  --tone-purple: #C084FC;
+  --tone-amber: #FBBF24;
   --visual-bg: #0B0C13;
   --visual-ink: #F5F7FA;
   --visual-muted: #A7AFBF;
@@ -58,6 +74,12 @@ html.light {
   --font-serif: 'Fraunces', Georgia, serif;
   --border-color: rgba(0, 0, 0, 0.1);
   --border-strong: rgba(17, 19, 24, 0.2);
+  /* Dark-on-white tone shades: all ≥ 6:1 on the light surfaces. */
+  --tone-rose: #BE123C;
+  --tone-cyan: #155E75;
+  --tone-emerald: #065F46;
+  --tone-purple: #6B21A8;
+  --tone-amber: #B45309;
   --visual-bg: #10131D;
   --visual-ink: #F5F7FA;
   --visual-muted: #B5BECE;

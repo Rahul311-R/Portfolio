@@ -17,8 +17,8 @@ const toneClass: Record<string, string> = {
   muted: 'text-[var(--visual-muted)] opacity-70',
   plain: 'text-[var(--visual-ink)]',
   accent: 'text-[var(--accent-color)]',
-  string: 'text-emerald-400',
-  keyword: 'text-purple-400',
+  string: 'text-[var(--tone-emerald)]',
+  keyword: 'text-[var(--tone-purple)]',
 };
 
 /**

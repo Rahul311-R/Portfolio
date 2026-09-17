@@ -96,7 +96,7 @@ export const Now: React.FC = () => {
           </FlipIn>
 
           <FlipIn as="section" delay={650} className="studio-panel p-6 rounded-xl space-y-4">
-            <div className="flex items-center gap-2"><Heart className="h-5 w-5 text-rose-400" /><SplitText text="HEALTH & RHYTHM" tag="h3" className="font-display text-lg font-bold" /></div>
+            <div className="flex items-center gap-2"><Heart className="h-5 w-5 text-[var(--tone-rose)]" /><SplitText text="HEALTH & RHYTHM" tag="h3" className="font-display text-lg font-bold" /></div>
             <p className="text-[var(--text-muted)]">{NOW_DATA.health}</p>
             <div className="flex flex-wrap gap-2 pt-2">
               <span className="px-3 py-1 bg-[var(--bg-surface-secondary)] border border-[var(--border-color)] text-[var(--text-muted)] font-mono text-xs">Morning walks</span>

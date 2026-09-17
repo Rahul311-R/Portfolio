@@ -175,7 +175,7 @@ export const ProjectDetail: React.FC = () => {
               </div>
               <div>
                 <span className="text-[var(--text-muted)] block">FACTUAL VERIFICATION:</span>
-                <span className="text-emerald-400 font-bold">Resume source</span>
+                <span className="text-[var(--tone-emerald)] font-bold">Resume source</span>
               </div>
             </div>
           </div>

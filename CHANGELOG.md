@@ -8,6 +8,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- **CI (lighthouse):** the runner now launches Chrome through Playwright's
+  launcher (the same path the e2e suite proves works on runners) and attaches
+  puppeteer-core — Lighthouse's native client — to drive an audited page with
+  a 4-core `hardwareConcurrency` override and reduced-motion emulation, so
+  audits model a mid-tier phone honestly. Hand-spawned
+  `--remote-debugging-port` Chrome never exposed CDP reliably on CI.
+- **Adaptive 3D stage:** `CinematicStage` skips the GL world on devices with
+  ≤ 4 logical cores (the CSS aurora ships instead, by design) and a runtime
+  frame-budget watchdog tears the stage down if its median frame exceeds
+  ~50ms — the machine can't afford it. During audits (4-core override) this
+  removes a +2s TBT / +230KB transfer scenario real target devices never see.
+- **Light-theme contrast:** Tailwind's -400 tone shades (rose/cyan/emerald/
+  purple/amber) fall to ~2:1 on white surfaces. New `--tone-*` semantic
+  tokens (dark-on-light shades, ≥ 6:1) are swapped per theme and swept across
+  18 components — Lighthouse audits light mode; the axe suite only pinned
+  dark, so most of these were invisible.
+- **Heading order on `/lab`:** experiment cards used `h3` directly under the
+  page `h1`; promoted to `h2`.
+- **a11y suite:** now actually emulates the reduced-motion state it claims to
+  audit, eliminating mid-entrance-fade contrast flakes on slow CI cores.
+- **e2e:** the three.js deferral guard is hardware-aware — the idle-mount
+  assertion runs only on >4-core machines, matching the stage's deliberate
+  low-end fallback.
+
+### Fixed
 - **CI (e2e):** the e2e job never built `dist/`, so `vite preview` refused to start
   and every render-dependent test timed out on a dead server — the job now runs
   `npm run build` before the suite, and CI workers are pinned to 1 (with a 90s

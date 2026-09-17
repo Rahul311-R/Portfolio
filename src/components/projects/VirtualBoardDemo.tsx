@@ -193,7 +193,7 @@ export const VirtualBoardDemo: React.FC = () => {
           </button>
           <button
             onClick={clearCanvas}
-            className="p-1.5 rounded border border-[var(--border-color)] bg-[var(--bg-surface-secondary)] text-[var(--text-muted)] hover:text-rose-400 hover:border-rose-400/50 font-mono text-xs flex items-center gap-1 transition-colors"
+            className="p-1.5 rounded border border-[var(--border-color)] bg-[var(--bg-surface-secondary)] text-[var(--text-muted)] hover:text-[var(--tone-rose)] hover:border-rose-400/50 font-mono text-xs flex items-center gap-1 transition-colors"
             title="Clear canvas"
           >
             <RotateCcw className="w-3.5 h-3.5" />
