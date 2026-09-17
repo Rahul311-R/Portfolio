@@ -33,8 +33,14 @@ async function scan(page: import('@playwright/test').Page, route: string) {
   await page.waitForTimeout(250);
   return new AxeBuilder({ page }).withRules(RULES).analyze();
 }
-
 test.describe('accessibility', () => {
+  // The suite audits the app under `prefers-reduced-motion: reduce` — its most
+  // conservative state. This is also a determinism fix: entrance animations
+  // (e.g. the hero CTA stagger) otherwise run during the scan, and axe samples
+  // mid-fade opacity as a color-contrast failure on slow CI cores.
+  test.beforeEach(async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+  });
   for (const route of ROUTES) {
     test(`${route} has no serious or critical violations`, async ({ page }) => {
       const results = await scan(page, route);
