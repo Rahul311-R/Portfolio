@@ -116,6 +116,10 @@ if (chromePath && !existsSync(chromePath)) {
   process.exit(1);
 }
 
+// Report dir must exist before the first audit writes its LHR — on a fresh
+// CI checkout nothing else creates it (writeCrumbs only runs at the end).
+mkdirSync(REPORT_DIR, { recursive: true });
+
 // 1. Serve the production build.
 const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const preview = spawn(npm, ['run', 'preview', '--', '--port', String(PORT), '--strictPort'], {
