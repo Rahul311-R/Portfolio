@@ -183,10 +183,9 @@ export const ProjectDetail: React.FC = () => {
 
         <nav aria-label="More projects" className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-[var(--border-color)] pt-8">
           {previousProject ? (
-            <NavLink
-              to={`/projects/${previousProject.slug}`}
-              viewTransition
-              className="group studio-panel rounded-xl p-5 transition-colors hover:border-[var(--accent-color)]"
+<NavLink
+            to={`/projects/${previousProject.slug}`}
+            className="group studio-panel rounded-xl p-5 transition-colors hover:border-[var(--accent-color)]"
             >
               <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
                 <ArrowLeft className="h-3.5 w-3.5 text-[var(--accent-color)] transition-transform group-hover:-translate-x-1" /> Previous project
@@ -201,7 +200,6 @@ export const ProjectDetail: React.FC = () => {
           {nextProject && (
             <NavLink
               to={`/projects/${nextProject.slug}`}
-              viewTransition
               className="group studio-panel rounded-xl p-5 text-right transition-colors hover:border-[var(--accent-color)]"
             >
               <span className="inline-flex items-center justify-end gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">

@@ -228,7 +228,7 @@ export const Home: React.FC = () => {
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--text-muted)]">
             07 / Have an interesting problem?
           </p>
-          <NavLink to="/contact" className="group mt-6 inline-block focus:outline-none">
+          <NavLink to="/contact" className="group mt-6 block focus:outline-none">
             <span className="font-serif-accent text-[clamp(3rem,10vw,9rem)] leading-[1.02] tracking-[-0.02em] text-[var(--text-primary)] transition-colors duration-500 group-hover:text-[var(--accent-color)]">
               Let's build <span className="text-gold-gradient">together</span>.
             </span>

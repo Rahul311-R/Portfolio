@@ -64,7 +64,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   if (to) {
     return (
-      <Link to={to} viewTransition className={classes} onClick={onClick as never}>
+      <Link to={to} className={classes} onClick={onClick as never}>
         {content}
       </Link>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/SocialIcons';
 import { SOCIAL } from '@/data/social';
@@ -18,6 +18,7 @@ const CHANNELS = [
  */
 export const Footer: React.FC = () => {
   const [tilt, setTilt] = React.useState({ x: 0, y: 0 });
+  const navigate = useNavigate();
 
   return (
     <footer className="relative overflow-hidden border-t border-[var(--border-color)] bg-[var(--bg-primary)]">
@@ -38,10 +39,14 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* The giant CTA — pointer-reactive serif */}
-        <NavLink
-          to="/contact"
-          viewTransition
-          className="group relative block border-t border-b border-[var(--border-color)] py-12 sm:py-20 focus:outline-none"
+        <div
+          className="group relative block border-t border-b border-[var(--border-color)] py-12 sm:py-20 cursor-pointer"
+          style={{
+            transform: `perspective(1000px) rotateX(${-tilt.y * 6}deg) rotateY(${tilt.x * 6}deg)`,
+            transformStyle: 'preserve-3d',
+            transition: 'transform 0.3s ease-out',
+            willChange: 'transform',
+          }}
           onMouseMove={(e) => {
             const r = e.currentTarget.getBoundingClientRect();
             setTilt({
@@ -50,20 +55,32 @@ export const Footer: React.FC = () => {
             });
           }}
           onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+          onClick={() => navigate('/contact')}
         >
-          <div
-            className="flex items-center justify-between gap-6 transition-transform duration-300 ease-out will-change-transform"
-            style={{ transform: `translate(${tilt.x * 10}px, ${tilt.y * 6}px)` }}
-          >
-            <h2 className="font-serif-accent text-[clamp(3rem,9vw,8.5rem)] leading-[0.95] tracking-[-0.02em] text-[var(--text-primary)]">
-              <SplitText text="Let's talk" stagger={0.09} />
-              <span className="text-gold-gradient">.</span>
-            </h2>
-            <span className="grid h-16 w-16 sm:h-24 sm:w-24 shrink-0 place-items-center rounded-full border border-[var(--border-strong)] transition-all duration-500 group-hover:border-[var(--accent-color)] group-hover:shadow-[0_0_40px_var(--accent-glow)] group-hover:rotate-45">
+          <div className="flex items-center justify-between gap-6">
+            <NavLink
+              to="/contact"
+              className="focus:outline-none"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="font-serif-accent text-[clamp(3rem,9vw,8.5rem)] leading-[0.95] tracking-[-0.02em] text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent-color)]">
+                <SplitText text="Let's talk" stagger={0.09} />
+                <span className="text-gold-gradient">.</span>
+              </h2>
+            </NavLink>
+            <NavLink
+              to="/contact"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate('/contact');
+              }}
+              className="grid h-16 w-16 sm:h-24 sm:w-24 shrink-0 place-items-center rounded-full border border-[var(--border-strong)] transition-all duration-500 group-hover:border-[var(--accent-color)] group-hover:shadow-[0_0_40px_var(--accent-glow)] group-hover:rotate-45 hover:border-[var(--accent-color)] hover:shadow-[0_0_40px_var(--accent-glow)] hover:rotate-45 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-color)]"
+              aria-label="Go to contact page"
+            >
               <ArrowUpRight className="h-6 w-6 sm:h-9 sm:w-9 text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent-color)]" />
-            </span>
+            </NavLink>
           </div>
-        </NavLink>
+        </div>
 
         {/* Channels */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 py-10 sm:py-14">
@@ -97,7 +114,7 @@ export const Footer: React.FC = () => {
               { label: 'Now', path: '/now' },
               { label: 'Contact', path: '/contact' },
             ].map((l) => (
-              <NavLink key={l.path} to={l.path} viewTransition className="hover:text-[var(--accent-color)] transition-colors">
+              <NavLink key={l.path} to={l.path} className="hover:text-[var(--accent-color)] transition-colors">
                 {l.label}
               </NavLink>
             ))}

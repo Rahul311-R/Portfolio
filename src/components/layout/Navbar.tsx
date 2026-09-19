@@ -49,7 +49,7 @@ export const Navbar: React.FC = () => {
       <header className="fixed top-0 left-0 right-0 z-40 bg-[var(--bg-primary)]/80 backdrop-blur-xl transition-colors duration-300">
         <div className="max-w-[100rem] mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
           {/* Brand */}
-          <NavLink to="/" viewTransition className="group flex items-baseline gap-3 focus:outline-none">
+          <NavLink to="/" className="group flex items-baseline gap-3 focus:outline-none">
             <span className="font-display font-extrabold text-base tracking-[0.08em] text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors">
               RAHUL R
             </span>
