@@ -103,7 +103,9 @@ export const SplitText: React.FC<{
   delay?: number;
   stagger?: number;
   asLines?: boolean;
-}> = ({ text, tag = 'p', className = '', delay = 0, stagger = 0.03, asLines = false }) => {
+  gradient?: boolean;
+  gradientClass?: string;
+}> = ({ text, tag = 'p', className = '', delay = 0, stagger = 0.03, asLines = false, gradient = false, gradientClass = '' }) => {
   const reducedMotion = useReducedMotion();
   const words = text.split(' ');
   const lines = asLines ? text.split('\n') : [text];
@@ -131,7 +133,17 @@ export const SplitText: React.FC<{
                 initial={{ opacity: 0, y: '1.1em' }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: delay + li * 0.12 + wi * stagger, ease: [0.2, 0.8, 0.2, 1] }}
-                style={{ display: 'inline-block', marginRight: '0.35em' }}
+                style={{
+                  display: 'inline-block',
+                  marginRight: '0.35em',
+                  ...(gradient && {
+                    background: 'linear-gradient(105deg, #F5E7C1 0%, #D9BC7A 45%, #9A7A35 100%)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                    ...(gradientClass && { background: gradientClass }),
+                  }),
+                }}
               >
                 {word}
               </motion.span>
@@ -146,7 +158,17 @@ export const SplitText: React.FC<{
             initial={{ opacity: 0, y: '1.1em' }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: delay + i * stagger, ease: [0.2, 0.8, 0.2, 1] }}
-            style={{ display: 'inline-block', marginRight: '0.35em' }}
+            style={{
+              display: 'inline-block',
+              marginRight: '0.35em',
+              ...(gradient && {
+                background: 'linear-gradient(105deg, #F5E7C1 0%, #D9BC7A 45%, #9A7A35 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+                ...(gradientClass && { background: gradientClass }),
+              }),
+            }}
           >
             {word}
           </motion.span>

@@ -35,9 +35,13 @@ export const Home: React.FC = () => {
           <SectionMarker n="01" label="The idea" />
           <p className="mt-10 max-w-5xl font-display text-[clamp(1.8rem,4.2vw,3.6rem)] font-medium leading-[1.16] tracking-[-0.02em] text-[var(--text-primary)]">
             <SplitText text="Every system is a" stagger={0.05} />{' '}
-            <span className="font-serif-accent text-gold-gradient">
-              <SplitText text="signal path" stagger={0.06} delay={0.3} />
-            </span>{' '}
+            <SplitText
+              text="signal path"
+              stagger={0.06}
+              delay={0.3}
+              gradient
+              gradientClass="linear-gradient(105deg, #F5E7C1 0%, #D9BC7A 45%, #9A7A35 100%)"
+            />{' '}
             <SplitText
               text="— sensor to model, model to decision. I build the parts in between."
               stagger={0.02}

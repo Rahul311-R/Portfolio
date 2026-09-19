@@ -8,6 +8,10 @@ interface SplitTextProps {
   stagger?: number;
   delay?: number;
   as?: 'span' | 'h1' | 'h2' | 'h3';
+  /** Apply gold gradient to each word */
+  gradient?: boolean;
+  /** Custom gradient class (e.g., 'linear-gradient(...)') */
+  gradientClass?: string;
 }
 
 /**
@@ -21,10 +25,21 @@ export const SplitText: React.FC<SplitTextProps> = ({
   stagger = 0.08,
   delay = 0,
   as: Tag = 'span',
+  gradient = false,
+  gradientClass = '',
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: '-8% 0px' });
   const words = text.split(' ');
+
+  const gradientStyle = gradient
+    ? {
+        background: gradientClass || 'linear-gradient(105deg, #F5E7C1 0%, #D9BC7A 45%, #9A7A35 100%)',
+        WebkitBackgroundClip: 'text',
+        backgroundClip: 'text',
+        color: 'transparent',
+      }
+    : {};
 
   return (
     <Tag className={className}>
@@ -39,6 +54,9 @@ export const SplitText: React.FC<SplitTextProps> = ({
                 duration: 0.7,
                 delay: delay + i * stagger,
                 ease: [0.22, 1, 0.36, 1],
+              }}
+              style={{
+                ...gradientStyle,
               }}
             >
               {word}
